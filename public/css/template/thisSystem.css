@@ -1,0 +1,133 @@
+.mis_titulos {
+	display: inline-block;
+	color: #2E3C43;
+	line-height: 32px;
+	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	font-weight: 600;
+	margin: 0;
+	width: calc(100% - 24px);
+}
+
+.separador {
+    min-height: 1px;
+    background-color: rgba(46, 60, 67, 0.08);
+    margin: 16px 0;
+}
+
+.separador2 {
+    min-height: 1px;
+    background-color: rgba(46, 60, 67, 0.08);
+    margin: 2px 0;
+}
+
+.contenedor2{
+	background-color: #ffffff !important;
+	color: black !important;
+}
+
+.table2 > tbody > tr > td, .table2 > tbody > tr > th, .table2 > tfoot > tr > td, .table2 > tfoot > tr > th, .table2 > thead > tr > td, .table2 > thead > tr > th {
+	padding: 6px !important;
+	line-height: 0.6 !important;
+	vertical-align: top !important;
+	border-top: 1px solid #ddd !important;
+	font-size: 11px;
+}
+
+.panel-body2 {
+	padding-bottom: 0px !important;
+	padding-top: 8px !important;
+	padding-right: 0px !important;
+	padding-left: 8px !important;
+}
+
+.panel-heading2 {
+	padding: 5px 15px !important;
+	border-bottom: 1px solid transparent;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+
+.letra {
+	font-family: 'Montserrat', Arial, Helvetica, sans-serif !important;
+	font-size: 20px !important;
+	font-weight: 600 !important;
+	margin: 0 !important;
+	/*
+	width: calc(100% - 24px) !important;
+	*/
+}
+
+.letra2 {
+	font-family: 'Montserrat', Arial, Helvetica, sans-serif !important;
+}
+
+.ppop {
+	margin-bottom: 0px !important;
+	margin-top: 0px !important;
+	display: inline-block !important;
+}
+
+.ppop2 {
+	margin-bottom: 0px !important;
+	margin-top: 18px !important;
+	display: inline-block !important;
+}
+
+.myBadge{
+	padding: 8px 20px !important;
+}
+
+.headerBasic{
+	width: 260px;
+	display:flex;
+	justify-content: center;
+}
+
+.btn_hamburguer{
+	display: inline-block;
+	margin-top: 15px;
+	width: 50px;
+	height: 65px;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	font-size: 30px;
+	transition: .3s ease all;
+	color: #cccccc;
+}
+
+.btn_hamburguer:hover {
+	color: #ffffff;
+}
+
+.options{
+	position: absolute !important;
+	left:10px !important;
+	top:45px !important;
+}
+
+.menu_top a{
+	font-family: 'Montserrat', Arial, Helvetica, sans-serif !important;
+	/*font-size: 13px;*/
+	font-weight: 700 !important;
+}
+
+.session {
+	margin-left: -90px !important;
+}
+
+.catalogo_main{
+	font-size: 24px;
+	text-align: center;
+	color: #9c27b0;
+}
+
+.montseh2{
+	font-family: 'Montserrat', Arial, Helvetica, sans-serif !important;
+	font-weight: 700 !important;
+}
+
+.montse{
+	font-family: 'Montserrat', Arial, Helvetica, sans-serif !important;
+}
