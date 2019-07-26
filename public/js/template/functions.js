@@ -125,16 +125,12 @@ function seteaCapas() {
     map = L.map('map', {
         zoomControl: false
     });
-
-
-    //map = L.map('map').setView([19.325075030834952, -99.13307189941406], 11);
+    
     map.setView([19.325075030834952, -99.13307189941406], 11);
     client = new carto.Client({
         apiKey: apiKey,
         username: userName
     });
-
-    
 
     L.control.zoom({
         position: 'topright'
@@ -145,77 +141,42 @@ function seteaCapas() {
         maxZoom: 18,            //map.scrollWheelZoom.disable();  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {  maxZoom: 18,
     }).addTo(map);
 
-
-    
-
-    //DRAWCONTROL
-    /*
-    let drawControl = new L.Control.Draw({
-        position : 'topleft',
-        draw: {
-            polygon: false,
-            polyline: false,
-            line: false,
-            marker: true,
-            rectangle: false,
-            circle: false,
-            circlemarker: false,
-        },
-        edit: false
-    });
-
-    map.addControl(drawControl);
-    
-    map.on('draw:created', function(e) {
-    	console.log(e);
-    	const longitud = e.layer._latlng.lng;
-    	const latitud = e.layer._latlng.lat;
-        //creaPunto(latitud,longitud);			//FUNCION QUE VALIDA QUE EL PUNTO CAIGA EN LA CDMX
-        //nuevo_pc(latitud,longitud)
-    });
-*/
-    /*
-    var drawnItems = new L.FeatureGroup();
-    map.addLayer(drawnItems);
-    var drawControl = new L.Control.Draw({
-        edit: {
-            featureGroup: drawnItems
+    map.on(L.Draw.Event.CREATED, function (e) {         //console.log(e);
+        const layer = e.layer;
+        var type = e.layerType;
+        const geoJson = layer.toGeoJSON();
+        const coor = JSON.stringify(geoJson.geometry);       
+        const coorPolygon = geoJson.geometry.coordinates       //alert(coor);
+        const centroid = turf.centroid(geoJson.geometry);
+        const lonCentroid = centroid.geometry.coordinates[0];
+        const latCentroid = centroid.geometry.coordinates[1];
+        
+        if (type === 'marker') {
+            alert('crear marker');
+        } else if (type === 'polyline') {
+            const url = 'forms/form_geocerca'
+            fetch(url, {
+                method: 'POST'
+            })
+            .then(function (response) {
+                return response.text();
+            }).then(function (string) {
+                document.querySelector('#modal_content').innerHTML = string;
+                $('#modal_title').html('NUEVA GEOCERCA');
+                $('[data-accion=accion]').attr('id','registrar_geocerca');
+                $('[data-accion=accion]').html('<span><i class="fas fa-plus"></i></span>&nbsp;Registrar');
+                $('[data-accion=accion],#modal_cerrar').show();
+                $('#latitud').val(latCentroid);
+                $('#longitud').val(lonCentroid);
+                $('#coor').val(coor);
+                $('#coor_polygon').val(coorPolygon);
+                $('#modal').modal('show');
+            }).catch(function (err) {
+                console.log('Fetch Error', err);
+            });
         }
-    });
-    map.addControl(drawControl);
-    */
 
-   map.on(L.Draw.Event.CREATED, function (e) {
-    console.log(e);
-    var type = e.layerType;
-        layer = e.layer;
-    if (type === 'marker') {
-        alert('crear marker');
-        //map.addLayer(layer);
-    }else if(type === 'polyline'){
-        const url = 'forms/form_geocerca'
-        fetch(url, {
-            method: 'POST'
-        })
-        .then(function (response) {
-            return response.text();
-        }).then(function (string) {
-            //document.querySelector('#modal_content').innerHTML = string;
-            document.getElementById('modal_content').innerHTML = string;
-            //$('#direxion').html(resp);
-            $('#modal_title').html('NUEVA GEOCERCA');
-            $('[data-accion=accion]').attr('id','registrar_geocerca');
-            $('[data-accion=accion]').html('<span><i class="fas fa-plus"></i></span>&nbsp;Registrar');
-            $('[data-accion=accion],#modal_cerrar').show();
-            //$('#latitud').val(lat);
-            //$('#longitud').val(lon);
-            $('#modal').modal('show');
-        }).catch(function (err) {
-            console.log('Fetch Error', err);
-        });
-    }
-    
- });
+    });
 
     client.addLayers([delegacionesLayer]);
     client.getLeafletLayer().addTo(map);

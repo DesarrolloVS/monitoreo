@@ -29,4 +29,37 @@ Route::get('/', function () {
     return view('map.main');
 });
 
+//GEOCERCA
 Route::post('forms/form_geocerca','FormsController@form_geocerca');
+Route::post('registrar/geocerca','FormsController@registrar_geocerca');
+
+//CATALOGO CLIENTES
+Route::resource('/cat_clientes', 'ClienteController');
+Route::get('/cat_clientes/{id}/domicilios', 'ClienteController@domicilios');
+Route::get('/cat_clientes/{id}/estatus', 'ClienteController@estatus');
+Route::put('/cat_clientes/{id}/estatus', 'ClienteController@update_estatus');
+//CATALOGO TIPOPERSONAS
+Route::resource('/cat_tipopersonas', 'TipopersonasController');
+Route::get('/cat_tipopersonas/{id}/confirmDelete', 'TipopersonasController@confirmDelete');
+
+//CATALOGO TIPO EMPRESAS
+Route::resource('/cat_tipoempresas', 'TipoempresasController');
+Route::get('/cat_tipoempresas/{id}/confirmDelete', 'TipoempresasController@confirmDelete');
+
+//CATALOGO TIPO SERVICIOS
+Route::resource('/cat_tiposervicios', 'TiposerviciosController');
+Route::get('/cat_tiposervicios/{id}/confirmDelete', 'TiposerviciosController@confirmDelete');
+
+//CATALOGO ESTADOCLIENTES
+Route::resource('/cat_estadoclientes', 'EstadoclientesController');
+Route::get('/cat_estadoclientes/{id}/confirmDelete', 'EstadoclientesController@confirmDelete');
+
+//CATALOGO TIPODOMICILIIOS
+Route::resource('/cat_tipodomicilios', 'TipodomicilioController');
+Route::get('/cat_tipodomicilios/{id}/confirmDelete', 'TipodomicilioController@confirmDelete');
+
+//CATALOGO DOMICILIIOS
+Route::get('cat_domicilios/{id}/create', 'DomicilioController@create');
+Route::post('domicilios/{id}','DomicilioController@store');
+Route::get('cat_domicilios/{id}/edit', 'DomicilioController@edit');
+Route::put('cat_domicilios/{id}', 'DomicilioController@update');
