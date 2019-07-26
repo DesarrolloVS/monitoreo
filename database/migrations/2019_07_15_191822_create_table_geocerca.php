@@ -14,15 +14,11 @@ class CreateTableGeocerca extends Migration
     public function up()
     {
         Schema::create('geocerca', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->float('latitud', 10, 7);
-            $table->float('longitud', 10, 7);
+            $table->bigIncrements('id_geocerca');
+            $table->geometry('geom');
             $table->text('descripcion_geocerca');
+            $table->text('coordenadas');
             $table->integer('id_tipo_geocerca');
-            $table->integer('id_tipo_alerta');
-            $table->float('metros_alerta');
-            $table->integer('estado');
-            $table->timestamps();
         });
     }
 

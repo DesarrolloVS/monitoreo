@@ -20,5 +20,6 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'forms/form_geocerca',
+        'forms/registrar_geocerca'
     ];
 }

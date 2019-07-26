@@ -26,6 +26,9 @@
 <link rel="stylesheet" href="{{ asset('css/pushbar/pushbar.css') }}">
 <link rel="stylesheet" href="{{ asset('css/template/estilos.css') }}">
 <link rel="stylesheet" href="{{ asset('css/template/botons.css') }}">
+<!-- TURF -->
+<script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+
 @endsection
 
 @section('content')
@@ -110,6 +113,7 @@
 <!-- JS NOTIFICACIONES ANIMATE -->
 <script type="text/javascript" src="{{ asset('js/notify/bootstrap-notify.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/template/functions.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/template/functionsGeo.js') }}"></script>
 <!--
     <script type="text/javascript" src="{{ asset('js/template/map.js') }}"></script>
     -->
@@ -118,6 +122,7 @@
 <script type="text/javascript" src="{{ asset('js/template/constantsLayers.js') }}"></script>
 
 <script type="text/javascript" src="{{ asset('js/template/events.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/template/eventsModal.js') }}"></script>
 
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 <script src="{{ asset('js/librerias/pushbar.js') }}"></script>
