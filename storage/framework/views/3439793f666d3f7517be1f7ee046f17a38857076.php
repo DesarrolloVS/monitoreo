@@ -24,6 +24,9 @@
 <link rel="stylesheet" href="<?php echo e(asset('css/pushbar/pushbar.css')); ?>">
 <link rel="stylesheet" href="<?php echo e(asset('css/template/estilos.css')); ?>">
 <link rel="stylesheet" href="<?php echo e(asset('css/template/botons.css')); ?>">
+<!-- TURF -->
+<script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -108,6 +111,7 @@
 <!-- JS NOTIFICACIONES ANIMATE -->
 <script type="text/javascript" src="<?php echo e(asset('js/notify/bootstrap-notify.min.js')); ?>"></script>
 <script type="text/javascript" src="<?php echo e(asset('js/template/functions.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/template/functionsGeo.js')); ?>"></script>
 <!--
     <script type="text/javascript" src="<?php echo e(asset('js/template/map.js')); ?>"></script>
     -->
@@ -116,6 +120,7 @@
 <script type="text/javascript" src="<?php echo e(asset('js/template/constantsLayers.js')); ?>"></script>
 
 <script type="text/javascript" src="<?php echo e(asset('js/template/events.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/template/eventsModal.js')); ?>"></script>
 
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 <script src="<?php echo e(asset('js/librerias/pushbar.js')); ?>"></script>

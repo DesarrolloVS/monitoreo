@@ -11,5 +11,8 @@
         <a href="/cat_estadoclientes">ABC Estados Cliente</a>
         <a href="/cat_tipodomicilios">ABC Domicilios</a>
         <a href="/cat_clientes">ABC Clientes</a>
+        <a href="/cat_tipoempleados">ABC Tipo Empleados</a>
+        <a href="/cat_estadosusuario">ABC Estados Usuarios</a>
+        <a href="/cat_usuarios">ABC Usuarios</a>
     </nav>
 </div>
