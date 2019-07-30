@@ -18,7 +18,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-offset-1"><br><br><br>
-            <h2 class="text-center mih2">Catálogos</h1><br><br><br>
+            <h2 class="text-center montseh2">Catálogos</h1><br><br><br>
         </div>
         
         <div class="catalogo_main"><br><br><br>

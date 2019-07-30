@@ -63,3 +63,17 @@ Route::get('cat_domicilios/{id}/create', 'DomicilioController@create');
 Route::post('domicilios/{id}','DomicilioController@store');
 Route::get('cat_domicilios/{id}/edit', 'DomicilioController@edit');
 Route::put('cat_domicilios/{id}', 'DomicilioController@update');
+
+//CATALOGO TIPOEMPLEADOS
+Route::resource('/cat_tipoempleados', 'TipoempleadoController');
+Route::get('/cat_tipoempleados/{id}/confirmDelete', 'TipoempleadoController@confirmDelete');
+
+//CATALOGO ESTADOUSUARIOS
+Route::resource('/cat_estadosusuario', 'EstadousuariosController');
+Route::get('/cat_estadosusuario/{id}/confirmDelete', 'EstadousuariosController@confirmDelete');
+
+//CATALOGO USUARIOS
+Route::resource('/cat_usuarios', 'UsuarioController');
+Route::get('/cat_usuarios/{id}/confirmDelete', 'UsuarioController@confirmDelete');
+Route::get('/cat_usuarios/{id}/estatus', 'UsuarioController@estatus');
+Route::put('/cat_usuarios/{id}/estatus', 'UsuarioController@update_estatus');
