@@ -14,5 +14,7 @@
         <a href="/cat_tipoempleados">ABC Tipo Empleados</a>
         <a href="/cat_estadosusuario">ABC Estados Usuarios</a>
         <a href="/cat_usuarios">ABC Usuarios</a>
+        <a href="/cat_estadosturnos">ABC Estados Turnos</a>
+        <a href="/cat_tipoturnos">ABC Tipo Turnos</a>
     </nav>
 </div><?php /**PATH C:\laragon\www\sismon\resources\views/template/menu_catalogos.blade.php ENDPATH**/ ?>

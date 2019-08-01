@@ -49,76 +49,73 @@
 
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label for="nombre">Cliente: </label>
+                    <label for="cliente_id">Cliente: </label>
                     <select name="cliente_id" id="cliente_id" class="form-control">
                         <option value="">Seleccione una Opción</option>
                         @foreach($clientes as $cliente)
-                            <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
+                        <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label for="nombre">Nombre: </label>
-                    <input class="form-control" type="text" id="nombre" name="nombre" placeholder="Nombre" value="">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="paterno">Paterno: </label>
-                    <input class="form-control" type="text" id="paterno" name="paterno" placeholder="Paterno" value="">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="materno">Materno: </label>
-                    <input class="form-control" type="text" id="materno" name="materno" placeholder="Materno" value="">
-                </div>
-            </div>
+            <div id="datos_usuario" style="display:none">
 
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label for="email">Correo: </label>
-                    <input class="form-control" type="text" id="email" name="email" placeholder="Correo" value="">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="rfc">RFC: </label>
-                    <input class="form-control" type="text" id="rfc" name="rfc" placeholder="RFC" value="">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="curp">CURP: </label>
-                    <input class="form-control" type="text" id="curp" name="curp" placeholder="CURP" value="">
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label for="tipoacceso_id">Tipo de acceso: </label>
-                    <select multiple name="tipoacceso_id[]" id="tipoacceso_id[]" class="form-control">
-                        <option value="rep_legal">Representante Legal</option>
-                        <option value="contacto">Contacto</option>
-                        <option value="usuario">Usuario</option>
-                    </select>
-                </div>
-
-                <div class="form-group col-md-4">
-                    <div class="checkbox">
-                        <label><input id="empleado" name="empleado" type="checkbox" value="" onclick="calc()" >¿Es Empleado?
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="nombre">Nombre: </label>
+                        <input class="form-control" type="text" id="nombre" name="nombre" placeholder="Nombre" value="">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="paterno">Paterno: </label>
+                        <input class="form-control" type="text" id="paterno" name="paterno" placeholder="Paterno" value="">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="materno">Materno: </label>
+                        <input class="form-control" type="text" id="materno" name="materno" placeholder="Materno" value="">
                     </div>
                 </div>
-                <div class="form-group col-md-4" id="tipo_empleado" style="display:none">
-                    <label for="tipoempleado_id">Tipo de empleado: </label>
-                    <select name="tipoempleado_id" id="tipoempleado_id" class="form-control">
-                        <option value="">Seleccione una Opción</option>
-                        @foreach($tes as $te)
-                            <option value="{{ $te->id }}">{{ $te->descripcion }}</option>
-                        @endforeach
-                    </select>
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="email">Correo: </label>
+                        <input class="form-control" type="text" id="email" name="email" placeholder="Correo" value="">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="rfc">RFC: </label>
+                        <input class="form-control" type="text" id="rfc" name="rfc" placeholder="RFC" value="">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="curp">CURP: </label>
+                        <input class="form-control" type="text" id="curp" name="curp" placeholder="CURP" value="">
+                    </div>
                 </div>
-            </div>
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="tipoacceso_id">Tipo de acceso: </label>
+                        <select multiple name="tipoacceso_id[]" id="tipoacceso_id[]" class="form-control">
+                            <option value="rep_legal">Representante Legal</option>
+                            <option value="contacto">Contacto</option>
+                            <option value="usuario">Usuario</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <div class="checkbox">
+                            <label><input id="empleado" name="empleado" type="checkbox" value="" onclick="calc()">¿Es Empleado?
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4" id="tipo_empleado" style="display:none">
+                    </div>
+                </div>
 
 
-            <br><br>
-            <div class="text-center">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
+                <br><br>
+                <div class="text-center">
+                    <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
+                </div>
+
             </div>
         </form>
         <br>

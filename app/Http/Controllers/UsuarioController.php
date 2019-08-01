@@ -100,10 +100,16 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
+        //'usuario' => Usuario::findOrFail($id),
+        //'tes' => Tipoempleado::all()
+        
+        $usuario = Usuario::findOrFail($id);
+        $tes = Tipoempleado::where('cliente_id','=',$usuario->cliente_id)->get();
+
         return view('usuario.edit',[
-            'usuario' => Usuario::findOrFail($id),
+            'usuario' => $usuario,
             'clientes' => Cliente::all(),
-            'tes' => Tipoempleado::all()
+            'tes' => $tes
         ]);
     }
 

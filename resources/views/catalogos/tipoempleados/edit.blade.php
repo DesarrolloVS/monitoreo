@@ -50,6 +50,20 @@
 
                 <div class="row">
                     <div class="form-group col-md-6">
+                        <label for="cliente_id">Cliente: </label>
+                        <select name="cliente_id" id="cliente_id" class="form-control">
+                            <option value="">Seleccione una Opción</option>
+                            @foreach($clientes as $cliente)
+                                <option value="{{ $cliente->id }}" 
+                                @if($cliente->id == $te->cliente_id)
+                                selected
+                                @endif
+                                >{{ $cliente->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
                         <label for="descripcion">Descripción: </label>
                         <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="{{ $te->descripcion }}">
                     </div>

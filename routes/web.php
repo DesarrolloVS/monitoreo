@@ -67,6 +67,7 @@ Route::put('cat_domicilios/{id}', 'DomicilioController@update');
 //CATALOGO TIPOEMPLEADOS
 Route::resource('/cat_tipoempleados', 'TipoempleadoController');
 Route::get('/cat_tipoempleados/{id}/confirmDelete', 'TipoempleadoController@confirmDelete');
+Route::post('/tipoempleado/cliente', 'TipoempleadoController@select');
 
 //CATALOGO ESTADOUSUARIOS
 Route::resource('/cat_estadosusuario', 'EstadousuariosController');
@@ -77,3 +78,11 @@ Route::resource('/cat_usuarios', 'UsuarioController');
 Route::get('/cat_usuarios/{id}/confirmDelete', 'UsuarioController@confirmDelete');
 Route::get('/cat_usuarios/{id}/estatus', 'UsuarioController@estatus');
 Route::put('/cat_usuarios/{id}/estatus', 'UsuarioController@update_estatus');
+
+//CATALOGO ESTADOSTURNOS
+Route::resource('/cat_estadosturnos', 'EstadosturnosController');
+Route::get('/cat_estadosturnos/{id}/confirmDelete', 'EstadosturnosController@confirmDelete');
+
+//CATALOGO TIPOTURNOS
+Route::resource('/cat_tipoturnos', 'TipoturnoController');
+Route::get('/cat_tipoturnos/{id}/confirmDelete', 'TipoturnoController@confirmDelete');

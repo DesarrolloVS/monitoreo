@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Tipoempleado;
 use Illuminate\Http\Request;
+use App\Cliente;
 use Illuminate\Support\Facades\DB;
 
 class TipoempleadoController extends Controller
@@ -26,7 +27,9 @@ class TipoempleadoController extends Controller
      */
     public function create()
     {
-        return view('catalogos.tipoempleados.create');
+        return view('catalogos.tipoempleados.create',[
+            'clientes' => Cliente::all()
+        ]);
     }
 
     /**
@@ -40,6 +43,7 @@ class TipoempleadoController extends Controller
         DB::beginTransaction();
         $te = new Tipoempleado();
 
+        $te->cliente_id = $request->get('cliente_id');
         $te->descripcion = strtoupper($request->get('descripcion'));
         $te->save();
         DB::commit();
@@ -67,7 +71,8 @@ class TipoempleadoController extends Controller
     {
         $te = Tipoempleado::findOrFail($id);
         return view('catalogos.tipoempleados.edit', [
-            'te' => $te
+            'te' => $te,
+            'clientes' => Cliente::all()
         ]);
     }
 
@@ -82,6 +87,7 @@ class TipoempleadoController extends Controller
     {
         DB::beginTransaction();
         $te = Tipoempleado::findOrFail($id);
+        $te->cliente_id = $request->get('cliente_id');
         $te->descripcion = strtoupper($request->get('descripcion'));
         $te->save();
         DB::commit();
@@ -107,5 +113,22 @@ class TipoempleadoController extends Controller
         return view('catalogos.tipoempleados.confirmDelete',[
             'te' => $te
         ]);
+    }
+
+    public function select(Request $request)            //ELIMINA EL ELEMENTO
+    {        
+        $id_cliente = $request->get('id_cliente');
+        $tes = Tipoempleado::where('cliente_id','=',$id_cliente)->get();
+
+        //dd($tes);
+
+        return view('usuario.select',[
+            'tes' => $tes
+        ]);
+        
+        
+
+
+
     }
 }
