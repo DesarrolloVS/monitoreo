@@ -29,20 +29,20 @@
 <div class="container">
     <div class="row">
         <div class="col"><br><br><br>
-            <h1>Eliminar Responsable: <small>{{ $us->nombre }} {{ $us->paterno }} {{ $us->materno }}</small></h1>
+            <h1>Eliminar Registro: <small>{{ $estado->descripcion }}</small></h1>
         </div>
     </div>
 
     <div class="row">
         <div class="col">
         <br><br>
-            <a class="btn btn-success" href="/cat_usuarios"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Usuarios</a>
+            <a class="btn btn-success" href="/cat_estadosrespveh"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Estados - Responsable Vehìculos</a>
         </div>
     </div>
 
     <div class="row">
         <div class="col">
-            <form action="/cat_usuarios/{{ $us->id }}" method="POST">
+            <form action="/cat_estadosrespveh/{{ $estado->id }}" method="POST">
                 {{ csrf_field() }}
                 @method('delete')
                 <br><br><br>

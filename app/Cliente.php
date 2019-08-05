@@ -13,4 +13,8 @@ class Cliente extends Model
     public function usuario () {
         return $this->hasMany(Usuario::class)->select('cliente_id','nombre');
     }
+
+    public function responsablevehiculo () {
+        return $this->hasMany(Responsablevehiculo::class);
+    }
 }

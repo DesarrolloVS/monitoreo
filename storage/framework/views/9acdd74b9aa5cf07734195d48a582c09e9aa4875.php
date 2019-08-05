@@ -16,5 +16,8 @@
         <a href="/cat_usuarios">ABC Usuarios</a>
         <a href="/cat_estadosturnos">ABC Estados Turnos</a>
         <a href="/cat_tipoturnos">ABC Tipo Turnos</a>
+        <a href="/cat_turnos">ABC Turnos</a>
+        <a href="/cat_estadosrespveh">ABC Estados Responsables Vehículos</a>
+        <a href="/cat_respveh">ABC Responsables de Vehículos</a>
     </nav>
 </div><?php /**PATH C:\laragon\www\sismon\resources\views/template/menu_catalogos.blade.php ENDPATH**/ ?>

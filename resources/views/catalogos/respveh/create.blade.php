@@ -26,31 +26,59 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container montse">
     <div class="row">
-        <div class="col"><br><br><br>
-            <h1>Eliminar Responsable: <small>{{ $us->nombre }} {{ $us->paterno }} {{ $us->materno }}</small></h1>
+        <div class="text-center">
+            <br>
+            <h2 montseh2>Agregar Responsable de Vehículo</h2>
         </div>
     </div>
 
     <div class="row">
-        <div class="col">
         <br><br>
-            <a class="btn btn-success" href="/cat_usuarios"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Usuarios</a>
+        <div class="">
+            <a class="btn btn-success" href="/cat_respveh"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Responsables de Vehículos</a>
         </div>
     </div>
 
     <div class="row">
-        <div class="col">
-            <form action="/cat_usuarios/{{ $us->id }}" method="POST">
-                {{ csrf_field() }}
-                @method('delete')
-                <br><br><br>
-                <button class="btn btn-danger" type="submit">Eliminar</button>
+        <br><br>
 
-            </form>
-        </div>
+        <form action="/cat_respveh" method="POST">
+            @csrf
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="cliente_id">Cliente: </label>
+                    <select name="cliente_id" id="cliente_id" class="form-control">
+                        <option value="">Seleccione una Opción</option>
+                        @foreach($clientes as $cliente)
+                        <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-4" id="usuarios" style="display:none">
+                </div>
+
+                <div class="form-group col-md-4" id="turnos" style="display:none">
+                    <label for="turno_id">Turnos: </label>
+                    <select name="turno_id" id="turno_id" class="form-control">
+                        <option value="">Seleccione una Opción</option>
+                        @foreach($turnos as $t)
+                        <option value="{{ $t->id }}">{{ $t->descripcion }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <br><br>
+            <div class="text-center">
+                <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
+            </div>
+        </form>
+        <br>
+
     </div>
+
 </div>
 @include('template.menu_catalogos')
 @endsection
@@ -61,6 +89,7 @@
 <!-- JS NOTIFICACIONES ANIMATE -->
 <script type="text/javascript" src="{{ asset('js/notify/bootstrap-notify.min.js') }}"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<script src="{{ asset('js/usuario/responsables.js') }}"></script>
 
 <script src="{{ asset('js/librerias/pushbar.js') }}"></script>
 <script>

@@ -26,31 +26,68 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container montse">
     <div class="row">
-        <div class="col"><br><br><br>
-            <h1>Eliminar Responsable: <small>{{ $us->nombre }} {{ $us->paterno }} {{ $us->materno }}</small></h1>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
         <br><br>
-            <a class="btn btn-success" href="/cat_usuarios"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Usuarios</a>
+        <div class="col-md-10 col-offset-1">
+            <h2>Modificar Estatus Cliente: <small>{{ $r->usuario->nombre." ".$r->usuario->paterno." ".$r->usuario->materno }}</small></h2>
         </div>
     </div>
 
     <div class="row">
-        <div class="col">
-            <form action="/cat_usuarios/{{ $us->id }}" method="POST">
-                {{ csrf_field() }}
-                @method('delete')
-                <br><br><br>
-                <button class="btn btn-danger" type="submit">Eliminar</button>
+        <br><br>
+        <div class="col-md-10 col-offset-1">
+            <a class="btn btn-success" href="/cat_respveh"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Responsables de Vehículo</a>
+        </div>
+    </div>
+
+    <div class="row"><br><br>
+        <div class="col-md-10 col-offset-1">
+            <h3>Estatus Actual: {{ ($r->estadoresponsablevehiculo_id == "" ) ? estatus_responsable($r->estadoresponsablevehiculo_id) : $r->estadoresponsablevehiculo->descripcion }}</h3>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-offset-1">
+            <br><br>
+            <form action="/cat_respveh/{{ $r->id }}/estatus" method="POST">
+                @csrf
+                @method('put')
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="estadoresponsablevehiculo_id">Cambiar Estado a: </label>
+                        <select name="estadoresponsablevehiculo_id" id="estadoresponsablevehiculo_id" class="form-control">
+                        <option value="">Seleccione una Opción</option>
+                        @foreach($estados as $estado)
+                            @if($estado->id != $r->estadoresponsablevehiculo_id)
+                            <option value="{{ $estado->id }}">{{ $estado->descripcion }}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                    </div>
+                </div>
+
+                <br><br>
+                <button class="btn btn-primary" type="submit">Modificar</button>
 
             </form>
+            <br>
+            <br>
+            <!--
+            @//if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @//endif
+            -->
         </div>
     </div>
+
 </div>
 @include('template.menu_catalogos')
 @endsection
@@ -69,4 +106,5 @@
         overlay: true
     });
 </script>
+@include('template.menu_catalogos')
 @endsection

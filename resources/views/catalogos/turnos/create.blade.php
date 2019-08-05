@@ -26,31 +26,62 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container montse">
     <div class="row">
-        <div class="col"><br><br><br>
-            <h1>Eliminar Responsable: <small>{{ $us->nombre }} {{ $us->paterno }} {{ $us->materno }}</small></h1>
+        <div class="text-center">
+            <br>
+            <h2 montseh2>Agregar Turno</h2>
         </div>
     </div>
 
     <div class="row">
-        <div class="col">
         <br><br>
-            <a class="btn btn-success" href="/cat_usuarios"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Usuarios</a>
+        <div class="">
+            <a class="btn btn-success" href="/cat_turnos"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Turnos</a>
         </div>
     </div>
 
     <div class="row">
-        <div class="col">
-            <form action="/cat_usuarios/{{ $us->id }}" method="POST">
-                {{ csrf_field() }}
-                @method('delete')
-                <br><br><br>
-                <button class="btn btn-danger" type="submit">Eliminar</button>
+        <br><br>
 
-            </form>
-        </div>
+        <form action="/cat_turnos" method="POST">
+            @csrf
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="nombre">Descripcion turno: </label>
+                    <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripciòn Turno" value="">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="tipoturno_id">Tipo de Turno: </label>
+                    <select name="tipoturno_id" id="tipoturno_id" class="form-control">
+                        <option value="">Seleccione una Opción</option>
+                        @foreach($tt as $t)
+                            <option value="{{ $t->id }}">{{ $t->descripcion }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="horainicio">Hora Inicio: </label>
+                    <input class="form-control" type="time" id="horainicio" name="horainicio" placeholder="Hora Inicio" value="">
+                </div>                
+                <div class="form-group col-md-6">
+                    <label for="horafin">Hora Fin: </label>
+                    <input class="form-control" type="time" id="horafin" name="horafin" placeholder="Hora Fin" value="">
+                </div>                
+            </div>
+            <br><br>
+            <div class="text-center">
+                <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
+            </div>
+        </form>
+        <br>
+
     </div>
+
 </div>
 @include('template.menu_catalogos')
 @endsection
@@ -69,4 +100,7 @@
         overlay: true
     });
 </script>
+<!--
+<script type="text/javascript" src="{{ asset('js/template/main.js') }}"></script>
+-->
 @endsection

@@ -14,7 +14,9 @@
 <script src="https://libs.cartocdn.com/carto.js/v4.1.2/carto.min.js"></script>
 <link href="https://carto.com/developers/carto-js/examples/maps/public/style.css" rel="stylesheet">
 <!-- Include Chart JS -->
+<!--
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+-->
 <!-- INICIO DE MIS ESTILOS -->
 <link rel="stylesheet" type="text/css" href="{{ asset('css/template/thisSystem.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
@@ -26,32 +28,55 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container montse">
     <div class="row">
-        <div class="col"><br><br><br>
-            <h1>Eliminar Responsable: <small>{{ $us->nombre }} {{ $us->paterno }} {{ $us->materno }}</small></h1>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
+        <div class="col-md-10 col-offset-1">
         <br><br>
-            <a class="btn btn-success" href="/cat_usuarios"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Usuarios</a>
+            <h2 class="text-center montseh2">CATÁLOGO ESTADOS RESPONSABLES DE VEHÍCULOS</h1>
         </div>
     </div>
-
     <div class="row">
-        <div class="col">
-            <form action="/cat_usuarios/{{ $us->id }}" method="POST">
-                {{ csrf_field() }}
-                @method('delete')
-                <br><br><br>
-                <button class="btn btn-danger" type="submit">Eliminar</button>
-
-            </form>
+        <div class="col-md-10 col-offset-1">
+            <br><br>
+            <a class="btn btn-primary" href="/cat_estadosrespveh/create"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar Registro</a>
         </div>
     </div>
+
+    @if($estados->first())
+    <div class="row">
+        <br><br>
+        <div class="col-md-10 col-offset-1">
+            <table class="table table-bordered">
+                <th class="text-center">Id</th>
+                <th class="text-center">Descrición</th>
+                <th class="text-center">Modificar</th>
+                <th class="text-center">Eliminar</th>
+                @foreach($estados as $e)
+                <tr>
+                    <td class="text-center">{{ $e->id }}</td>
+                    <td class="text-center">{{ $e->descripcion }}</td>
+                    <td class="text-center"><a class="btn btn-success btn-xs" href="/cat_estadosrespveh/{{ $e->id }}/edit"><i class="fas fa-pencil-alt"></i></a></td>
+                    <td class="text-center"><a class="btn btn-danger btn-xs" href="/cat_estadosrespveh/{{ $e->id }}/confirmDelete"><i class="fas fa-trash-alt"></i></a></td>
+                </tr>
+                @endforeach
+            </table>
+        </div>
+    </div>
+    @else
+    <div class="row col-md-10 col-offset-1">
+    <br><br><br><br>
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Atención: </strong> No hay registros para este catálogo.
+    </div>
+    </div>
+    @endif
+
+
+    
+
 </div>
+
 @include('template.menu_catalogos')
 @endsection
 
