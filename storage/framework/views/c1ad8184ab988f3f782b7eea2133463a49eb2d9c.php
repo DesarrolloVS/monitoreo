@@ -28,21 +28,21 @@
     <div class="row">
         <div class="text-center">
             <br>
-            <h2 montseh2>Agregar Tipo de Servicio</h2>
+            <h2 montseh2>Agregar Tipo de Empleado</h2>
         </div>
     </div>
 
     <div class="row">
         <br><br>
         <div class="">
-            <a class="btn btn-success" href="/cat_tiposervicios"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Tipo Servicios</a>
+            <a class="btn btn-success" href="/cat_tipoempleados"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Tipo Empleados</a>
         </div>
     </div>
 
     <div class="row">
         <br><br>
 
-        <form action="/cat_tiposervicios" method="POST">
+        <form action="/cat_tipoempleados" method="POST">
             <?php echo csrf_field(); ?>
             <div class="row">
                 <div class="form-group col-md-6">
@@ -79,4 +79,4 @@
     });
 </script>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/monitoreo/resources/views/catalogos/tiposervicios/create.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/monitoreo/resources/views/catalogos/tipoempleados/create.blade.php ENDPATH**/ ?>

@@ -28,30 +28,73 @@
     <div class="row">
         <br><br>
         <div class="col-md-10 col-offset-1">
-            <h2>Modificar Registro</h2>
+            <h2>Modificar Domicilio</h2>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-10 col-offset-1">
             <br><br>
-            <a class="btn btn-success" href="/cat_tiposervicios"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Tipo Servicios</a>
+            <a class="btn btn-success" href="/cat_clientes/<?php echo e($domicilio->cliente_id); ?>/domicilios"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Volver a Domicilios</a>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-10 col-offset-1">
             <br><br>
-            <form action="/cat_tiposervicios/<?php echo e($ts->id); ?>" method="POST">
+            <form action="/cat_domicilios/<?php echo e($domicilio->id); ?>" method="POST">
                 <?php echo csrf_field(); ?>
                 <?php echo method_field('put'); ?>
 
                 <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="descripcion">Descripción: </label>
-                        <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="<?php echo e($ts->descripcion); ?>">
+                    <div class="form-group col-md-4">
+                        <label for="calle">Calle: </label>
+                        <input class="form-control" type="text" id="calle" name="calle" placeholder="Calle" value="<?php echo e($domicilio->calle); ?>">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="exterior">Número Exterior: </label>
+                        <input class="form-control" type="text" id="exterior" name="exterior" placeholder="Número Exterior" value="<?php echo e($domicilio->exterior); ?>">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="interior">Número Interior: </label>
+                        <input class="form-control" type="text" id="interior" name="interior" placeholder="Numero Interior" value="<?php echo e($domicilio->interior); ?>">
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="colonia">Colonia: </label>
+                        <input class="form-control" type="text" id="colonia" name="colonia" placeholder="Colonia" value="<?php echo e($domicilio->colonia); ?>">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="cp">C.P. </label>
+                        <input class="form-control" type="text" id="cp" name="cp" placeholder="Colonia" value="<?php echo e($domicilio->cp); ?>">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="estado">Estado: </label>
+                        <input class="form-control" type="text" id="estado" name="estado" placeholder="Estado" value="<?php echo e($domicilio->estado); ?>">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="ciiudad">Ciudad o Municipio: </label>
+                        <input class="form-control" type="text" id="ciudad" name="ciudad" placeholder="Ciudad" value="<?php echo e($domicilio->ciudad); ?>">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="tipodomicilio_id">Tipo de Domicilio: </label>
+                        <select name="tipodomicilio_id" id="tipodomicilio_id" class="form-control">
+                            <?php $__currentLoopData = $tds; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $td): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($td->id); ?>" 
+                            <?php if($domicilio->tipodomicilio_id == $td->id): ?>
+                            selected
+                            <?php endif; ?>
+                            ><?php echo e($td->descripcion); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </select>
+                    </div>
+                </div>
+
 
                 <br><br>
                 <button class="btn btn-primary" type="submit">Modificar</button>
@@ -93,4 +136,4 @@
 </script>
 <?php echo $__env->make('template.menu_catalogos', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/monitoreo/resources/views/catalogos/tiposervicios/edit.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/monitoreo/resources/views/catalogos/domicilios/edit.blade.php ENDPATH**/ ?>

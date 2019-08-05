@@ -24,42 +24,32 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
-<div class="container montse">
+<div class="container">
     <div class="row">
-        <div class="text-center">
-            <br>
-            <h2 montseh2>Agregar Tipo de Servicio</h2>
+        <div class="col"><br><br><br>
+            <h1>Eliminar Registro: <small><?php echo e($te->descripcion); ?></small></h1>
         </div>
     </div>
 
     <div class="row">
+        <div class="col">
         <br><br>
-        <div class="">
-            <a class="btn btn-success" href="/cat_tiposervicios"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Tipo Servicios</a>
+            <a class="btn btn-success" href="/cat_tipoempleados"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Tipo de Empleados</a>
         </div>
     </div>
 
     <div class="row">
-        <br><br>
+        <div class="col">
+            <form action="/cat_tipoempleados/<?php echo e($te->id); ?>" method="POST">
+                <?php echo e(csrf_field()); ?>
 
-        <form action="/cat_tiposervicios" method="POST">
-            <?php echo csrf_field(); ?>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label for="descripcion">Descripción: </label>
-                    <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="">
-                </div>
-            </div>
+                <?php echo method_field('delete'); ?>
+                <br><br><br>
+                <button class="btn btn-danger" type="submit">Eliminar</button>
 
-            <br><br>
-            <div class="text-center">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
-            </div>
-        </form>
-        <br>
-
+            </form>
+        </div>
     </div>
-
 </div>
 <?php echo $__env->make('template.menu_catalogos', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
@@ -79,4 +69,4 @@
     });
 </script>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/monitoreo/resources/views/catalogos/tiposervicios/create.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/monitoreo/resources/views/catalogos/tipoempleados/confirmDelete.blade.php ENDPATH**/ ?>

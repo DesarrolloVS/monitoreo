@@ -28,66 +28,91 @@
     <div class="row">
         <div class="text-center">
             <br>
-            <h2 montseh2>Agregar Domicilio - <small><?php echo e($cliente->nombre); ?></small> </h2>
+            <h2 montseh2>Agregar Usuario</h2>
         </div>
     </div>
 
     <div class="row">
         <br><br>
         <div class="">
-            <a class="btn btn-success" href="/cat_clientes/<?php echo e($cliente->id); ?>/domicilios"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Regresar Domicilios</a>
+            <a class="btn btn-success" href="/cat_usuarios"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Usuarios</a>
         </div>
     </div>
 
     <div class="row">
         <br><br>
 
-        <form action="/domicilios/<?php echo e($cliente->id); ?>" method="POST">
+        <form action="/cat_usuarios" method="POST">
             <?php echo csrf_field(); ?>
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label for="calle">Calle: </label>
-                    <input class="form-control" type="text" id="calle" name="calle" placeholder="Calle" value="">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="exterior">Número Exterior: </label>
-                    <input class="form-control" type="text" id="exterior" name="exterior" placeholder="Número Exterior" value="">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="interior">Número Interior: </label>
-                    <input class="form-control" type="text" id="interior" name="interior" placeholder="Numero Interior" value="">
-                </div>
-            </div>
 
             <div class="row">
-                <div class="form-group col-md-4">
-                    <label for="colonia">Colonia: </label>
-                    <input class="form-control" type="text" id="colonia" name="colonia" placeholder="Colonia" value="">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="cp">C.P. </label>
-                    <input class="form-control" type="text" id="cp" name="cp" placeholder="Colonia" value="">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="estado">Estado: </label>
-                    <input class="form-control" type="text" id="estado" name="estado" placeholder="Estado" value="">
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label for="ciiudad">Ciudad o Municipio: </label>
-                    <input class="form-control" type="text" id="ciudad" name="ciudad" placeholder="Ciudad" value="">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="tipodomicilio_id">Tipo de Domicilio: </label>
-                    <select name="tipodomicilio_id" id="tipodomicilio_id" class="form-control">
-                        <?php $__currentLoopData = $tds; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $td): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <option value="<?php echo e($td->id); ?>"><?php echo e($td->descripcion); ?></option>
+                <div class="form-group col-md-6">
+                    <label for="nombre">Cliente: </label>
+                    <select name="cliente_id" id="cliente_id" class="form-control">
+                        <option value="">Seleccione una Opción</option>
+                        <?php $__currentLoopData = $clientes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cliente): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($cliente->id); ?>"><?php echo e($cliente->nombre); ?></option>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
-                </div>    
+                </div>
             </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="nombre">Nombre: </label>
+                    <input class="form-control" type="text" id="nombre" name="nombre" placeholder="Nombre" value="">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="paterno">Paterno: </label>
+                    <input class="form-control" type="text" id="paterno" name="paterno" placeholder="Paterno" value="">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="materno">Materno: </label>
+                    <input class="form-control" type="text" id="materno" name="materno" placeholder="Materno" value="">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="email">Correo: </label>
+                    <input class="form-control" type="text" id="email" name="email" placeholder="Correo" value="">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="rfc">RFC: </label>
+                    <input class="form-control" type="text" id="rfc" name="rfc" placeholder="RFC" value="">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="curp">CURP: </label>
+                    <input class="form-control" type="text" id="curp" name="curp" placeholder="CURP" value="">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="tipoacceso_id">Tipo de acceso: </label>
+                    <select multiple name="tipoacceso_id[]" id="tipoacceso_id[]" class="form-control">
+                        <option value="rep_legal">Representante Legal</option>
+                        <option value="contacto">Contacto</option>
+                        <option value="usuario">Usuario</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="checkbox">
+                        <label><input id="empleado" name="empleado" type="checkbox" value="" onclick="calc()" >¿Es Empleado?
+                    </div>
+                </div>
+                <div class="form-group col-md-4" id="tipo_empleado" style="display:none">
+                    <label for="tipoempleado_id">Tipo de empleado: </label>
+                    <select name="tipoempleado_id" id="tipoempleado_id" class="form-control">
+                        <option value="">Seleccione una Opción</option>
+                        <?php $__currentLoopData = $tes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $te): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($te->id); ?>"><?php echo e($te->descripcion); ?></option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </select>
+                </div>
+            </div>
+
 
             <br><br>
             <div class="text-center">
@@ -110,6 +135,7 @@
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 <script src="<?php echo e(asset('js/librerias/pushbar.js')); ?>"></script>
+<script src="<?php echo e(asset('js/usuario/usuario.js')); ?>"></script>
 <script>
     var pushbar = new Pushbar({
         blur: true,
@@ -117,4 +143,4 @@
     });
 </script>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/monitoreo/resources/views/catalogos/domicilios/create.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/monitoreo/resources/views/catalogos/usuarios/create.blade.php ENDPATH**/ ?>

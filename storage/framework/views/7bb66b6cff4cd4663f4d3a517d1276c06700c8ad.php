@@ -30,31 +30,35 @@
     <div class="row">
         <div class="col-md-10 col-offset-1">
         <br><br>
-            <h2 class="text-center montseh2">CATÁLOGO TIPO DOMICILIOS</h1>
+            <h2 class="text-center montseh2">CATÁLOGO USUARIOS</h1>
         </div>
     </div>
     <div class="row">
         <div class="col-md-10 col-offset-1">
             <br><br>
-            <a class="btn btn-primary" href="/cat_tipodomicilios/create"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar Registro</a>
+            <a class="btn btn-primary" href="/cat_usuarios/create"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar Usuario</a>
         </div>
     </div>
 
-    <?php if($tipodomicilios->first()): ?>
+    <?php if($usuarios->first()): ?>
     <div class="row">
         <br><br>
         <div class="col-md-10 col-offset-1">
             <table class="table table-bordered">
                 <th class="text-center">Id</th>
-                <th class="text-center">Descrición</th>
+                <th class="text-center">Nombre</th>
+                <th class="text-center">Estado</th>
+                <th class="text-center">Perfiles</th>
                 <th class="text-center">Modificar</th>
                 <th class="text-center">Eliminar</th>
-                <?php $__currentLoopData = $tipodomicilios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $td): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php $__currentLoopData = $usuarios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $u): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
-                    <td class="text-center"><?php echo e($td->id); ?></td>
-                    <td class="text-center"><?php echo e($td->descripcion); ?></td>
-                    <td class="text-center"><a class="btn btn-success btn-xs" href="/cat_tipodomicilios/<?php echo e($td->id); ?>/edit"><i class="fas fa-pencil-alt"></i></a></td>
-                    <td class="text-center"><a class="btn btn-danger btn-xs" href="/cat_tipodomicilios/<?php echo e($td->id); ?>/confirmDelete"><i class="fas fa-trash-alt"></i></a></td>
+                    <td class="text-center"><?php echo e($u->id); ?></td>
+                    <td class="text-center"><?php echo e($u->nombre); ?> <?php echo e($u->paterno); ?> <?php echo e($u->materno); ?></td>
+                    <td class="text-center"><a class="btn btn-info btn-xs" href="/cat_usuarios/<?php echo e($u->id); ?>/estatus"><?php echo e(($u->estadousuario_id == "" ) ? estatus_cliente($u->estadousuario_id) : $u->estadousuario_id); ?>&emsp;<i class="fas fa-exchange-alt"></i></a></td>
+                    <td class="text-center"><a class="btn btn-primary btn-xs" href="/cat_usuarios/<?php echo e($u->id); ?>/perfiles"><i class="far fa-id-card"></i></a></td>
+                    <td class="text-center"><a class="btn btn-success btn-xs" href="/cat_usuarios/<?php echo e($u->id); ?>/edit"><i class="fas fa-pencil-alt"></i></a></td>
+                    <td class="text-center"><a class="btn btn-danger btn-xs" href="/cat_usuarios/<?php echo e($u->id); ?>/confirmDelete"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </table>
@@ -93,4 +97,4 @@
     });
 </script>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/monitoreo/resources/views/catalogos/tipodomicilio/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/monitoreo/resources/views/catalogos/usuarios/index.blade.php ENDPATH**/ ?>

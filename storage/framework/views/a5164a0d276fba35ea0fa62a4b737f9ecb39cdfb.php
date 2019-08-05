@@ -12,7 +12,9 @@
 <script src="https://libs.cartocdn.com/carto.js/v4.1.2/carto.min.js"></script>
 <link href="https://carto.com/developers/carto-js/examples/maps/public/style.css" rel="stylesheet">
 <!-- Include Chart JS -->
+<!--
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+-->
 <!-- INICIO DE MIS ESTILOS -->
 <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/template/thisSystem.css')); ?>" />
 <link rel="stylesheet" href="<?php echo e(asset('css/bootstrap/bootstrap.min.css')); ?>">
@@ -26,41 +28,53 @@
 <?php $__env->startSection('content'); ?>
 <div class="container montse">
     <div class="row">
-        <div class="text-center">
-            <br>
-            <h2 montseh2>Agregar Tipo de Servicio</h2>
+        <div class="col-md-10 col-offset-1">
+        <br><br>
+            <h2 class="text-center montseh2">CATÁLOGO TIPO EMPLEADOS</h1>
         </div>
     </div>
-
     <div class="row">
-        <br><br>
-        <div class="">
-            <a class="btn btn-success" href="/cat_tiposervicios"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Tipo Servicios</a>
-        </div>
-    </div>
-
-    <div class="row">
-        <br><br>
-
-        <form action="/cat_tiposervicios" method="POST">
-            <?php echo csrf_field(); ?>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label for="descripcion">Descripción: </label>
-                    <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="">
-                </div>
-            </div>
-
+        <div class="col-md-10 col-offset-1">
             <br><br>
-            <div class="text-center">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
-            </div>
-        </form>
-        <br>
-
+            <a class="btn btn-primary" href="/cat_tipoempleados/create"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar Registro</a>
+        </div>
     </div>
+
+    <?php if($tipoempleados->first()): ?>
+    <div class="row">
+        <br><br>
+        <div class="col-md-10 col-offset-1">
+            <table class="table table-bordered">
+                <th class="text-center">Id</th>
+                <th class="text-center">Descrición</th>
+                <th class="text-center">Modificar</th>
+                <th class="text-center">Eliminar</th>
+                <?php $__currentLoopData = $tipoempleados; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $te): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <tr>
+                    <td class="text-center"><?php echo e($te->id); ?></td>
+                    <td class="text-center"><?php echo e($te->descripcion); ?></td>
+                    <td class="text-center"><a class="btn btn-success btn-xs" href="/cat_tipoempleados/<?php echo e($te->id); ?>/edit"><i class="fas fa-pencil-alt"></i></a></td>
+                    <td class="text-center"><a class="btn btn-danger btn-xs" href="/cat_tipoempleados/<?php echo e($te->id); ?>/confirmDelete"><i class="fas fa-trash-alt"></i></a></td>
+                </tr>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </table>
+        </div>
+    </div>
+    <?php else: ?>
+    <div class="row col-md-10 col-offset-1">
+    <br><br><br><br>
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Atención: </strong> No hay registros para este catálogo.
+    </div>
+    </div>
+    <?php endif; ?>
+
+
+    
 
 </div>
+
 <?php echo $__env->make('template.menu_catalogos', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
@@ -79,4 +93,4 @@
     });
 </script>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/monitoreo/resources/views/catalogos/tiposervicios/create.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/monitoreo/resources/views/catalogos/tipoempleados/index.blade.php ENDPATH**/ ?>

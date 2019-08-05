@@ -28,28 +28,41 @@
     <div class="row">
         <br><br>
         <div class="col-md-10 col-offset-1">
-            <h2>Modificar Registro</h2>
+            <h2>Modificar Estatus Usuario: <small><?php echo e($usuario->nombre); ?> <?php echo e($usuario->paterno); ?> <?php echo e($usuario->materno); ?></small></h2>
         </div>
+    </div>
+
+    <div class="row">
+        <br><br>
+        <div class="col-md-10 col-offset-1">
+            <a class="btn btn-success" href="/cat_usuarios"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Usuarios</a>
+        </div>
+    </div>
+
+    <div class="row"><br><br>
+        <div class="col-md-10 col-offset-1">
+            <h3>Estatus Actual: <?php echo e(($usuario->estadousuario_id == "" ) ? estatus_cliente($usuario->estadousuario_id) : $usuario->estadousuario_id); ?></h3>
+    </div>
     </div>
 
     <div class="row">
         <div class="col-md-10 col-offset-1">
             <br><br>
-            <a class="btn btn-success" href="/cat_tiposervicios"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Tipo Servicios</a>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-10 col-offset-1">
-            <br><br>
-            <form action="/cat_tiposervicios/<?php echo e($ts->id); ?>" method="POST">
+            <form action="/cat_usuarios/<?php echo e($usuario->id); ?>/estatus" method="POST">
                 <?php echo csrf_field(); ?>
                 <?php echo method_field('put'); ?>
 
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label for="descripcion">Descripción: </label>
-                        <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="<?php echo e($ts->descripcion); ?>">
+                        <label for="estadousuario_id">Cambiar Estado a: </label>
+                        <select name="estadousuario_id" id="estadousuario_id" class="form-control">
+                        <option value="">Seleccione una Opción</option>
+                        <?php $__currentLoopData = $estados; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $estado): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if($estado->id != $usuario->estadousuario_id): ?>
+                            <option value="<?php echo e($estado->id); ?>"><?php echo e($estado->descripcion); ?></option>
+                            <?php endif; ?>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </select>
                     </div>
                 </div>
 
@@ -93,4 +106,4 @@
 </script>
 <?php echo $__env->make('template.menu_catalogos', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/monitoreo/resources/views/catalogos/tiposervicios/edit.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/monitoreo/resources/views/usuario/estatus.blade.php ENDPATH**/ ?>

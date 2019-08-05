@@ -26,38 +26,51 @@
 <?php $__env->startSection('content'); ?>
 <div class="container montse">
     <div class="row">
-        <div class="text-center">
-            <br>
-            <h2 montseh2>Agregar Tipo de Servicio</h2>
+        <br><br>
+        <div class="col-md-10 col-offset-1">
+            <h2>Modificar Registro</h2>
         </div>
     </div>
 
     <div class="row">
-        <br><br>
-        <div class="">
-            <a class="btn btn-success" href="/cat_tiposervicios"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Tipo Servicios</a>
-        </div>
-    </div>
-
-    <div class="row">
-        <br><br>
-
-        <form action="/cat_tiposervicios" method="POST">
-            <?php echo csrf_field(); ?>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label for="descripcion">Descripción: </label>
-                    <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="">
-                </div>
-            </div>
-
+        <div class="col-md-10 col-offset-1">
             <br><br>
-            <div class="text-center">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
-            </div>
-        </form>
-        <br>
+            <a class="btn btn-success" href="/cat_estadosusuario"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Tipo Servicios</a>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-md-10 col-offset-1">
+            <br><br>
+            <form action="/cat_estadosusuario/<?php echo e($eu->id); ?>" method="POST">
+                <?php echo csrf_field(); ?>
+                <?php echo method_field('put'); ?>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="descripcion">Descripción: </label>
+                        <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="<?php echo e($eu->descripcion); ?>">
+                    </div>
+                </div>
+
+                <br><br>
+                <button class="btn btn-primary" type="submit">Modificar</button>
+
+            </form>
+            <br>
+            <br>
+            <!--
+            @//if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <li><?php echo e($error); ?></li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </ul>
+            </div>
+            @//endif
+            -->
+        </div>
     </div>
 
 </div>
@@ -78,5 +91,6 @@
         overlay: true
     });
 </script>
+<?php echo $__env->make('template.menu_catalogos', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/monitoreo/resources/views/catalogos/tiposervicios/create.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/monitoreo/resources/views/catalogos/estadosusuario/edit.blade.php ENDPATH**/ ?>
