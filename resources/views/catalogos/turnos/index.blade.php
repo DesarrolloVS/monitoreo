@@ -14,7 +14,9 @@
 <script src="https://libs.cartocdn.com/carto.js/v4.1.2/carto.min.js"></script>
 <link href="https://carto.com/developers/carto-js/examples/maps/public/style.css" rel="stylesheet">
 <!-- Include Chart JS -->
+<!--
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+-->
 <!-- INICIO DE MIS ESTILOS -->
 <link rel="stylesheet" type="text/css" href="{{ asset('css/template/thisSystem.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
@@ -28,68 +30,61 @@
 @section('content')
 <div class="container montse">
     <div class="row">
+        <div class="col-md-10 col-offset-1">
+        <br><br>
+            <h2 class="text-center montseh2">CATÁLOGO TURNOS</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-offset-1">
+            <br><br>
+            <a class="btn btn-primary" href="/cat_turnos/create"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar Turno</a>
+        </div>
+    </div>
+
+    @if($turnos->first())
+    <div class="row">
         <br><br>
         <div class="col-md-10 col-offset-1">
-            <h2>Modificar Registro</h2>
+            <table class="table table-bordered">
+                <th class="text-center">Id</th>
+                <th class="text-center">Descripcion</th>
+                <th class="text-center">Hora Inicio</th>
+                <th class="text-center">Hora Fin</th>
+                <th class="text-center">Tipo</th>
+                <th class="text-center">Estatus</th>
+                <th class="text-center">Modificar</th>
+                <th class="text-center">Eliminar</th>
+                @foreach($turnos as $t)
+                <tr>
+                    <td class="text-center">{{ $t->id }}</td>
+                    <td class="text-center">{{ str_limit($t->descripcion,30) }} </td>
+                    <td class="text-center">{{ $t->horainicio }}</td>
+                    <td class="text-center">{{ $t->horafin }}</td>
+                    <td class="text-center">{{ $t->tipoturno->descripcion }}</td>
+                    <td class="text-center"><a class="btn btn-info btn-xs" href="/cat_turnos/{{ $t->id }}/estatus">{{ ($t->estadoturno_id == "" ) ? estatus_turno($t->estadoturno_id) : $t->estadoturno->descripcion }}&emsp;<i class="fas fa-exchange-alt"></i></a></td>
+                    <td class="text-center"><a class="btn btn-success btn-xs" href="/cat_turnos/{{ $t->id }}/edit"><i class="fas fa-pencil-alt"></i></a></td>
+                    <td class="text-center"><a class="btn btn-danger btn-xs" href="/cat_turnos/{{ $t->id }}/confirmDelete"><i class="fas fa-trash-alt"></i></a></td>
+                </tr>
+                @endforeach
+            </table>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-10 col-offset-1">
-            <br><br>
-            <a class="btn btn-success" href="/cat_tipoempleados"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Tipo Empleados</a>
-        </div>
+    @else
+    <div class="row col-md-10 col-offset-1">
+    <br><br><br><br>
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Atención: </strong> No hay registros para este catálogo.
     </div>
-
-    <div class="row">
-        <div class="col-md-10 col-offset-1">
-            <br><br>
-            <form action="/cat_tipoempleados/{{ $te->id }}" method="POST">
-                @csrf
-                @method('put')
-
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="cliente_id">Cliente: </label>
-                        <select name="cliente_id" id="cliente_id" class="form-control">
-                            <option value="">Seleccione una Opción</option>
-                            @foreach($clientes as $cliente)
-                                <option value="{{ $cliente->id }}" 
-                                @if($cliente->id == $te->cliente_id)
-                                selected
-                                @endif
-                                >{{ $cliente->nombre }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="descripcion">Descripción: </label>
-                        <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="{{ $te->descripcion }}">
-                    </div>
-                </div>
-
-                <br><br>
-                <button class="btn btn-primary" type="submit">Modificar</button>
-
-            </form>
-            <br>
-            <br>
-            <!--
-            @//if($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @//endif
-            -->
-        </div>
     </div>
+    @endif
+
+
+    
 
 </div>
+
 @include('template.menu_catalogos')
 @endsection
 
@@ -107,5 +102,4 @@
         overlay: true
     });
 </script>
-@include('template.menu_catalogos')
 @endsection

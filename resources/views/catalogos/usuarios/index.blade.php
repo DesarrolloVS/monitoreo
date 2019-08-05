@@ -49,6 +49,7 @@
             <table class="table table-bordered">
                 <th class="text-center">Id</th>
                 <th class="text-center">Nombre</th>
+                <th class="text-center">Cliente</th>
                 <th class="text-center">Estado</th>
                 <th class="text-center">Perfiles</th>
                 <th class="text-center">Modificar</th>
@@ -56,7 +57,8 @@
                 @foreach($usuarios as $u)
                 <tr>
                     <td class="text-center">{{ $u->id }}</td>
-                    <td class="text-center">{{ $u->nombre }} {{ $u->paterno }} {{ $u->materno }}</td>
+                    <td class="text-center">{{ str_limit(($u->nombre." ".$u->paterno." ".$u->materno),30) }} </td>
+                    <td class="text-center">{{ str_limit($u->cliente->nombre,30) }}</td>
                     <td class="text-center"><a class="btn btn-info btn-xs" href="/cat_usuarios/{{ $u->id }}/estatus">{{ ($u->estadousuario_id == "" ) ? estatus_cliente($u->estadousuario_id) : $u->estadousuario_id }}&emsp;<i class="fas fa-exchange-alt"></i></a></td>
                     <td class="text-center"><a class="btn btn-primary btn-xs" href="/cat_usuarios/{{ $u->id }}/perfiles"><i class="far fa-id-card"></i></a></td>
                     <td class="text-center"><a class="btn btn-success btn-xs" href="/cat_usuarios/{{ $u->id }}/edit"><i class="fas fa-pencil-alt"></i></a></td>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEstadousuariosTable extends Migration
+class CreateTipoturnosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateEstadousuariosTable extends Migration
      */
     public function up()
     {
-        Schema::create('estadousuarios', function (Blueprint $table) {
+        Schema::create('tipoturnos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('descripcion');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateEstadousuariosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estadousuarios');
+        Schema::dropIfExists('tipoturnos');
     }
 }

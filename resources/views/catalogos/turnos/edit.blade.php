@@ -37,36 +37,46 @@
     <div class="row">
         <div class="col-md-10 col-offset-1">
             <br><br>
-            <a class="btn btn-success" href="/cat_tipoempleados"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Tipo Empleados</a>
+            <a class="btn btn-success" href="/cat_turnos"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Turnos</a>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-10 col-offset-1">
             <br><br>
-            <form action="/cat_tipoempleados/{{ $te->id }}" method="POST">
+            <form action="/cat_turnos/{{ $turno->id }}" method="POST">
                 @csrf
                 @method('put')
 
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label for="cliente_id">Cliente: </label>
-                        <select name="cliente_id" id="cliente_id" class="form-control">
+                        <label for="nombre">Descripcion turno: </label>
+                        <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripciòn Turno" value="{{ $turno->descripcion }}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="tipoturno_id">Tipo de Turno: </label>
+                        <select name="tipoturno_id" id="tipoturno_id" class="form-control">
                             <option value="">Seleccione una Opción</option>
-                            @foreach($clientes as $cliente)
-                                <option value="{{ $cliente->id }}" 
-                                @if($cliente->id == $te->cliente_id)
+                            @foreach($tt as $t)
+                                <option value="{{ $t->id }}" 
+                                @if($t->id == $turno->tipoturno_id)
                                 selected
                                 @endif
-                                >{{ $cliente->nombre }}</option>
+                                >{{ $t->descripcion }}</option>
                             @endforeach
                         </select>
                     </div>
+                </div>
 
+                <div class="row">
                     <div class="form-group col-md-6">
-                        <label for="descripcion">Descripción: </label>
-                        <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="{{ $te->descripcion }}">
-                    </div>
+                        <label for="horainicio">Hora Inicio: </label>
+                        <input class="form-control" type="time" id="horainicio" name="horainicio" placeholder="Hora Inicio" value="{{ $turno->horainicio }}">
+                    </div>                
+                    <div class="form-group col-md-6">
+                        <label for="horafin">Hora Fin: </label>
+                        <input class="form-control" type="time" id="horafin" name="horafin" placeholder="Hora Fin" value="{{ $turno->horafin }}">
+                    </div>                
                 </div>
 
                 <br><br>

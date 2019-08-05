@@ -26,52 +26,31 @@
 @endsection
 
 @section('content')
-<div class="container montse">
+<div class="container">
     <div class="row">
-        <div class="text-center">
-            <br>
-            <h2 montseh2>Agregar Tipo de Empleado</h2>
+        <div class="col"><br><br><br>
+            <h1>Eliminar Registro: <small>{{ $t->descripcion }}</small></h1>
         </div>
     </div>
 
     <div class="row">
+        <div class="col">
         <br><br>
-        <div class="">
-            <a class="btn btn-success" href="/cat_tipoempleados"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Tipo Empleados</a>
+            <a class="btn btn-success" href="/cat_turnos"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Turnos</a>
         </div>
     </div>
 
     <div class="row">
-        <br><br>
+        <div class="col">
+            <form action="/cat_turnos/{{ $t->id }}" method="POST">
+                {{ csrf_field() }}
+                @method('delete')
+                <br><br><br>
+                <button class="btn btn-danger" type="submit">Eliminar</button>
 
-        <form action="/cat_tipoempleados" method="POST">
-            @csrf
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label for="cliente_id">Cliente: </label>
-                    <select name="cliente_id" id="cliente_id" class="form-control">
-                        <option value="">Seleccione una Opción</option>
-                        @foreach($clientes as $cliente)
-                            <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
-                        @endforeach
-                    </select>                    
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label for="descripcion">Descripción: </label>
-                    <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="">
-                </div>
-            </div>
-
-            <br><br>
-            <div class="text-center">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
-            </div>
-        </form>
-        <br>
-
+            </form>
+        </div>
     </div>
-
 </div>
 @include('template.menu_catalogos')
 @endsection

@@ -30,39 +30,49 @@
     <div class="row">
         <div class="text-center">
             <br>
-            <h2 montseh2>Agregar Tipo de Empleado</h2>
+            <h2 montseh2>Agregar Turno</h2>
         </div>
     </div>
 
     <div class="row">
         <br><br>
         <div class="">
-            <a class="btn btn-success" href="/cat_tipoempleados"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Tipo Empleados</a>
+            <a class="btn btn-success" href="/cat_turnos"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Turnos</a>
         </div>
     </div>
 
     <div class="row">
         <br><br>
 
-        <form action="/cat_tipoempleados" method="POST">
+        <form action="/cat_turnos" method="POST">
             @csrf
+
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label for="cliente_id">Cliente: </label>
-                    <select name="cliente_id" id="cliente_id" class="form-control">
-                        <option value="">Seleccione una Opción</option>
-                        @foreach($clientes as $cliente)
-                            <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
-                        @endforeach
-                    </select>                    
+                    <label for="nombre">Descripcion turno: </label>
+                    <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripciòn Turno" value="">
                 </div>
-
                 <div class="form-group col-md-6">
-                    <label for="descripcion">Descripción: </label>
-                    <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="">
+                    <label for="tipoturno_id">Tipo de Turno: </label>
+                    <select name="tipoturno_id" id="tipoturno_id" class="form-control">
+                        <option value="">Seleccione una Opción</option>
+                        @foreach($tt as $t)
+                            <option value="{{ $t->id }}">{{ $t->descripcion }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
 
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="horainicio">Hora Inicio: </label>
+                    <input class="form-control" type="time" id="horainicio" name="horainicio" placeholder="Hora Inicio" value="">
+                </div>                
+                <div class="form-group col-md-6">
+                    <label for="horafin">Hora Fin: </label>
+                    <input class="form-control" type="time" id="horafin" name="horafin" placeholder="Hora Fin" value="">
+                </div>                
+            </div>
             <br><br>
             <div class="text-center">
                 <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
@@ -90,4 +100,7 @@
         overlay: true
     });
 </script>
+<!--
+<script type="text/javascript" src="{{ asset('js/template/main.js') }}"></script>
+-->
 @endsection

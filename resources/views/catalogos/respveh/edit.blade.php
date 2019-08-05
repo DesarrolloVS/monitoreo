@@ -30,44 +30,71 @@
     <div class="row">
         <br><br>
         <div class="col-md-10 col-offset-1">
-            <h2>Modificar Registro</h2>
+            <h2>Modificar Responsable: <small>( {{ $r->usuario->nombre." ".$r->usuario->paterno." ".$r->usuario->materno }} )</small></h2>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-10 col-offset-1">
             <br><br>
-            <a class="btn btn-success" href="/cat_tipoempleados"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Tipo Empleados</a>
+            <a class="btn btn-success" href="/cat_respveh"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Responsables de Vehículos</a>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-10 col-offset-1">
             <br><br>
-            <form action="/cat_tipoempleados/{{ $te->id }}" method="POST">
+            <form action="/cat_respveh/{{ $r->id }}" method="POST">
                 @csrf
                 @method('put')
 
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label for="cliente_id">Cliente: </label>
                         <select name="cliente_id" id="cliente_id" class="form-control">
                             <option value="">Seleccione una Opción</option>
                             @foreach($clientes as $cliente)
-                                <option value="{{ $cliente->id }}" 
-                                @if($cliente->id == $te->cliente_id)
-                                selected
-                                @endif
-                                >{{ $cliente->nombre }}</option>
+                            <option value="{{ $cliente->id }}" 
+                            @if($cliente->id == $r->cliente_id)
+                            selected
+                            @endif
+                            >{{ $cliente->nombre }}</option>
                             @endforeach
                         </select>
                     </div>
+                    <div class="form-group col-md-4" id="usuarios">
+                        <label for="usuario_id">Usuarios: </label>
+                        <select name="usuario_id" id="usuario_id" class="form-control">
+                            <option value="">Seleccione una Opción</option>
+                            @foreach($us as $u)
+                            <option value="{{ $u->id }}" 
+                            @if($u->id == $r->usuario_id)
+                            selected
+                            @endif
+                            >{{ $u->nombre." ".$u->paterno." ".$u->materno }}</option>
+                            @endforeach
+                        </select>
 
-                    <div class="form-group col-md-6">
-                        <label for="descripcion">Descripción: </label>
-                        <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="{{ $te->descripcion }}">
+                    </div>
+
+                    <div class="form-group col-md-4" id="turnos">
+                        <label for="turno_id">Turnos: </label>
+                        <select name="turno_id" id="turno_id" class="form-control">
+                            <option value="">Seleccione una Opción</option>
+                            @foreach($turnos as $t)
+                            <option value="{{ $t->id }}" 
+                            @if($t->id == $r->turno_id)
+                            selected
+                            @endif
+                            >{{ $t->descripcion }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
+
+
+
+
 
                 <br><br>
                 <button class="btn btn-primary" type="submit">Modificar</button>
@@ -99,6 +126,7 @@
 <!-- JS NOTIFICACIONES ANIMATE -->
 <script type="text/javascript" src="{{ asset('js/notify/bootstrap-notify.min.js') }}"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<script src="{{ asset('js/usuario/responsables.js') }}"></script>
 
 <script src="{{ asset('js/librerias/pushbar.js') }}"></script>
 <script>
@@ -107,5 +135,8 @@
         overlay: true
     });
 </script>
+<!--
+<script type="text/javascript" src="{{ asset('js/template/main.js') }}"></script>
+-->
 @include('template.menu_catalogos')
 @endsection

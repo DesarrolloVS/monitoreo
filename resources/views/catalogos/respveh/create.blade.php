@@ -30,36 +30,43 @@
     <div class="row">
         <div class="text-center">
             <br>
-            <h2 montseh2>Agregar Tipo de Empleado</h2>
+            <h2 montseh2>Agregar Responsable de Vehículo</h2>
         </div>
     </div>
 
     <div class="row">
         <br><br>
         <div class="">
-            <a class="btn btn-success" href="/cat_tipoempleados"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Tipo Empleados</a>
+            <a class="btn btn-success" href="/cat_respveh"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Responsables de Vehículos</a>
         </div>
     </div>
 
     <div class="row">
         <br><br>
 
-        <form action="/cat_tipoempleados" method="POST">
+        <form action="/cat_respveh" method="POST">
             @csrf
             <div class="row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="cliente_id">Cliente: </label>
                     <select name="cliente_id" id="cliente_id" class="form-control">
                         <option value="">Seleccione una Opción</option>
                         @foreach($clientes as $cliente)
-                            <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
+                        <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
                         @endforeach
-                    </select>                    
+                    </select>
+                </div>
+                <div class="form-group col-md-4" id="usuarios" style="display:none">
                 </div>
 
-                <div class="form-group col-md-6">
-                    <label for="descripcion">Descripción: </label>
-                    <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="">
+                <div class="form-group col-md-4" id="turnos" style="display:none">
+                    <label for="turno_id">Turnos: </label>
+                    <select name="turno_id" id="turno_id" class="form-control">
+                        <option value="">Seleccione una Opción</option>
+                        @foreach($turnos as $t)
+                        <option value="{{ $t->id }}">{{ $t->descripcion }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
 
@@ -82,6 +89,7 @@
 <!-- JS NOTIFICACIONES ANIMATE -->
 <script type="text/javascript" src="{{ asset('js/notify/bootstrap-notify.min.js') }}"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<script src="{{ asset('js/usuario/responsables.js') }}"></script>
 
 <script src="{{ asset('js/librerias/pushbar.js') }}"></script>
 <script>

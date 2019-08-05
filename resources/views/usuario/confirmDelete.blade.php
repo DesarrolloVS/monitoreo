@@ -29,7 +29,7 @@
 <div class="container">
     <div class="row">
         <div class="col"><br><br><br>
-            <h1>Eliminar Registro: <small>{{ $us->nombre }} {{ $us->paterno }} {{ $us->materno }}</small></h1>
+            <h1>Eliminar Responsable: <small>{{ $us->nombre }} {{ $us->paterno }} {{ $us->materno }}</small></h1>
         </div>
     </div>
 

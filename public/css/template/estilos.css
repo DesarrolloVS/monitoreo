@@ -60,7 +60,8 @@
 .pushbar-menu a{
 	display: block;
 	color: #aaaaaa;
-	padding: 20px 0;
+	/*padding: 20px 0;*/
+	padding: 10px 0;
 	border-bottom: 1px solid rgba(112, 112,112, 0.6);
 	font-weight: 300;
 	font-size: 18px;

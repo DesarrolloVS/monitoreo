@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTipoempleadosTable extends Migration
+class CreateEstadoresponsablevehiculosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateTipoempleadosTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipoempleados', function (Blueprint $table) {
+        Schema::create('estadoresponsablevehiculos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('cliente_id');                    
-            $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->text('descripcion');
             $table->timestamps();
         });
@@ -29,6 +27,6 @@ class CreateTipoempleadosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipoempleados');
+        Schema::dropIfExists('estadoresponsablevehiculos');
     }
 }

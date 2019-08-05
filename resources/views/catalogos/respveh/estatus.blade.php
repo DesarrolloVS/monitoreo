@@ -28,48 +28,64 @@
 @section('content')
 <div class="container montse">
     <div class="row">
-        <div class="text-center">
-            <br>
-            <h2 montseh2>Agregar Tipo de Empleado</h2>
+        <br><br>
+        <div class="col-md-10 col-offset-1">
+            <h2>Modificar Estatus Cliente: <small>{{ $r->usuario->nombre." ".$r->usuario->paterno." ".$r->usuario->materno }}</small></h2>
         </div>
     </div>
 
     <div class="row">
         <br><br>
-        <div class="">
-            <a class="btn btn-success" href="/cat_tipoempleados"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Tipo Empleados</a>
+        <div class="col-md-10 col-offset-1">
+            <a class="btn btn-success" href="/cat_respveh"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Responsables de Vehículo</a>
         </div>
     </div>
 
+    <div class="row"><br><br>
+        <div class="col-md-10 col-offset-1">
+            <h3>Estatus Actual: {{ ($r->estadoresponsablevehiculo_id == "" ) ? estatus_responsable($r->estadoresponsablevehiculo_id) : $r->estadoresponsablevehiculo->descripcion }}</h3>
+    </div>
+    </div>
+
     <div class="row">
-        <br><br>
-
-        <form action="/cat_tipoempleados" method="POST">
-            @csrf
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label for="cliente_id">Cliente: </label>
-                    <select name="cliente_id" id="cliente_id" class="form-control">
-                        <option value="">Seleccione una Opción</option>
-                        @foreach($clientes as $cliente)
-                            <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
-                        @endforeach
-                    </select>                    
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label for="descripcion">Descripción: </label>
-                    <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="">
-                </div>
-            </div>
-
+        <div class="col-md-10 col-offset-1">
             <br><br>
-            <div class="text-center">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
-            </div>
-        </form>
-        <br>
+            <form action="/cat_respveh/{{ $r->id }}/estatus" method="POST">
+                @csrf
+                @method('put')
 
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="estadoresponsablevehiculo_id">Cambiar Estado a: </label>
+                        <select name="estadoresponsablevehiculo_id" id="estadoresponsablevehiculo_id" class="form-control">
+                        <option value="">Seleccione una Opción</option>
+                        @foreach($estados as $estado)
+                            @if($estado->id != $r->estadoresponsablevehiculo_id)
+                            <option value="{{ $estado->id }}">{{ $estado->descripcion }}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                    </div>
+                </div>
+
+                <br><br>
+                <button class="btn btn-primary" type="submit">Modificar</button>
+
+            </form>
+            <br>
+            <br>
+            <!--
+            @//if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @//endif
+            -->
+        </div>
     </div>
 
 </div>
@@ -90,4 +106,5 @@
         overlay: true
     });
 </script>
+@include('template.menu_catalogos')
 @endsection
