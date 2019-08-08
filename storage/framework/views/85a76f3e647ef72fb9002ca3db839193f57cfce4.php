@@ -27,7 +27,7 @@
 <div class="container">
     <div class="row">
         <div class="col"><br><br><br>
-            <h1>Eliminar Registro <small> ( <?php echo e($marca->id_marca); ?> - <?php echo e($marca->descripcion_marca); ?> ) </small></h1>
+            <h1>Eliminar Registro <small> <?php echo e($marca->descripcion); ?> </small></h1>
         </div>
     </div>
 
@@ -40,7 +40,7 @@
 
     <div class="row">
         <div class="col">
-            <form action="/cat_marca/<?php echo e($marca->id_marca); ?>" method="POST">
+            <form action="/cat_marca/<?php echo e($marca->id); ?>" method="POST">
                 <?php echo e(csrf_field()); ?>
 
                 <?php echo method_field('delete'); ?>
@@ -51,7 +51,7 @@
         </div>
     </div>
 </div>
-<?php echo $__env->make('template.menu_catalogos', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('template.menu_vehiculos', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>

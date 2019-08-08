@@ -38,12 +38,9 @@ class MarcaController extends Controller
     public function store(Request $request)
     {
         $marca = new Marca();
-        $marca->descripcion_marca = strtoupper($request->get('nombre'));
-
-
-        
+        $marca->descripcion = strtoupper($request->get('descripcion'));
         $marca->save();
-        return redirect('cat_marca');
+        return redirect('/cat_marca');
     }
 
     /**
@@ -81,9 +78,9 @@ class MarcaController extends Controller
     public function update(Request $request, $id)
     {
         $marca = Marca::findOrFail($id);
-        $marca->descripcion_marca = strtoupper($request->get('descripcion'));
+        $marca->descripcion = strtoupper($request->get('descripcion'));
         $marca->save();
-        return redirect('cat_marca');
+        return redirect('/cat_marca');
     }
 
     /**

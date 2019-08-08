@@ -30,7 +30,7 @@
     <div class="row">
         <br><br>
         <div class="col-md-10 col-offset-1">
-            <h2>Modificar Marca <small>( {{ $marca->id_marca }} - {{ $marca->descripcion_marca }} )</small></h2>
+            <h2>Modificar Registro</h2>
         </div>
     </div>
 
@@ -44,13 +44,13 @@
     <div class="row">
         <div class="col-md-10 col-offset-1">
             <br><br>
-            <form action="/cat_marca/{{ $marca->id_marca }}" method="POST">
+            <form action="/cat_marca/{{ $marca->id }}" method="POST">
                 @csrf
                 @method('put')
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="descripcion">Descripción Marca: </label>
-                        <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Ingrese descripción" value="{{ $marca->descripcion_marca }}">
+                        <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Ingrese descripción" value="{{ $marca->descripcion }}">
                     </div>
                 </div>
 
@@ -75,7 +75,7 @@
     </div>
 
 </div>
-@include('template.menu_catalogos')
+@include('template.menu_vehiculos')
 @endsection
 
 @section ('scripts')

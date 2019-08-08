@@ -28,7 +28,7 @@
     <div class="row">
         <br><br>
         <div class="col-md-10 col-offset-1">
-            <h2>Modificar Marca <small>( <?php echo e($marca->id_marca); ?> - <?php echo e($marca->descripcion_marca); ?> )</small></h2>
+            <h2>Modificar Registro</h2>
         </div>
     </div>
 
@@ -42,13 +42,13 @@
     <div class="row">
         <div class="col-md-10 col-offset-1">
             <br><br>
-            <form action="/cat_marca/<?php echo e($marca->id_marca); ?>" method="POST">
+            <form action="/cat_marca/<?php echo e($marca->id); ?>" method="POST">
                 <?php echo csrf_field(); ?>
                 <?php echo method_field('put'); ?>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="descripcion">Descripción Marca: </label>
-                        <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Ingrese descripción" value="<?php echo e($marca->descripcion_marca); ?>">
+                        <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Ingrese descripción" value="<?php echo e($marca->descripcion); ?>">
                     </div>
                 </div>
 
@@ -73,7 +73,7 @@
     </div>
 
 </div>
-<?php echo $__env->make('template.menu_catalogos', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('template.menu_vehiculos', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>

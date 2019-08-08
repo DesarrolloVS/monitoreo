@@ -5,6 +5,7 @@
     </div>
     <nav class="menu">
         <a href="/">Inicio (Mapa)</a>
+        <a href="/cat_vehiculos">Modulo Vehículos</a>
         <a href="/cat_tipopersonas">ABC Tipo Persona</a>
         <a href="/cat_tipoempresas">ABC Tipo Empresa</a>
         <a href="/cat_tiposervicios">ABC Tipo Servicio</a>
@@ -19,5 +20,8 @@
         <a href="/cat_turnos">ABC Turnos</a>
         <a href="/cat_estadosrespveh">ABC Estados Responsables Vehículos</a>
         <a href="/cat_respveh">ABC Responsables de Vehículos</a>
+        <a href="/cat_gpsmarcamodelo">ABC GPS Marca Modelo</a>
+        <a href="/cat_estadogpscliente">ABC Estados GPS Cliente</a>
+        <a href="/cat_gpscliente">ABC GPS Cliente</a>
     </nav>
 </div>
