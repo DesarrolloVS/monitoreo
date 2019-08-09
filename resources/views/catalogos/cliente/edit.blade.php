@@ -155,7 +155,7 @@
     </div>
 
 </div>
-@include('template.menu_catalogos')
+@include('template.menu_clientes')
 @endsection
 
 @section ('scripts')
@@ -163,19 +163,6 @@
 <script src="{{ asset('js/librerias/bootstrap.min.js') }}"></script>
 <!-- JS NOTIFICACIONES ANIMATE -->
 <script type="text/javascript" src="{{ asset('js/notify/bootstrap-notify.min.js') }}"></script>
-<!--
-<script type="text/javascript" src="{{ asset('js/template/functions.js') }}"></script>
--->
-<!--
-    <script type="text/javascript" src="{{ asset('js/template/map.js') }}"></script>
-    -->
-<!--
-<script type="text/javascript" src="{{ asset('js/template/constants.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/template/constantsLayers.js') }}"></script>
--->
-<!--
-<script type="text/javascript" src="{{ asset('js/template/events.js') }}"></script>
--->
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 <script src="{{ asset('js/librerias/pushbar.js') }}"></script>
@@ -185,8 +172,4 @@
         overlay: true
     });
 </script>
-<!--
-<script type="text/javascript" src="{{ asset('js/template/main.js') }}"></script>
--->
-@include('template.menu_catalogos')
 @endsection

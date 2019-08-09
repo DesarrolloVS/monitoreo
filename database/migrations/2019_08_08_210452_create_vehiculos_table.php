@@ -16,6 +16,8 @@ class CreateVehiculosTable extends Migration
         Schema::create('vehiculos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('descripcion');
+            $table->unsignedBigInteger('cliente_id');
+            $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->unsignedBigInteger('marca_id');
             $table->foreign('marca_id')->references('id')->on('marcas');
             $table->unsignedBigInteger('submarca_id');
@@ -23,9 +25,10 @@ class CreateVehiculosTable extends Migration
             $table->unsignedBigInteger('modelo_id');
             $table->foreign('modelo_id')->references('id')->on('modelos');
             $table->integer('puertas');
-            $table->integer('clindros');
+            $table->integer('cilindros');
             $table->string('serie');
             $table->string('chasis');
+            $table->string('placa');
             $table->integer('capacidad');
             $table->unsignedBigInteger('procedencia_id');
             $table->foreign('procedencia_id')->references('id')->on('procedencias');

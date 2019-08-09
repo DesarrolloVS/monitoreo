@@ -34,7 +34,7 @@
     <div class="row">
         <div class="col-md-10 col-offset-1">
             <br><br>
-            <a class="btn btn-primary" href="/cat_vehiculos/create"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar Tipo de Uso</a>
+            <a class="btn btn-primary" href="/cat_vehiculos/create"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar Vehículo</a>
         </div>
     </div>
 
@@ -44,13 +44,17 @@
         <div class="col-md-10 col-offset-1">
             <table class="table table-bordered">
                 <th class="text-center">Id</th>
-                <th class="text-center">Descripción</th>
+                <th class="text-center">Marca</th>
+                <th class="text-center">Submarca</th>
+                <th class="text-center">Placa</th>
                 <th class="text-center">Modificar</th>
                 <th class="text-center">Eliminar</th>
-                @foreach($tu as $x)
+                @foreach($vehiculos as $x)
                 <tr>
                     <td class="text-center">{{ $x->id }}</td>
-                    <td class="text-center">{{ $x->descripcion }}</td>
+                    <td class="text-center">{{ $x->marca->descripcion }}</td>
+                    <td class="text-center">{{ $x->submarca->descripcion }}</td>
+                    <td class="text-center">{{ $x->placa }}</td>
                     <td class="text-center"><a class="btn btn-success btn-xs" href="/cat_tipouso/{{ $x->id }}/edit"><i class="fas fa-pencil-alt"></i></a></td>
                     <td class="text-center"><a class="btn btn-danger btn-xs" href="/cat_tipouso/{{ $x->id }}/confirmDelete"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>

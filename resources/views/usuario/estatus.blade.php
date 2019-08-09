@@ -89,7 +89,7 @@
     </div>
 
 </div>
-@include('template.menu_catalogos')
+@include('template.menu_usuarios')
 @endsection
 
 @section ('scripts')
@@ -106,5 +106,4 @@
         overlay: true
     });
 </script>
-@include('template.menu_catalogos')
 @endsection

@@ -27,12 +27,14 @@
 
 @section('content')
 <div class="container montse">
+    <!--
     <div class="row">
         <div class="text-center">
             <br>
             <h2 montseh2>Agregar Vehículo</h2>
         </div>
     </div>
+-->
 
     <div class="row">
         <br><br>
@@ -47,7 +49,7 @@
         <form action="/cat_vehiculos" method="POST">
             @csrf
             <div class="row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-3">
                     <label for="cliente_id">Cliente: </label>
                     <select name="cliente_id" id="cliente_id" class="form-control">
                         <option value="">Seleccione una Opción</option>
@@ -56,16 +58,9 @@
                         @endforeach
                     </select>
                 </div>
-            </div>
-
-            <div class="row"><br><br>
-            <div class="form-group col-md-3">
-                    <label for="descripcion">Descripcion Vehículo: </label>
-                    <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descrpción" value="">
-                </div>
                 <div class="form-group col-md-3">
-                    <label for="placa">Placa: </label>
-                    <input class="form-control" type="text" id="placa" name="placa" placeholder="Placa" value="">
+                    <label for="descripcion">Descripcion Vehículo: </label>
+                    <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="marca_id">Marca: </label>
@@ -76,25 +71,19 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group col-md-3">
+                <div id="submarca" style="" class="form-group col-md-3">
                     <label for="submarca_id">Submarca: </label>
                     <select name="submarca_id" id="submarca_id" class="form-control">
-                        <option value="">Seleccione una Opción</option>
-                        @foreach($submarcas as $sub)
-                        <option value="{{ $sub->id }}">{{ $sub->descripcion }}</option>
-                        @endforeach
+                        <option value=""></option>
                     </select>
                 </div>
             </div>
 
+
             <div class="row">
                 <div class="form-group col-md-3">
-                    <label for="puertas">Puertas: </label>
-                    <input class="form-control" type="text" id="puertas" name="puertas" placeholder="Puertas" value="">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="cilindros">Cilindros: </label>
-                    <input class="form-control" type="text" id="cilindros" name="cilindros" placeholder="Cilindros" value="">
+                    <label for="placa">Placa: </label>
+                    <input class="form-control" type="text" id="placa" name="placa" placeholder="Placa" value="">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="modelo_id">Modelo: </label>
@@ -106,12 +95,20 @@
                     </select>
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="serie">Serie: </label>
-                    <input class="form-control" type="text" id="serie" name="serie" placeholder="Serie" value="">
+                    <label for="puertas">Puertas: </label>
+                    <input class="form-control" type="text" id="puertas" name="puertas" placeholder="Puertas" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="cilindros">Cilindros: </label>
+                    <input class="form-control" type="text" id="cilindros" name="cilindros" placeholder="Cilindros" value="">
                 </div>
             </div>
 
             <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="serie">Serie: </label>
+                    <input class="form-control" type="text" id="serie" name="serie" placeholder="Serie" value="">
+                </div>
                 <div class="form-group col-md-3">
                     <label for="chasis">Chasis: </label>
                     <input class="form-control" type="text" id="chasis" name="chasis" placeholder="Chasis" value="">
@@ -129,6 +126,9 @@
                         @endforeach
                     </select>
                 </div>
+            </div>
+
+            <div class="row">
                 <div class="form-group col-md-3">
                     <label for="tipovehiculo_id">Tipo de Vehículo: </label>
                     <select name="tipovehiculo_id" id="tipovehiculo_id" class="form-control">
@@ -138,9 +138,6 @@
                         @endforeach
                     </select>
                 </div>
-            </div>
-
-            <div class="row">
                 <div class="form-group col-md-3">
                     <label for="tipouso_id">Tipo de usos: </label>
                     <select name="tipouso_id" id="tipouso_id" class="form-control">
@@ -168,13 +165,13 @@
                         @endforeach
                     </select>
                 </div>
+            </div>
+
+            <div class="row">
                 <div class="form-group col-md-3">
                     <label for="version">Version: </label>
                     <input class="form-control" type="text" id="version" name="version" placeholder="Versión" value="">
                 </div>
-            </div>
-
-            <div class="row">
                 <div class="form-group col-md-3">
                     <label for="clasevehiculo_id">Clase de Vehículo: </label>
                     <select name="clasevehiculo_id" id="clasevehiculo_id" class="form-control">
@@ -192,12 +189,64 @@
                     <label for="rfv">RFV: </label>
                     <input class="form-control" type="text" id="rfv" name="rfv" placeholder="RFV" value="">
                 </div>
+                
             </div>
+
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="color">Color: </label>
+                    <input class="form-control" type="text" id="color" name="color" placeholder="Color" value="">
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="balizado">Balizado: </label>
+                    <select name="balizado" id="balizado" class="form-control">
+                        <option value="">Seleccione una Opción</option>
+                        <option value="0">No</option>
+                        <option value="1">Si</option>
+                    </select>
+                </div>
+            </div>
+
+                
+
+<!-- 
+    <div class="row">
+        <div id="iniciales" style="">
+
+
+        </div>
+
+        <div id="complement" style="display:none">
+            <div class="row">
+
+                
+            </div>
+
+            <div class="row">
+                
+                
+            </div>
+
+            <div class="row">
+                
+                
+            </div>
+
+            <div class="row">
+                
+            </div>
+
+            <div class="row">
+                
+                
+            </div> -->
 
             <br><br>
             <div class="text-center">
                 <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
             </div>
+        </div>
         </form>
         <br>
 
@@ -213,6 +262,7 @@
 <!-- JS NOTIFICACIONES ANIMATE -->
 <script type="text/javascript" src="{{ asset('js/notify/bootstrap-notify.min.js') }}"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<script src="{{ asset('js/usuario/vehiculo.js') }}"></script>
 
 <script src="{{ asset('js/librerias/pushbar.js') }}"></script>
 <script>

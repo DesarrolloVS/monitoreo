@@ -52,7 +52,7 @@
         </div>
     </div>
 </div>
-@include('template.menu_catalogos')
+@include('template.menu_responsables')
 @endsection
 
 @section ('scripts')

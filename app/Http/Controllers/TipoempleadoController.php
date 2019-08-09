@@ -125,10 +125,5 @@ class TipoempleadoController extends Controller
         return view('usuario.select',[
             'tes' => $tes
         ]);
-        
-        
-
-
-
     }
 }

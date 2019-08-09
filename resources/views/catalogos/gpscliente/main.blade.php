@@ -7,15 +7,6 @@
 <!-- Include Airship -->
 <link rel="stylesheet" href="https://libs.cartocdn.com/airship-style/v2.0.5/airship.css">
 <script src="https://libs.cartocdn.com/airship-components/v2.0.5/airship.js"></script>
-<!-- Include Leaflet -->
-<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
-<link href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" rel="stylesheet">
-<!-- Include CARTO.js -->
-<script src="https://libs.cartocdn.com/carto.js/v4.1.2/carto.min.js"></script>
-<link href="https://carto.com/developers/carto-js/examples/maps/public/style.css" rel="stylesheet">
-<!-- Include Chart JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-<!-- INICIO DE MIS ESTILOS -->
 <link rel="stylesheet" type="text/css" href="{{ asset('css/template/thisSystem.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
 <!-- CSS NOTIFICACIONES ANIMATE -->
@@ -28,31 +19,18 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col"><br><br><br>
-            <h1>Eliminar Registro: <small>{{ $estado->descripcion }}</small></h1>
+        <div class="col-md-10 col-offset-1"><br><br><br>
+            <h2 class="text-center montseh2">Gps</h1><br><br><br>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-        <br><br>
-            <a class="btn btn-success" href="/cat_estadosrespveh"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Estados - Responsable Vehìculos</a>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <form action="/cat_estadosrespveh/{{ $estado->id }}" method="POST">
-                {{ csrf_field() }}
-                @method('delete')
-                <br><br><br>
-                <button class="btn btn-danger" type="submit">Eliminar</button>
-
-            </form>
+        
+        <div class="catalogo_main"><br><br><br>
+            <i class="fas fa-location-arrow fa-10x"></i>
+            
         </div>
     </div>
 </div>
-@include('template.menu_responsables')
+
+@include('template.menu_gps')
 @endsection
 
 @section ('scripts')

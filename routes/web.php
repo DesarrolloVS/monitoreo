@@ -117,7 +117,7 @@ Route::get('/cat_gpscliente/{id}/estatus', 'GpsclienteController@estatus');
 Route::put('/cat_gpscliente/{id}/estatus', 'GpsclienteController@update_estatus');
 
 //CATALOGOS VEHICULOS
-Route::get('/cat_vehiculos', function () {
+Route::get('/cat_vehiculo', function () {
     return view('vehiculos.main');
 });
 
@@ -164,3 +164,24 @@ Route::get('/cat_clasevehiculo/{id}/confirmDelete', 'ClasevehiculoController@con
 //CATALOGO VEHICULO
 Route::resource('/cat_vehiculos', 'VehiculoController');
 Route::get('/cat_vehiculos/{id}/confirmDelete', 'VehiculoController@confirmDelete');
+Route::post('/vehiculo/marca', 'VehiculoController@submarca');
+
+//CATALOGOS CLIENTES
+Route::get('/cat_cliente', function () {
+    return view('cliente.main');
+});
+
+//CATALOGOS USUARIOS
+Route::get('/cat_usuario', function () {
+    return view('usuario.main');
+});
+
+//CATALOGOS RESPONSABLES
+Route::get('/cat_responsables', function () {
+    return view('catalogos.respveh.main');
+});
+
+//CATALOGOS GPS
+Route::get('/cat_gps', function () {
+    return view('catalogos.gpscliente.main');
+});

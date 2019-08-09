@@ -37,7 +37,7 @@
     <div class="row">
         <br><br>
         <div class="">
-            <a class="btn btn-success" href="/cat_domicilios"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Tipo Domicilios</a>
+            <a class="btn btn-success" href="/cat_tipodomicilios"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Tipo Domicilios</a>
         </div>
     </div>
 
@@ -63,7 +63,7 @@
     </div>
 
 </div>
-@include('template.menu_catalogos')
+@include('template.menu_clientes')
 @endsection
 
 @section ('scripts')

@@ -117,7 +117,7 @@
     </div>
 
 </div>
-@include('template.menu_catalogos')
+@include('template.menu_responsables')
 @endsection
 
 @section ('scripts')
@@ -138,5 +138,4 @@
 <!--
 <script type="text/javascript" src="{{ asset('js/template/main.js') }}"></script>
 -->
-@include('template.menu_catalogos')
 @endsection

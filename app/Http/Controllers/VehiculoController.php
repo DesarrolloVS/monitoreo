@@ -58,7 +58,33 @@ class VehiculoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // dd($request);
+        $vehiculo = new Vehiculo();
+        $vehiculo->cliente_id = $request->get('cliente_id');
+        $vehiculo->descripcion = strtoupper($request->get('descripcion'));
+        $vehiculo->marca_id = $request->get('marca_id');
+        $vehiculo->submarca_id = $request->get('submarca_id');
+        $vehiculo->placa = strtoupper($request->get('placa'));
+        $vehiculo->modelo_id = $request->get('modelo_id');
+        $vehiculo->puertas = $request->get('puertas');
+        $vehiculo->cilindros = $request->get('cilindros');
+        $vehiculo->serie = strtoupper($request->get('serie'));
+        $vehiculo->chasis = strtoupper($request->get('chasis'));
+        $vehiculo->capacidad = $request->get('capacidad');
+        $vehiculo->procedencia_id = $request->get('procedencia_id');
+        $vehiculo->tipovehiculo_id = $request->get('tipovehiculo_id');
+        $vehiculo->tipouso_id = $request->get('tipouso_id');
+        $vehiculo->tipocombustible_id = $request->get('tipocombustible_id');
+        $vehiculo->tipotransmision_id = $request->get('tipotransmision_id');
+        $vehiculo->version = strtoupper($request->get('version'));
+        $vehiculo->clasevehiculo_id = $request->get('clasevehiculo_id');
+        $vehiculo->vin = strtoupper($request->get('vin'));
+        $vehiculo->rfv = strtoupper($request->get('rfv'));
+        $vehiculo->color = strtoupper($request->get('color'));
+        $vehiculo->balizado = $request->get('balizado');
+        $vehiculo->save();
+        return redirect('/cat_vehiculos');
     }
 
     /**
@@ -104,5 +130,15 @@ class VehiculoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function submarca(Request $request)            //ELIMINA EL ELEMENTO
+    {        
+        $id_marca = $request->get('id_marca');
+        $subs = Submarca::where('marca_id','=',$id_marca)->get();
+
+        return view('vehiculos.vehiculos.submarca',[
+            'submarcas' => $subs
+        ]);
     }
 }

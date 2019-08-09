@@ -79,7 +79,7 @@
 
 </div>
 
-@include('template.menu_catalogos')
+@include('template.menu_gps')
 @endsection
 
 @section ('scripts')

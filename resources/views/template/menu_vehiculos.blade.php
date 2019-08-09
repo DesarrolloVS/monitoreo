@@ -14,8 +14,10 @@
         <a href="/cat_tipocombustible">ABC Tipo de Combustible</a>
         <a href="/cat_tipotransmision">ABC Tipo de Transmisión</a>
         <a href="/cat_clasevehiculo">ABC Clase Vehículo</a>
-        <a href="/cat_vehiculos">ABC Vehículo</a>
         <a href="/">Inicio (Mapa)</a>
-        <a href="/catalogos">Catálogos</a>
+        <a href="/cat_cliente">Modulo Clientes</a>
+        <a href="/cat_usuario">Modulo Usuarios</a>
+        <a href="/cat_responsables">Modulo Responsables</a>
+        <a href="/cat_gps">Modulo GPS</a>
     </nav>
 </div>
