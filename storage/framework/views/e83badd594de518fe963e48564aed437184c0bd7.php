@@ -47,16 +47,14 @@
             <table class="table table-bordered">
                 <th class="text-center">Id Marca</th>
                 <th class="text-center">Descripción</th>
-                <th class="text-center">Fecha de Creacion</th>
-                <th class="text-center"></th>
-                <th class="text-center"></th>
+                <th class="text-center">Modificar</th>
+                <th class="text-center">Eliminar</th>
                 <?php $__currentLoopData = $marcas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $marca): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
-                    <td class="text-center"><?php echo e($marca->id_marca); ?></td>
-                    <td class="text-center"><?php echo e($marca->descripcion_marca); ?></td>
-                    <td class="text-center"><?php echo e($marca->created_at); ?></td>
-                    <td class="text-center"><a class="btn btn-success btn-xs" href="/cat_marca/<?php echo e($marca->id_marca); ?>/edit"><i class="fas fa-pencil-alt"></i></a></td>
-                    <td class="text-center"><a class="btn btn-danger btn-xs" href="/cat_marca/<?php echo e($marca->id_marca); ?>/confirmDelete"><i class="fas fa-trash-alt"></i></a></td>
+                    <td class="text-center"><?php echo e($marca->id); ?></td>
+                    <td class="text-center"><?php echo e($marca->descripcion); ?></td>
+                    <td class="text-center"><a class="btn btn-success btn-xs" href="/cat_marca/<?php echo e($marca->id); ?>/edit"><i class="fas fa-pencil-alt"></i></a></td>
+                    <td class="text-center"><a class="btn btn-danger btn-xs" href="/cat_marca/<?php echo e($marca->id); ?>/confirmDelete"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </table>
@@ -77,7 +75,7 @@
 
 </div>
 
-<?php echo $__env->make('template.menu_catalogos', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('template.menu_vehiculos', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>

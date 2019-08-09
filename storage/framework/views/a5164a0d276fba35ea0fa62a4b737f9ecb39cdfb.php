@@ -46,13 +46,15 @@
         <div class="col-md-10 col-offset-1">
             <table class="table table-bordered">
                 <th class="text-center">Id</th>
+                <th class="text-center">Cliente</th>
                 <th class="text-center">Descrición</th>
                 <th class="text-center">Modificar</th>
                 <th class="text-center">Eliminar</th>
                 <?php $__currentLoopData = $tipoempleados; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $te): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
                     <td class="text-center"><?php echo e($te->id); ?></td>
-                    <td class="text-center"><?php echo e($te->descripcion); ?></td>
+                    <td class="text-center"><?php echo e(str_limit($te->cliente->nombre,25)); ?>...</td>
+                    <td class="text-center"><?php echo e(str_limit($te->descripcion,25)); ?>...</td>
                     <td class="text-center"><a class="btn btn-success btn-xs" href="/cat_tipoempleados/<?php echo e($te->id); ?>/edit"><i class="fas fa-pencil-alt"></i></a></td>
                     <td class="text-center"><a class="btn btn-danger btn-xs" href="/cat_tipoempleados/<?php echo e($te->id); ?>/confirmDelete"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>

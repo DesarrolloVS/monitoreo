@@ -22,6 +22,8 @@ class VerifyCsrfToken extends Middleware
         'forms/form_geocerca',
         'forms/registrar_geocerca',
         'tipoempleado/cliente',
-        'usuarios/cliente'
+        'usuarios/cliente',
+        '/gps/form',
+        '/vehiculo/marca'
     ];
 }

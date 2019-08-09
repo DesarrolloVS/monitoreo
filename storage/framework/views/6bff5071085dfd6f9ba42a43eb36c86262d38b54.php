@@ -14,5 +14,10 @@
         <a href="/cat_tipoempleados">ABC Tipo Empleados</a>
         <a href="/cat_estadosusuario">ABC Estados Usuarios</a>
         <a href="/cat_usuarios">ABC Usuarios</a>
+        <a href="/cat_estadosturnos">ABC Estados Turnos</a>
+        <a href="/cat_tipoturnos">ABC Tipo Turnos</a>
+        <a href="/cat_turnos">ABC Turnos</a>
+        <a href="/cat_estadosrespveh">ABC Estados Responsables Vehículos</a>
+        <a href="/cat_respveh">ABC Responsables de Vehículos</a>
     </nav>
 </div><?php /**PATH /var/www/html/monitoreo/resources/views/template/menu_catalogos.blade.php ENDPATH**/ ?>

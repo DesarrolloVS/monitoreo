@@ -47,6 +47,7 @@
             <table class="table table-bordered">
                 <th class="text-center">Id</th>
                 <th class="text-center">Nombre</th>
+                <th class="text-center">Cliente</th>
                 <th class="text-center">Estado</th>
                 <th class="text-center">Perfiles</th>
                 <th class="text-center">Modificar</th>
@@ -54,7 +55,8 @@
                 <?php $__currentLoopData = $usuarios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $u): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
                     <td class="text-center"><?php echo e($u->id); ?></td>
-                    <td class="text-center"><?php echo e($u->nombre); ?> <?php echo e($u->paterno); ?> <?php echo e($u->materno); ?></td>
+                    <td class="text-center"><?php echo e(str_limit(($u->nombre." ".$u->paterno." ".$u->materno),30)); ?> </td>
+                    <td class="text-center"><?php echo e(str_limit($u->cliente->nombre,30)); ?></td>
                     <td class="text-center"><a class="btn btn-info btn-xs" href="/cat_usuarios/<?php echo e($u->id); ?>/estatus"><?php echo e(($u->estadousuario_id == "" ) ? estatus_cliente($u->estadousuario_id) : $u->estadousuario_id); ?>&emsp;<i class="fas fa-exchange-alt"></i></a></td>
                     <td class="text-center"><a class="btn btn-primary btn-xs" href="/cat_usuarios/<?php echo e($u->id); ?>/perfiles"><i class="far fa-id-card"></i></a></td>
                     <td class="text-center"><a class="btn btn-success btn-xs" href="/cat_usuarios/<?php echo e($u->id); ?>/edit"><i class="fas fa-pencil-alt"></i></a></td>

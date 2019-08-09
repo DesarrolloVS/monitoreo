@@ -48,7 +48,7 @@
                 @csrf
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label for="nombre">Descripción Marca: </label>
+                        <label for="descripcion">Descripción: </label>
                         <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Ingrese descripción" value="">
                     </div>
                 </div>
@@ -60,7 +60,7 @@
     </div>
 
 </div>
-@include('template.menu_catalogos')
+@include('template.menu_vehiculos')
 @endsection
 
 @section ('scripts')

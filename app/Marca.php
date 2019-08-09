@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Marca extends Model
 {
-    protected $table = "marca"; // table name
-    protected $primaryKey = 'id_marca';
+    public function submarca () {
+        return $this->hasMany(Submarca::class)->select('descripcion');
+    }
+
+    public function vehiculo () {
+        return $this->hasMany(Vehiculo::class)->select('descripcion');
+    }
 }

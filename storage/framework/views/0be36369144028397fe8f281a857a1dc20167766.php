@@ -46,7 +46,7 @@
                 <?php echo csrf_field(); ?>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label for="nombre">Descripción Marca: </label>
+                        <label for="descripcion">Descripción: </label>
                         <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Ingrese descripción" value="">
                     </div>
                 </div>
@@ -58,7 +58,7 @@
     </div>
 
 </div>
-<?php echo $__env->make('template.menu_catalogos', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('template.menu_vehiculos', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>

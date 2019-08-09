@@ -46,6 +46,16 @@
             <?php echo csrf_field(); ?>
             <div class="row">
                 <div class="form-group col-md-6">
+                    <label for="cliente_id">Cliente: </label>
+                    <select name="cliente_id" id="cliente_id" class="form-control">
+                        <option value="">Seleccione una Opción</option>
+                        <?php $__currentLoopData = $clientes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cliente): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($cliente->id); ?>"><?php echo e($cliente->nombre); ?></option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </select>                    
+                </div>
+
+                <div class="form-group col-md-6">
                     <label for="descripcion">Descripción: </label>
                     <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="">
                 </div>

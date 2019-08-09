@@ -29,7 +29,7 @@
 <div class="container">
     <div class="row">
         <div class="col"><br><br><br>
-            <h1>Eliminar Registro <small> ( {{ $marca->id_marca }} - {{ $marca->descripcion_marca }} ) </small></h1>
+            <h1>Eliminar Registro <small> {{ $marca->descripcion }} </small></h1>
         </div>
     </div>
 
@@ -42,7 +42,7 @@
 
     <div class="row">
         <div class="col">
-            <form action="/cat_marca/{{ $marca->id_marca }}" method="POST">
+            <form action="/cat_marca/{{ $marca->id }}" method="POST">
                 {{ csrf_field() }}
                 @method('delete')
                 <br><br><br>
@@ -52,7 +52,7 @@
         </div>
     </div>
 </div>
-@include('template.menu_catalogos')
+@include('template.menu_vehiculos')
 @endsection
 
 @section ('scripts')

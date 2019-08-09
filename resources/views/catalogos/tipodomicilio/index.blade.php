@@ -77,7 +77,7 @@
 
 </div>
 
-@include('template.menu_catalogos')
+@include('template.menu_clientes')
 @endsection
 
 @section ('scripts')
