@@ -1,5 +1,5 @@
 // $cliente = $('#cliente_id');
-// $marca = $('#marca_id');
+$marca = $('#marca_id');
 
 // $cliente.on('change', function () {
 //     const value = $('#cliente_id').val();
