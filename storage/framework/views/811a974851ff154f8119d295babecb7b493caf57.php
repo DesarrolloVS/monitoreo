@@ -9,6 +9,5 @@
         <a href="/cat_usuario">Modulo Usuarios</a>
         <a href="/cat_responsables">Modulo Responsables</a>
         <a href="/cat_gps">Modulo GPS</a>
-        <a href="/catalogos">Catálogos</a>
     </nav>
 </div><?php /**PATH C:\laragon\www\sismon\resources\views/template/menu.blade.php ENDPATH**/ ?>
