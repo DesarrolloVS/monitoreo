@@ -15,7 +15,7 @@ use App\Tipotransmision;
 use App\Clasevehiculo;
 use App\Estadovehiculo;
 use App\Vehiculo;
-use App\vehiculogpshistorico;
+use App\Vehiculogpshistorico;
 use App\Gpscliente;
 use Illuminate\Support\Facades\DB;
 
@@ -270,7 +270,7 @@ class VehiculoController extends Controller
             $g2->asignado = false;
             $g2->save();}
 
-        $h = new vehiculogpshistorico();
+        $h = new Vehiculogpshistorico();
         $h->vehiculo_id = $request->get('vehiculo_id');
         $h->gpscliente_id = $request->get('gpscliente_id');
         $h->placa = strtoupper($request->get('placa'));
