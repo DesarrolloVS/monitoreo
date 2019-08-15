@@ -34,7 +34,7 @@
     <div class="row">
         <div class="col-md-10 col-offset-1">
             <br><br>
-            <a class="btn btn-primary" href="/cat_vehiculos/create"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar Vehículo</a>
+            <a class="btn btn-primary pull-right" href="/cat_vehiculos/create"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar Vehículo</a>
         </div>
     </div>
 
