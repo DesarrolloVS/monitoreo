@@ -20,6 +20,5 @@
         <a href="/cat_usuario">Modulo Usuarios</a>
         <a href="/cat_responsables">Modulo Responsables</a>
         <a href="/cat_gps">Modulo GPS</a>
-        <a href="/cat_gps">Robert jaaziel</a>
     </nav>
 </div>

@@ -165,6 +165,13 @@ Route::get('/cat_clasevehiculo/{id}/confirmDelete', 'ClasevehiculoController@con
 Route::resource('/cat_vehiculos', 'VehiculoController');
 Route::get('/cat_vehiculos/{id}/confirmDelete', 'VehiculoController@confirmDelete');
 Route::post('/vehiculo/marca', 'VehiculoController@submarca');
+Route::get('/cat_vehiculos/{id}/estatus', 'VehiculoController@estatus');
+Route::put('/cat_vehiculos/{id}/estatus', 'VehiculoController@update_estatus');
+Route::get('/cat_vehiculos/{id}/gps', 'VehiculoController@gps');
+Route::post('vehiculo/gps','VehiculoController@showgpss');
+Route::put('/cat_vehiculos/{id}/gps', 'VehiculoController@update_gps');
+Route::get('/cat_vehiculos/{id}/nogps', 'VehiculoController@nogps');
+Route::get('cat_vehiculos/{id}/historico','VehiculoController@historico');
 
 //CATALOGOS CLIENTES
 Route::get('/cat_cliente', function () {

@@ -1,7 +1,5 @@
 <?php
-
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Gpscliente extends Model
@@ -16,5 +14,9 @@ class Gpscliente extends Model
 
     public function estadogpscliente () {
         return $this->belongsTo(Estadogpscliente::class)->select('descripcion');
+    }
+
+    public function vehiculo () {
+        return $this->belongsTo(Vehiculo::class);
     }
 }

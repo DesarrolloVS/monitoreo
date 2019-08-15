@@ -30,77 +30,42 @@
     <div class="row">
         <br><br>
         <div class="col-md-10 col-offset-1">
-            <h2>Modificar Registro</h2>
+            <h2>Modificar Estatus Vehiculo: <small>Placa: {{ $v->placa }} </small></h2>
         </div>
+    </div>
+
+    <div class="row">
+        <br><br>
+        <div class="col-md-10 col-offset-1">
+            <a class="btn btn-success" href="/cat_vehiculos"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Vehículos</a>
+        </div>
+    </div>
+
+    <div class="row"><br><br>
+        <div class="col-md-10 col-offset-1">
+            <h3>Estatus Actual: {{ ($v->estadovehiculo_id == "" ) ? estatus_vehiculos($v->estadovehiculo_id) : $v->estadovehiculo->descripcion }}</h3>
+    </div>
     </div>
 
     <div class="row">
         <div class="col-md-10 col-offset-1">
             <br><br>
-            <a class="btn btn-success" href="/cat_gpscliente"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo GPS Cliente</a>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-10 col-offset-1">
-            <br><br>
-            <form action="/cat_gpscliente/{{ $gps->id }}" method="POST">
+            <form action="/cat_vehiculos/{{ $v->id }}/estatus" method="POST">
                 @csrf
                 @method('put')
 
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label for="cliente_id">Cliente: </label>
-                        <select name="cliente_id" id="cliente_id" class="form-control">
-                            <option value="">Seleccione una Opción</option>
-                            @foreach($clientes as $cliente)
-                            <option value="{{ $cliente->id }}" 
-                            @if($cliente->id == $gps->cliente_id)
-                            selected
+                        <label for="estadogpscliente_id">Cambiar Estado a: </label>
+                        <select name="estadovehiculo_id" id="estadovehiculo_id" class="form-control">
+                        <option value="">Seleccione una Opción</option>
+                        @foreach($estados as $estado)
+                            @if($estado->id != $v->estadovehiculo_id)
+                            <option value="{{ $estado->id }}">{{ $estado->descripcion }}</option>
                             @endif
-                            >{{ $cliente->nombre }}</option>
-                            @endforeach
-                        </select>
+                        @endforeach
+                    </select>
                     </div>
-                </div>
-
-                <div id="datos_gps">
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label for="gpsmarcamodelo_id">Marca - Modelo: </label>
-                            <select name="gpsmarcamodelo_id" id="gpsmarcamodelo_id" class="form-control">
-                                <option value="">Seleccione una Opción</option>
-                                @foreach($mm as $m)
-                                <option value="{{ $m->id }}" 
-                                @if($m->id == $gps->gpsmarcamodelo_id)
-                                selected
-                                @endif
-                                >{{ $m->marca }} - {{ $m->modelo }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group col-md-4">
-                            <label for="serie">Serie: </label>
-                            <input class="form-control" type="text" id="serie" name="serie" placeholder="Serie" value="{{ $gps->serie }}">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="paterno">Imei: </label>
-                            <input class="form-control" type="text" id="imei" name="imei" placeholder="Imei" value="{{ $gps->imei }}">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label for="puerto">Puerto: </label>
-                            <input class="form-control" type="text" id="puerto" name="puerto" placeholder="Puerto" value="{{ $gps->puerto }}">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="sincronizacion">Sincronización: </label>
-                            <input class="form-control" type="text" id="sincronizacion" name="sincronizacion" placeholder="Sincronización" value="{{ $gps->sincronizacion }}">
-                        </div>
-                    </div>
-
                 </div>
 
                 <br><br>
@@ -124,7 +89,7 @@
     </div>
 
 </div>
-@include('template.menu_gps')
+@include('template.menu_vehiculos')
 @endsection
 
 @section ('scripts')
@@ -133,7 +98,6 @@
 <!-- JS NOTIFICACIONES ANIMATE -->
 <script type="text/javascript" src="{{ asset('js/notify/bootstrap-notify.min.js') }}"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-<script src="{{ asset('js/usuario/gpscliente.js') }}"></script>
 
 <script src="{{ asset('js/librerias/pushbar.js') }}"></script>
 <script>

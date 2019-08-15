@@ -26,52 +26,33 @@
 @endsection
 
 @section('content')
-<div class="container montse">
+<div class="container">
     <div class="row">
-        <div class="text-center">
-            <br>
-            <h2 montseh2>Agregar GPS Cliente</h2>
+        <div class="col"><br><br><br>
+            <h1>Eliminar Registro: <small>Placa: {{ $v->placa }}</small></h1>
         </div>
     </div>
 
     <div class="row">
+        <div class="col">
         <br><br>
-        <div class="">
-            <a class="btn btn-success" href="/cat_gpscliente"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo GPS Cliente</a>
+            <a class="btn btn-success" href="/cat_vehiculos"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Vehículos</a>
         </div>
     </div>
 
     <div class="row">
-        <br><br>
+        <div class="col">
+            <form action="/cat_vehiculos/{{ $v->id }}" method="POST">
+                {{ csrf_field() }}
+                @method('delete')
+                <br><br><br>
+                <button class="btn btn-danger" type="submit">Eliminar</button>
 
-        <form action="/cat_gpscliente" method="POST">
-            @csrf
-
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label for="cliente_id">Cliente: </label>
-                    <select name="cliente_id" id="cliente_id" class="form-control">
-                        <option value="">Seleccione una Opción</option>
-                        @foreach($clientes as $cliente)
-                        <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-
-            <div id="datos_gps" style="display:none"></div>
-
-            <br><br>
-            <div class="text-center" id="submit_form" style="display:none">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
-            </div>
-        </form>
-        <br>
-
+            </form>
+        </div>
     </div>
-
 </div>
-@include('template.menu_gps')
+@include('template.menu_vehiculos')
 @endsection
 
 @section ('scripts')
@@ -82,7 +63,6 @@
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 <script src="{{ asset('js/librerias/pushbar.js') }}"></script>
-<script src="{{ asset('js/usuario/gpscliente.js') }}"></script>
 <script>
     var pushbar = new Pushbar({
         blur: true,
