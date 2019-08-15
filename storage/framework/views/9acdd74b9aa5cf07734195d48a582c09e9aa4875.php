@@ -11,5 +11,6 @@
         <a href="/cat_vehiculo">Modulo Vehículos</a>
         <a href="/cat_usuario">Modulo Usuarios</a>
         <a href="/cat_responsables">Modulo Responsables</a>
+        <a href="/cat_gps">Modulo GPS</a>
     </nav>
 </div><?php /**PATH C:\laragon\www\sismon\resources\views/template/menu_catalogos.blade.php ENDPATH**/ ?>

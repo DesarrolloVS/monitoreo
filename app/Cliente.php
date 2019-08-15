@@ -21,4 +21,8 @@ class Cliente extends Model
     public function gpscliente () {
         return $this->hasMany(Gpscliente::class);
     }
+
+    public function vehiculo () {
+        return $this->vehiculo(Vehiculo::class);
+    }
 }

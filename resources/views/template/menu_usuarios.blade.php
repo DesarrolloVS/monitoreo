@@ -9,8 +9,8 @@
         <a href="/cat_usuarios">ABC Usuarios</a>
         <a href="/">Inicio (Mapa)</a>
         <a href="/cat_cliente">Modulo Clientes</a>
-        <a href="/cat_vehiculo">Modulo Vehículos</a>
         <a href="/cat_responsables">Modulo Responsables</a>
         <a href="/cat_gps">Modulo GPS</a>
+        <a href="/cat_vehiculo">Modulo Vehículos</a>
     </nav>
 </div>

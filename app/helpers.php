@@ -42,4 +42,15 @@ function estatus_gps($param){
     }
     return $res;
 }
+
+function estatus_vehiculos($param){
+    switch ($param) {
+        case "":
+        $res = "SIN ESTADO";
+        break;
+        default:
+        $res = "NO ENCONTRADO";
+    }
+    return $res;
+}
 ?>

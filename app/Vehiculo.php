@@ -13,4 +13,16 @@ class Vehiculo extends Model
     public function submarca () {
         return $this->belongsTo(Submarca::class)->select('descripcion');
     }
+
+    public function estadovehiculo () {
+        return $this->belongsTo(Estadovehiculo::class)->select('descripcion');
+    }
+
+    public function gpscliente () {
+        return $this->belongsTo(Gpscliente::class);
+    }
+
+    public function cliente () {
+        return $this->belongsTo(Cliente::class)->select('nombre');
+    }
 }

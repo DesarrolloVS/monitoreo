@@ -43,6 +43,10 @@ class CreateVehiculosTable extends Migration
             $table->string('version');
             $table->unsignedBigInteger('clasevehiculo_id');
             $table->foreign('clasevehiculo_id')->references('id')->on('clasevehiculos');
+            $table->unsignedBigInteger('estadovehiculo_id')->nullable();
+            $table->foreign('estadovehiculo_id')->references('id')->on('estadovehiculos');
+            $table->unsignedBigInteger('gpscliente_id')->nullable();
+            $table->foreign('gpscliente_id')->references('id')->on('gpsclientes');
             $table->string('vin');
             $table->string('rfv');
             $table->string('color');

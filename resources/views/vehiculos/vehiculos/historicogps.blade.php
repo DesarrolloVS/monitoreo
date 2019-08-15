@@ -28,50 +28,53 @@
 @section('content')
 <div class="container montse">
     <div class="row">
-        <div class="text-center">
-            <br>
-            <h2 montseh2>Agregar GPS Cliente</h2>
+        <br><br>
+        <div class="col-md-10 col-offset-1">
+            <h2>Histórico: <small>Placa: {{ $v->placa }} </small></h2>
         </div>
     </div>
 
     <div class="row">
         <br><br>
-        <div class="">
-            <a class="btn btn-success" href="/cat_gpscliente"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo GPS Cliente</a>
+        <div class="col-md-10 col-offset-1">
+            <a class="btn btn-success" href="/cat_vehiculos"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Vehículos</a>
+        </div>
+    </div>
+
+    <div class="row"><br><br>
+        <div class="col-md-10 col-offset-1">
+            <h3>Gps Actual: {{ ($v->gpscliente_id == "" ) ? "NO ASIGNADO" : $v->gpscliente->imei }}</h3>
         </div>
     </div>
 
     <div class="row">
-        <br><br>
-
-        <form action="/cat_gpscliente" method="POST">
-            @csrf
-
+        <div class="col-md-10 col-offset-1">
             <div class="row">
-                <div class="form-group col-md-6">
-                    <label for="cliente_id">Cliente: </label>
-                    <select name="cliente_id" id="cliente_id" class="form-control">
-                        <option value="">Seleccione una Opción</option>
-                        @foreach($clientes as $cliente)
-                        <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
+                <br><br>
+                <div class="col-md-10 col-offset-1">
+                    <table class="table table-bordered">
+                        <th class="text-center">Id</th>
+                        <th class="text-center">Imei</th>
+                        <th class="text-center">Serie GPS</th>
+                        <th class="text-center">Placa</th>
+                        <th class="text-center">Fecha de asignacion</th>
+                        @foreach($historico as $h)
+                        <tr>
+                            <td class="text-center">{{ $h->id }}</td>
+                            <td class="text-center">{{ $h->imei }}</td>
+                            <td class="text-center">{{ $h->serie }}</td>
+                            <td class="text-center">{{ $h->placa }}</td>
+                            <td class="text-center">{{ $h->created_at }}</td>
+                        </tr>
                         @endforeach
-                    </select>
+                    </table>
                 </div>
             </div>
-
-            <div id="datos_gps" style="display:none"></div>
-
-            <br><br>
-            <div class="text-center" id="submit_form" style="display:none">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
-            </div>
-        </form>
-        <br>
-
+        </div>
     </div>
 
 </div>
-@include('template.menu_gps')
+@include('template.menu_vehiculos')
 @endsection
 
 @section ('scripts')
@@ -82,7 +85,7 @@
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 <script src="{{ asset('js/librerias/pushbar.js') }}"></script>
-<script src="{{ asset('js/usuario/gpscliente.js') }}"></script>
+<script src="{{ asset('js/usuario/asignargps.js') }}"></script>
 <script>
     var pushbar = new Pushbar({
         blur: true,
