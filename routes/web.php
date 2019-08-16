@@ -172,6 +172,8 @@ Route::post('vehiculo/gps','VehiculoController@showgpss');
 Route::put('/cat_vehiculos/{id}/gps', 'VehiculoController@update_gps');
 Route::get('/cat_vehiculos/{id}/nogps', 'VehiculoController@nogps');
 Route::get('cat_vehiculos/{id}/historico','VehiculoController@historico');
+Route::post('/vehiculos/cliente','VehiculoController@clientes');
+Route::get('/cat_vehiculos/create/{id}', 'VehiculoController@create');
 
 //CATALOGOS CLIENTES
 Route::get('/cat_cliente', function () {

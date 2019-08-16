@@ -29,14 +29,14 @@
 <div class="container montse">
     <div class="row">
         <br><br>
-        <div class="col-md-10 col-offset-1">
+        <div class="text-center">
             <h2>Asignar Gps Vehiculo: <small>Placa: {{ $v->placa }} </small></h2>
         </div>
     </div>
 
     <div class="row">
         <br><br>
-        <div class="col-md-10 col-offset-1">
+        <div class="">
             <a class="btn btn-success" href="/cat_vehiculos"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Vehículos</a>
             @if($historico->first())
             <a class="btn btn-info pull-right" href="/cat_vehiculos/{{ $v->id }}/historico"><i class="fas fa-database"></i>&nbsp;&nbsp;&nbsp;Historico GPS</a>
@@ -44,12 +44,12 @@
         </div>
     </div>
 
-    <div class="row"><br><br>
-        <div class="col-md-10 col-offset-1">
-            <h3>Gps Actual: {{ ($v->gpscliente_id == "" ) ? "NO ASIGNADO" : $v->gpscliente->imei }} 
-            @if($v->gpscliente_id != "")
-            &emsp;<a href="/cat_vehiculos/{{ $v->id }}/nogps" class="btn btn-danger btn-xs">Desvincular GPS</a>
-            @endif
+    <div class="row  col-md-4 col-md-offset-4"><br>
+        <div class="">
+            <h3>Gps Actual: {{ ($v->gpscliente_id == "" ) ? "NO ASIGNADO" : $v->gpscliente->imei }}
+                @if($v->gpscliente_id != "")
+                &emsp;<a href="/cat_vehiculos/{{ $v->id }}/nogps" class="btn btn-danger btn-xs">Desvincular GPS</a>
+                @endif
             </h3>
             @if($v->gpscliente_id != "")
             <h3>Fecha de Asignación: {{ $v->gpscliente->created_at }}</h3>
@@ -58,50 +58,57 @@
     </div>
 
     <div class="row">
-        <div class="col-md-10 col-offset-1">
+        <div class="">
             <br><br>
             <form action="/cat_vehiculos/{{ $v->id }}/gps" method="POST">
                 @csrf
                 @method('put')
 
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4 col-md-offset-4"><br><br>
                         <label for="cliente_id">Cliente: </label>
-                        <select name="cliente_id" id="cliente_id" class="form-control">
-                            <option value="">Seleccione una Opción</option>
-                            @foreach($clientes as $cliente)
-                            <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
-                            @endforeach
+                        <select name="cliente_id" id="cliente_id" class="form-control" readonly>
+                            <option value="{{ $cliente->id }}" selected>{{ $cliente->nombre }}</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="row" id="gpss">
-
+                @if($gpss->first())
+                <div class="row">
+                    <div class="form-group col-md-4 col-md-offset-4">
+                        <label for="gpscliente_id">Cambiar GPS a: </label>
+                        <select name="gpscliente_id" id="gpscliente_id" class="form-control">
+                            <option value="">Seleccione una Opción</option>
+                            @foreach($gpss as $g)
+                            <option value="{{ $g->id }}">{{ $g->serie }} - {{ $g->imei }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
-
-                <br><br>
-                <div class="text-center" style="display:none" id="asignar"><br><br>
-                    <button class="btn btn-primary" type="submit">Asignar Gps</button>
+                <div class="row">
+                    <div class="form-group"><br>
+                        <div class="text-center" id="asignar" style="display:none"><br><br>
+                            <button class="btn btn-primary" type="submit">Asignar Gps</button>
+                        </div>
+                    </div>
+                </div>
+                @else
+                <div class="row">
+                    <div class="form-group col-md-4 col-md-offset-4">
+                        <br>
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <strong>Atención: </strong> No hay registros de GPS's disponibles para este cliente.
+                        </div>
+                    </div>
+                </div>
+                @endif
                 </div>
 
                 <input type="hidden" name="placa" id="placa" value="{{ $v->placa }}">
                 <input type="hidden" name="vehiculo_id" id="vehiculo_id" value="{{ $v->id }}">
                 <input type="hidden" name="gpscliente_id_anterior" id="gpscliente_id_anterior" value="{{ $v->gpscliente_id }}">
-
-
             </form>
-
-            @if($historico->first())
-            @else
-            <div class="row col-md-10 col-offset-1">
-                <br><br><br><br>
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>Atención: </strong> No hay registros gps-historicos para este vehiculo.
-                </div>
-            </div>
-            @endif
             <br>
             <br>
         </div>

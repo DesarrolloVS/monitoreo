@@ -52,10 +52,7 @@
                 <div class="form-group col-md-3">
                     <label for="cliente_id">Cliente: </label>
                     <select name="cliente_id" id="cliente_id" class="form-control">
-                        <option value="">Seleccione una Opción</option>
-                        @foreach($clientes as $cliente)
                         <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
-                        @endforeach
                     </select>
                 </div>
                 <div class="form-group col-md-3">

@@ -26,10 +26,17 @@ class VehiculoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function index()
+    // {
+    //     return view('vehiculos.vehiculos.index', [
+    //         'vehiculos' => Vehiculo::all()
+    //     ]);
+    // }
+
     public function index()
     {
         return view('vehiculos.vehiculos.index', [
-            'vehiculos' => Vehiculo::all()
+            'clientes' => Cliente::all()
         ]);
     }
 
@@ -38,10 +45,28 @@ class VehiculoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    // public function create()
+    // {
+    //     return view('vehiculos.vehiculos.create', [
+    //         'clientes' => Cliente::all(),
+    //         'marcas' => Marca::all(),
+    //         'submarcas' => Submarca::all(),
+    //         'modelos' => Modelo::all(),
+    //         'procedencias' => Procedencia::all(),
+    //         'tvs' => Tipovehiculo::all(),
+    //         'tus' => Tipouso::all(),
+    //         'tcs' => Tipocombustible::all(),
+    //         'tts' => Tipotransmision::all(),
+    //         'cvs' => Clasevehiculo::all()
+    //     ]);
+    // }
+
+    public function create($id)
     {
+        //dd($id);
+        $c = Cliente::findOrFail($id);
         return view('vehiculos.vehiculos.create', [
-            'clientes' => Cliente::all(),
+            'cliente' => $c,
             'marcas' => Marca::all(),
             'submarcas' => Submarca::all(),
             'modelos' => Modelo::all(),
@@ -89,6 +114,7 @@ class VehiculoController extends Controller
         $vehiculo->balizado = $request->get('balizado');
         $vehiculo->save();
         return redirect('/cat_vehiculos');
+        //return redirect()->route('/vehiculos/cliente', ['id_cliente' => $request->get('cliente_id')]);
     }
 
     /**
@@ -219,16 +245,23 @@ class VehiculoController extends Controller
         $historico = DB::table('vehiculogpshistoricos')
         ->where('vehiculo_id',$id_vehiculo)
         ->get();            
+        $c = Cliente::findOrFail($v->cliente_id);
+        if($historico->first()){$bandera2 = 1;}else{$bandera2 = 0;}
 
-        if($historico->first()){$bandera = 1;}else{$bandera = 0;}
+        $gpss = DB::table('gpsclientes')
+        ->where('cliente_id',$v->cliente_id)
+        ->whereIn('asignado', [false])
+        ->get();            //dd($doms);
 
-        
+        //if($gpss->first()){$bandera = 1;}else{$bandera = 0;}
+
         
         return view('vehiculos.vehiculos.gps', [
             'v' => $v,
-            'clientes' => Cliente::all(),
+            'cliente' => $c,
             'historico' => $historico,
-            'bandera' => $bandera   
+            'gpss' => $gpss
+            // 'bandera' => $bandera   
         ]);        
     }
 
@@ -313,5 +346,16 @@ class VehiculoController extends Controller
         $g->save();
         DB::commit();
         return redirect('/cat_vehiculos');
+    }
+
+    public function clientes(Request $request)            //ELIMINA EL ELEMENTO
+    {        
+        $id_cliente = $request->get('id_cliente');
+        $vehiculos = Vehiculo::where('cliente_id','=',$id_cliente)->get();
+
+        return view('vehiculos.vehiculos.filtro',[
+            'vehiculos' => $vehiculos,
+            'id' => $id_cliente
+        ]);
     }
 }

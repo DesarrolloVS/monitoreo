@@ -29,33 +29,33 @@
 <div class="container montse">
     <div class="row">
         <br><br>
-        <div class="col-md-10 col-offset-1">
+        <div class="text-center">
             <h2>Modificar Estatus Vehiculo: <small>Placa: {{ $v->placa }} </small></h2>
         </div>
     </div>
 
     <div class="row">
         <br><br>
-        <div class="col-md-10 col-offset-1">
+        <div class="">
             <a class="btn btn-success" href="/cat_vehiculos"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Vehículos</a>
         </div>
     </div>
 
     <div class="row"><br><br>
-        <div class="col-md-10 col-offset-1">
+        <div class="col-md-4 col-md-offset-4">
             <h3>Estatus Actual: {{ ($v->estadovehiculo_id == "" ) ? estatus_vehiculos($v->estadovehiculo_id) : $v->estadovehiculo->descripcion }}</h3>
     </div>
     </div>
 
     <div class="row">
-        <div class="col-md-10 col-offset-1">
+        <div class="">
             <br><br>
             <form action="/cat_vehiculos/{{ $v->id }}/estatus" method="POST">
                 @csrf
                 @method('put')
 
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4 col-md-offset-4">
                         <label for="estadogpscliente_id">Cambiar Estado a: </label>
                         <select name="estadovehiculo_id" id="estadovehiculo_id" class="form-control">
                         <option value="">Seleccione una Opción</option>
@@ -67,9 +67,10 @@
                     </select>
                     </div>
                 </div>
-
-                <br><br>
-                <button class="btn btn-primary" type="submit">Modificar</button>
+                
+                <div class="row text-center"><br><br><br><br>
+                    <button class="btn btn-primary" type="submit">Modificar</button>
+                </div>
 
             </form>
             <br>
