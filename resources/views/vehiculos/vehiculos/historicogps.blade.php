@@ -29,48 +29,46 @@
 <div class="container montse">
     <div class="row">
         <br><br>
-        <div class="col-md-10 col-offset-1">
+        <div class="">
             <h2>Histórico: <small>Placa: {{ $v->placa }} </small></h2>
         </div>
     </div>
 
     <div class="row">
         <br><br>
-        <div class="col-md-10 col-offset-1">
+        <div class="">
             <a class="btn btn-success" href="/cat_vehiculos"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Vehículos</a>
         </div>
     </div>
 
     <div class="row"><br><br>
-        <div class="col-md-10 col-offset-1">
+        <div class="">
             <h3>Gps Actual: {{ ($v->gpscliente_id == "" ) ? "NO ASIGNADO" : $v->gpscliente->imei }}</h3>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-10 col-offset-1">
-            <div class="row">
-                <br><br>
-                <div class="col-md-10 col-offset-1">
-                    <table class="table table-bordered">
-                        <th class="text-center">Id</th>
-                        <th class="text-center">Imei</th>
-                        <th class="text-center">Serie GPS</th>
-                        <th class="text-center">Placa</th>
-                        <th class="text-center">Fecha de asignacion</th>
-                        @foreach($historico as $h)
-                        <tr>
-                            <td class="text-center">{{ $h->id }}</td>
-                            <td class="text-center">{{ $h->imei }}</td>
-                            <td class="text-center">{{ $h->serie }}</td>
-                            <td class="text-center">{{ $h->placa }}</td>
-                            <td class="text-center">{{ $h->created_at }}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                </div>
-            </div>
+
+        <br><br>
+        <div class="">
+            <table class="table table-bordered">
+                <th class="text-center">Id</th>
+                <th class="text-center">Imei</th>
+                <th class="text-center">Serie GPS</th>
+                <th class="text-center">Placa</th>
+                <th class="text-center">Fecha de asignacion</th>
+                @foreach($historico as $h)
+                <tr>
+                    <td class="text-center">{{ $h->id }}</td>
+                    <td class="text-center">{{ $h->imei }}</td>
+                    <td class="text-center">{{ $h->serie }}</td>
+                    <td class="text-center">{{ $h->placa }}</td>
+                    <td class="text-center">{{ $h->created_at }}</td>
+                </tr>
+                @endforeach
+            </table>
         </div>
+
     </div>
 
 </div>
