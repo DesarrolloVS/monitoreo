@@ -174,6 +174,12 @@ Route::get('/cat_vehiculos/{id}/nogps', 'VehiculoController@nogps');
 Route::get('cat_vehiculos/{id}/historico','VehiculoController@historico');
 Route::post('/vehiculos/cliente','VehiculoController@clientes');
 Route::get('/cat_vehiculos/create/{id}', 'VehiculoController@create');
+Route::get('/cat_vehiculos/{id}/resp', 'VehiculoController@responsable');
+Route::put('/cat_vehiculos/{id}/resp', 'VehiculoController@storeresp');
+Route::get('/cat_vehiculos/{id}/responsablesh', 'VehiculoController@responsablesh');
+Route::get('/cat_vehiculos/{id}/responsablesactuales', 'VehiculoController@resact');
+Route::get('/cat_vehiculos/{id}/deleteResponsable', 'VehiculoController@confirm');
+Route::delete('/cat_vehiculos/deleteResponsable/{id}', 'VehiculoController@destroyResponsable');
 
 //CATALOGOS CLIENTES
 Route::get('/cat_cliente', function () {

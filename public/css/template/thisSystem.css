@@ -131,3 +131,14 @@
 .montse{
 	font-family: 'Montserrat', Arial, Helvetica, sans-serif !important;
 }
+
+.justifyc{
+	display:flex;
+	justify-content: space-between;
+}
+
+.fd_column{
+	display:flex;
+	flex-direction: column;
+	padding: 5px 0;
+}
