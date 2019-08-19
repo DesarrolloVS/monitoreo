@@ -13,4 +13,12 @@ class Usuario extends Model
     public function responsablevehiculo () {
         return $this->hasMany(Responsablevehiculo::class);
     }
+
+    public function responsablesvehiculoh () {
+        return $this->hasMany(Responsablesvehiculoh::class);
+    }
+
+    public function responsablesvehiculo () {
+        return $this->hasMany(Responsablesvehiculo::class);
+    }
 }

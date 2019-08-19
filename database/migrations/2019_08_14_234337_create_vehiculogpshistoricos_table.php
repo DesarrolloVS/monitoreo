@@ -16,9 +16,7 @@ class CreateVehiculogpshistoricosTable extends Migration
         Schema::create('vehiculogpshistoricos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('vehiculo_id');
-            $table->foreign('vehiculo_id')->references('id')->on('vehiculos');
             $table->unsignedBigInteger('gpscliente_id');
-            $table->foreign('gpscliente_id')->references('id')->on('gpsclientes');
             $table->string('placa');
             $table->string('imei');
             $table->string('serie');

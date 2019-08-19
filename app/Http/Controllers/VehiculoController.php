@@ -17,6 +17,9 @@ use App\Estadovehiculo;
 use App\Vehiculo;
 use App\Vehiculogpshistorico;
 use App\Gpscliente;
+use App\Responsablesvehiculo;
+use App\Responsablesvehiculoh;
+use App\Responsablevehiculo;
 use Illuminate\Support\Facades\DB;
 
 class VehiculoController extends Controller
@@ -357,5 +360,101 @@ class VehiculoController extends Controller
             'vehiculos' => $vehiculos,
             'id' => $id_cliente
         ]);
+    }
+
+    public function responsable($id)
+    {        
+        $v = Vehiculo::findOrFail($id);
+        $id_cliente = $v->cliente_id;
+        $c = Cliente::findOrFail($id_cliente);
+
+        $actuales = Responsablesvehiculo::where('vehiculo_id',$id)
+            ->get();
+        $h = Responsablesvehiculoh::where('vehiculo_id',$id)
+            ->get();
+        
+        $restodos = Responsablevehiculo::where('cliente_id',$id_cliente)
+            ->get();
+        
+        $arr =  array();
+        foreach($actuales as $a){array_push($arr,$a->responsablevehiculo_id);}
+        
+        $res = $restodos->diff(Responsablevehiculo::whereIn('id',$arr)->get());
+
+        return view('vehiculos.vehiculos.responsables', [
+            'v' => $v,
+            'cliente' => $c,
+            'actuales' => $actuales,
+            'res' => $res,
+            'h' => $h
+        ]);        
+    }
+
+    public function storeresp(Request $request, $id)
+    {   
+        $v = Vehiculo::findOrFail($id);
+        // $c = Cliente::findOrFail($request->get('cliente_id'));
+        $res = Responsablevehiculo::findOrFail($request->get('responsablevehiculo_id'));
+        
+        $usuario_id = $res->usuario_id;
+        $cliente_id = $res->cliente_id;
+
+        $r = new Responsablesvehiculo();
+        $r->vehiculo_id = $id;
+        $r->responsablevehiculo_id = $request->get('responsablevehiculo_id');
+        $r->usuario_id = $usuario_id;
+        $r->cliente_id = $cliente_id;
+        $r->save();
+
+        $rh = new Responsablesvehiculoh();
+        $rh->vehiculo_id = $id;
+        $rh->responsablevehiculo_id = $request->get('responsablevehiculo_id');
+        $rh->usuario_id = $usuario_id;
+        $r->cliente_id = $cliente_id;
+        $rh->save();
+
+        return redirect("/cat_vehiculos/$id/responsablesactuales");
+        ///cat_vehiculos/1/responsablesactuales
+    }
+
+    public function responsablesh($id)
+    {        
+        $v = Vehiculo::findOrFail($id);
+        $res = Responsablesvehiculoh::where('vehiculo_id',$id)
+            ->get();
+        //dd($res);
+        return view('vehiculos.vehiculos.historicoresponsables', [
+            'v' => $v,
+            'res' => $res            
+        ]);        
+    }
+
+    public function resact($id)
+    {        
+        $v = Vehiculo::findOrFail($id);
+        $res = Responsablesvehiculo::where('vehiculo_id',$id)
+            ->get();
+        return view('vehiculos.vehiculos.responsablesactuales', [
+            'v' => $v,
+            'res' => $res            
+        ]);        
+    }
+
+    public function confirm($id)
+    {        
+        $r = Responsablesvehiculo::findOrFail($id);
+        $vehiculo_id = $r->vehiculo_id;
+        $v = Vehiculo::findOrFail($vehiculo_id);
+        return view('vehiculos.vehiculos.deleteResponsable',[
+            'r' => $r,
+            'v' => $v
+        ]);
+    }
+
+    public function destroyResponsable($id)
+    {        
+        $r = Responsablesvehiculo::findOrFail($id);
+        $r->delete();
+        return redirect('/cat_vehiculos');
     }
 }
