@@ -35,7 +35,7 @@
     <div class="row">
         <br><br>
         <div class="">
-            <a class="btn btn-success" href="/cat_domicilios"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Tipo Domicilios</a>
+            <a class="btn btn-success" href="/cat_tipodomicilios"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Tipo Domicilios</a>
         </div>
     </div>
 
@@ -61,7 +61,7 @@
     </div>
 
 </div>
-<?php echo $__env->make('template.menu_catalogos', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('template.menu_clientes', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>

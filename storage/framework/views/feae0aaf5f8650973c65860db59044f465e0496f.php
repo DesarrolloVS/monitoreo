@@ -153,7 +153,7 @@
     </div>
 
 </div>
-<?php echo $__env->make('template.menu_catalogos', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('template.menu_clientes', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>
@@ -161,19 +161,6 @@
 <script src="<?php echo e(asset('js/librerias/bootstrap.min.js')); ?>"></script>
 <!-- JS NOTIFICACIONES ANIMATE -->
 <script type="text/javascript" src="<?php echo e(asset('js/notify/bootstrap-notify.min.js')); ?>"></script>
-<!--
-<script type="text/javascript" src="<?php echo e(asset('js/template/functions.js')); ?>"></script>
--->
-<!--
-    <script type="text/javascript" src="<?php echo e(asset('js/template/map.js')); ?>"></script>
-    -->
-<!--
-<script type="text/javascript" src="<?php echo e(asset('js/template/constants.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(asset('js/template/constantsLayers.js')); ?>"></script>
--->
-<!--
-<script type="text/javascript" src="<?php echo e(asset('js/template/events.js')); ?>"></script>
--->
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 <script src="<?php echo e(asset('js/librerias/pushbar.js')); ?>"></script>
@@ -183,9 +170,5 @@
         overlay: true
     });
 </script>
-<!--
-<script type="text/javascript" src="<?php echo e(asset('js/template/main.js')); ?>"></script>
--->
-<?php echo $__env->make('template.menu_catalogos', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/monitoreo/resources/views/catalogos/cliente/edit.blade.php ENDPATH**/ ?>

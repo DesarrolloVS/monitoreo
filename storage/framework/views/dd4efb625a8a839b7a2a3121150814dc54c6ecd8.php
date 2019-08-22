@@ -46,7 +46,7 @@
             <?php echo csrf_field(); ?>
 
             <div class="row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-5">
                     <label for="cliente_id">Cliente: </label>
                     <select name="cliente_id" id="cliente_id" class="form-control">
                         <option value="">Seleccione una Opción</option>
@@ -121,7 +121,7 @@
     </div>
 
 </div>
-<?php echo $__env->make('template.menu_catalogos', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('template.menu_usuarios', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>
