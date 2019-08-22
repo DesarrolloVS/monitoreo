@@ -13,6 +13,8 @@
 <!-- Include CARTO.js -->
 <script src="https://libs.cartocdn.com/carto.js/v4.1.2/carto.min.js"></script>
 <link href="https://carto.com/developers/carto-js/examples/maps/public/style.css" rel="stylesheet">
+<!-- Include Chart JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <!-- INICIO DE MIS ESTILOS -->
 <link rel="stylesheet" type="text/css" href="{{ asset('css/template/thisSystem.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
@@ -26,62 +28,90 @@
 @section('content')
 <div class="container montse">
     <div class="row">
-        <div class="col-md-10 col-offset-1">
         <br><br>
-            <h2 class="text-center montseh2">CATÁLOGO GPS CLIENTE</h1>
-        </div>
-    </div>
-    <div class="row">
         <div class="">
-            <!-- <br><br> -->
-            <!-- <a class="btn btn-primary" href="/cat_gpscliente/create"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar GPS Cliente</a> -->
-            <img src="{{ asset('img/svg/gps.svg') }}" alt="Modulo GPS">
+            <h2>Administrar Posiciones</h2>
         </div>
     </div>
 
-    @if($gps->first())
     <div class="row">
         <br><br>
-        <div class="col-md-10 col-offset-1">
+        <div class="justifyc">
+            <div>
+                <a class="btn btn-success" href="/cat_trazas"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Trazas</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row"><br><br>
+        <div class="">
+            <p>Marca: {{ $t->gpsmarcamodelo->marca }}</p>
+            <p>Modelo: {{ $t->gpsmarcamodelo->modelo }}</p>
+            <p>Tipo Traza: {{ $t->tipotraza->descripcion }}</p>
+        </div>
+    </div>
+
+    <form action="/cat_posiciones/{{ $t->id }}" method="POST">
+        @csrf
+        <div class="row"><br>
+            <div class="form-group col-md-4">
+                        <label for="posicion">Posición: </label>
+                        <input class="form-control" type="text" id="posicion" name="posicion" placeholder="Posición" value="{{ old('posicion') }}">
+                        {!! $errors->first('posicion', '<small style="color:red">:message</small>') !!}
+                    </div>
+            <div class="form-group col-md-4">
+                <label for="camposgps_id">Campos GPS: </label>
+                <select name="camposgps_id" id="camposgps_id" class="form-control">
+                    <option value="">Seleccione una Opción</option>
+                    @foreach($campos as $c)
+                    <option value="{{ $c->id }}">{{ $c->descripcion }}</option>
+                    @endforeach
+                </select>
+                {!! $errors->first('camposgps_id', '<small style="color:red">:message</small>') !!}
+            </div>
+        </div>
+
+        <br><br>
+            <div class="text-center">
+                <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
+            </div>
+    </form>
+
+
+
+    @if($ps->first())
+    <div class="row">
+        <br><br>
+        <div class="">
             <table class="table table-bordered">
                 <th class="text-center">Id</th>
-                <th class="text-center">Cliente</th>
-                <th class="text-center">Serie</th>
-                <th class="text-center">Imei</th>
-                <th class="text-center">Marca Modelo</th>
-                <th class="text-center">Estado</th>
-                <th class="text-center">Modificar</th>
+                <th class="text-center">Posicion</th>
+                <th class="text-center">Campo</th>
                 <th class="text-center">Eliminar</th>
-                @foreach($gps as $g)
+                @foreach($ps as $x)
                 <tr>
-                    <td class="text-center">{{ $g->id }}</td>
-                    <td class="text-center">{{ str_limit($g->cliente->nombre,30) }} </td>
-                    <td class="text-center">{{ $g->serie }}</td>
-                    <td class="text-center">{{ $g->imei }}</td>
-                    <td class="text-center">{{ $g->gpsmarcamodelo->marca}} / {{ $g->gpsmarcamodelo->modelo}}</td>
-                    <td class="text-center"><a class="btn btn-info btn-xs" href="/cat_gpscliente/{{ $g->id }}/estatus">{{ ($g->estadogpscliente_id == "" ) ? estatus_gps($g->estadogpscliente_id) : $g->estadogpscliente->descripcion }}&emsp;<i class="fas fa-exchange-alt"></i></a></td>
-                    <td class="text-center"><a class="btn btn-success btn-xs" href="/cat_gpscliente/{{ $g->id }}/edit"><i class="fas fa-pencil-alt"></i></a></td>
-                    <td class="text-center"><a class="btn btn-danger btn-xs" href="/cat_gpscliente/{{ $g->id }}/confirmDelete"><i class="fas fa-trash-alt"></i></a></td>
+                    <td class="text-center">{{ $x->id }}</td>
+                    <td class="text-center">{{ $x->posicion }}</td>
+                    <td class="text-center">{{ $x->camposgps->descripcion }}</td>
+                    <td class="text-center"><a class="btn btn-danger btn-xs" href="/cat_trazas/{{ $x->id }}/confirmDeletePosicion"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
                 @endforeach
             </table>
         </div>
     </div>
     @else
-    <div class="row col-md-10 col-offset-1">
+    <div class="row ">
     <br><br><br><br>
     <div class="alert alert-danger alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <strong>Atención: </strong> No hay registros para este catálogo.
+        <strong>Atención: </strong> No hay registros de posiciones para esta traza.
     </div>
     </div>
     @endif
 
-
     
 
 </div>
-
 @include('template.menu_gps')
 @endsection
 
@@ -91,6 +121,7 @@
 <!-- JS NOTIFICACIONES ANIMATE -->
 <script type="text/javascript" src="{{ asset('js/notify/bootstrap-notify.min.js') }}"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<script src="{{ asset('js/catalogos/gps/posiciones.js') }}"></script>
 
 <script src="{{ asset('js/librerias/pushbar.js') }}"></script>
 <script>
@@ -99,4 +130,5 @@
         overlay: true
     });
 </script>
+@include('template.menu_catalogos')
 @endsection

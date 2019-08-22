@@ -26,6 +26,7 @@ class VerifyCsrfToken extends Middleware
         '/gps/form',
         '/vehiculo/marca',
         '/vehiculo/gps',
-        '/vehiculos/cliente'
+        '/vehiculos/cliente',
+        '/gps/campos'
     ];
 }
