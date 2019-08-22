@@ -28,40 +28,31 @@
     <div class="row">
         <div class="col-md-10 col-offset-1">
         <br><br>
-            <h2 class="text-center montseh2">CATÁLOGO GPS CLIENTE</h1>
+            <h2 class="text-center montseh2">CATÁLOGO TIPO DE TRAZA</h1>
         </div>
     </div>
     <div class="row">
-        <div class="">
-            <!-- <br><br> -->
-            <!-- <a class="btn btn-primary" href="/cat_gpscliente/create"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar GPS Cliente</a> -->
-            <img src="{{ asset('img/svg/gps.svg') }}" alt="Modulo GPS">
+        <div class="col-md-10 col-offset-1">
+            <br><br>
+            <a class="btn btn-primary" href="/cat_tipotraza/create"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar Tipo de Traza</a>
         </div>
     </div>
 
-    @if($gps->first())
+    @if($tt->first())
     <div class="row">
         <br><br>
         <div class="col-md-10 col-offset-1">
             <table class="table table-bordered">
                 <th class="text-center">Id</th>
-                <th class="text-center">Cliente</th>
-                <th class="text-center">Serie</th>
-                <th class="text-center">Imei</th>
-                <th class="text-center">Marca Modelo</th>
-                <th class="text-center">Estado</th>
+                <th class="text-center">Descripción</th>
                 <th class="text-center">Modificar</th>
                 <th class="text-center">Eliminar</th>
-                @foreach($gps as $g)
+                @foreach($tt as $x)
                 <tr>
-                    <td class="text-center">{{ $g->id }}</td>
-                    <td class="text-center">{{ str_limit($g->cliente->nombre,30) }} </td>
-                    <td class="text-center">{{ $g->serie }}</td>
-                    <td class="text-center">{{ $g->imei }}</td>
-                    <td class="text-center">{{ $g->gpsmarcamodelo->marca}} / {{ $g->gpsmarcamodelo->modelo}}</td>
-                    <td class="text-center"><a class="btn btn-info btn-xs" href="/cat_gpscliente/{{ $g->id }}/estatus">{{ ($g->estadogpscliente_id == "" ) ? estatus_gps($g->estadogpscliente_id) : $g->estadogpscliente->descripcion }}&emsp;<i class="fas fa-exchange-alt"></i></a></td>
-                    <td class="text-center"><a class="btn btn-success btn-xs" href="/cat_gpscliente/{{ $g->id }}/edit"><i class="fas fa-pencil-alt"></i></a></td>
-                    <td class="text-center"><a class="btn btn-danger btn-xs" href="/cat_gpscliente/{{ $g->id }}/confirmDelete"><i class="fas fa-trash-alt"></i></a></td>
+                    <td class="text-center">{{ $x->id }}</td>
+                    <td class="text-center">{{ $x->descripcion }}</td>
+                    <td class="text-center"><a class="btn btn-success btn-xs" href="/cat_tipotraza/{{ $x->id }}/edit"><i class="fas fa-pencil-alt"></i></a></td>
+                    <td class="text-center"><a class="btn btn-danger btn-xs" href="/cat_tipotraza/{{ $x->id }}/confirmDelete"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
                 @endforeach
             </table>
@@ -76,10 +67,6 @@
     </div>
     </div>
     @endif
-
-
-    
-
 </div>
 
 @include('template.menu_gps')

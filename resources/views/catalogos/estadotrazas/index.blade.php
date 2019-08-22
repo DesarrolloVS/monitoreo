@@ -13,6 +13,10 @@
 <!-- Include CARTO.js -->
 <script src="https://libs.cartocdn.com/carto.js/v4.1.2/carto.min.js"></script>
 <link href="https://carto.com/developers/carto-js/examples/maps/public/style.css" rel="stylesheet">
+<!-- Include Chart JS -->
+<!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+-->
 <!-- INICIO DE MIS ESTILOS -->
 <link rel="stylesheet" type="text/css" href="{{ asset('css/template/thisSystem.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
@@ -28,40 +32,31 @@
     <div class="row">
         <div class="col-md-10 col-offset-1">
         <br><br>
-            <h2 class="text-center montseh2">CATÁLOGO GPS CLIENTE</h1>
+            <h2 class="text-center montseh2">CATÁLOGO ESTADOS TRAZAS</h1>
         </div>
     </div>
     <div class="row">
-        <div class="">
-            <!-- <br><br> -->
-            <!-- <a class="btn btn-primary" href="/cat_gpscliente/create"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar GPS Cliente</a> -->
-            <img src="{{ asset('img/svg/gps.svg') }}" alt="Modulo GPS">
+        <div class="col-md-10 col-offset-1">
+            <br><br>
+            <a class="btn btn-primary" href="/cat_estadotrazas/create"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar Registro</a>
         </div>
     </div>
 
-    @if($gps->first())
+    @if($ets->first())
     <div class="row">
         <br><br>
         <div class="col-md-10 col-offset-1">
             <table class="table table-bordered">
                 <th class="text-center">Id</th>
-                <th class="text-center">Cliente</th>
-                <th class="text-center">Serie</th>
-                <th class="text-center">Imei</th>
-                <th class="text-center">Marca Modelo</th>
-                <th class="text-center">Estado</th>
+                <th class="text-center">Descrición</th>
                 <th class="text-center">Modificar</th>
                 <th class="text-center">Eliminar</th>
-                @foreach($gps as $g)
+                @foreach($ets as $e)
                 <tr>
-                    <td class="text-center">{{ $g->id }}</td>
-                    <td class="text-center">{{ str_limit($g->cliente->nombre,30) }} </td>
-                    <td class="text-center">{{ $g->serie }}</td>
-                    <td class="text-center">{{ $g->imei }}</td>
-                    <td class="text-center">{{ $g->gpsmarcamodelo->marca}} / {{ $g->gpsmarcamodelo->modelo}}</td>
-                    <td class="text-center"><a class="btn btn-info btn-xs" href="/cat_gpscliente/{{ $g->id }}/estatus">{{ ($g->estadogpscliente_id == "" ) ? estatus_gps($g->estadogpscliente_id) : $g->estadogpscliente->descripcion }}&emsp;<i class="fas fa-exchange-alt"></i></a></td>
-                    <td class="text-center"><a class="btn btn-success btn-xs" href="/cat_gpscliente/{{ $g->id }}/edit"><i class="fas fa-pencil-alt"></i></a></td>
-                    <td class="text-center"><a class="btn btn-danger btn-xs" href="/cat_gpscliente/{{ $g->id }}/confirmDelete"><i class="fas fa-trash-alt"></i></a></td>
+                    <td class="text-center">{{ $e->id }}</td>
+                    <td class="text-center">{{ $e->descripcion }}</td>
+                    <td class="text-center"><a class="btn btn-success btn-xs" href="/cat_estadotrazas/{{ $e->id }}/edit"><i class="fas fa-pencil-alt"></i></a></td>
+                    <td class="text-center"><a class="btn btn-danger btn-xs" href="/cat_estadotrazas/{{ $e->id }}/confirmDelete"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
                 @endforeach
             </table>

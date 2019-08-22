@@ -200,3 +200,28 @@ Route::get('/cat_responsables', function () {
 Route::get('/cat_gps', function () {
     return view('catalogos.gpscliente.main');
 });
+
+//CATALOGO CAMPOSGPS
+Route::resource('/cat_camposgps', 'CamposgpsController');
+Route::get('/cat_camposgps/create/{id}', 'CamposgpsController@create');
+Route::post('/gps/campos', 'CamposgpsController@camposgps');
+Route::get('/gps/campos', 'CamposgpsController@index')->name('/gps/campos');
+
+//CATALOGO TIPOTRAZA
+Route::resource('/cat_tipotraza', 'TipotrazaController');
+Route::get('/cat_tipotraza/{id}/confirmDelete', 'TipotrazaController@confirmDelete');
+
+//CATALOGO ESTADO TRAZAS
+Route::resource('/cat_estadotrazas', 'EstadotrazaController');
+Route::get('/cat_estadotrazas/{id}/confirmDelete', 'EstadotrazaController@confirmDelete');
+
+//CATALOGO TRAZAS
+Route::resource('/cat_trazas', 'TrazaController');
+Route::get('/cat_trazas/{id}/confirmDelete', 'TrazaController@confirmDelete');
+Route::get('/cat_trazas/{id}/posiciones','TrazaController@positions');
+Route::post('/cat_posiciones/{id}','TrazaController@store_position');
+Route::get('/cat_trazas/{id}/confirmDeletePosicion', 'TrazaController@confirmDeletePosition');
+Route::delete('/cat_deleteposicion/{id}', 'TrazaController@destroyPosition');
+
+
+
