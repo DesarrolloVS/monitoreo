@@ -16,8 +16,6 @@ class CreateCamposgpsTable extends Migration
         Schema::create('camposgps', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('descripcion');
-            $table->unsignedBigInteger('gpsmarcamodelo_id');
-            $table->foreign('gpsmarcamodelo_id')->references('id')->on('gpsmarcamodelos');
             $table->timestamps();
         });
     }

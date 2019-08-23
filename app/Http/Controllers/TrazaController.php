@@ -53,16 +53,19 @@ class TrazaController extends Controller
         $validatedData = $request->validate([
             'gpsmarcamodelo_id' => 'required',
             'descripcion' => 'required',
-            'tipotraza_id' => 'required'
+            'tipotraza_id' => 'required',
+            'num_posiciones' => 'required|integer'
         ], [
-            'gpsmarcamodelo_id.required' => 'El campo Marca-Modelo es obligatorio',
-            'tipotraza_id.required' => 'El campo Tipo Traza es obligatorio',
+            'gpsmarcamodelo_id.required' => 'El campo <i>Marca-Modelo</i> es obligatorio',
+            'tipotraza_id.required' => 'El campo <i>Tipo Traza</i> es obligatorio',
+            'num_posiciones.required' => 'El campo <i>posiciones</i> es obligatorio',
         ]);
 
         if($validatedData){
             $t = new Traza();
             $t->gpsmarcamodelo_id = $request->get('gpsmarcamodelo_id');
             $t->descripcion = strtoupper($request->get('descripcion'));
+            $t->num_posiciones = strtoupper($request->get('num_posiciones'));
             $t->tipotraza_id = $request->get('tipotraza_id');
             $t->save();
             return redirect('cat_trazas');
@@ -118,13 +121,30 @@ class TrazaController extends Controller
     {        
 
         $t = Traza::findOrFail($id);
-        $id_gpsmarcamodelo = $t->gpsmarcamodelo_id;
-        $campos = Camposgps::where('gpsmarcamodelo_id',$id_gpsmarcamodelo)->get();
+        $posiciones = $t->num_posiciones;
+        $arr = array();
+        for($i=1;$i<=$posiciones;$i++ ){array_push($arr,$i);}
+
+        $tp = Trazaposicion::where('traza_id',$id)->get();
+        $actuales = array();
+        $actuales2 = array();
+        foreach($tp as $x){
+            array_push($actuales, $x->posicion);
+            array_push($actuales2, $x->camposgps_id);
+        }
+        $pos = array_diff($arr,$actuales);
+        $campos = Camposgps::orderBy('descripcion', 'asc')
+            ->get();
+        $camp = $campos
+            ->diff(Camposgps::whereIn('id',$actuales2)
+            ->orderBy('descripcion', 'asc')
+            ->get());
         $ps = Trazaposicion::where('traza_id',$id)->get();
         return view('catalogos.trazas.posiciones', [
             't' => $t,
             'ps' => $ps,
-            'campos' => $campos
+            'campos' => $camp,
+            'posiciones' => $pos
         ]);        
     }
 

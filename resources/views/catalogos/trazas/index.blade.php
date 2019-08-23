@@ -51,8 +51,9 @@
                 <th class="text-center">Marca</th>
                 <th class="text-center">Modelo</th>
                 <th class="text-center">Tipo Traza</th>
+                <th class="text-center"># Posiciones</th>
                 <th class="text-center">Estado</th>
-                <th class="text-center">Posiciones</th>
+                <th class="text-center">Traza Posición</th>
                 <th class="text-center">Modificar</th>
                 <th class="text-center">Eliminar</th>
                 @foreach($trazas as $x)
@@ -61,6 +62,7 @@
                     <td class="text-center">{{ $x->gpsmarcamodelo->marca }}</td>
                     <td class="text-center">{{ $x->gpsmarcamodelo->modelo }}</td>
                     <td class="text-center">{{ $x->tipotraza->descripcion }}</td>
+                    <td class="text-center">{{ $x->num_posiciones }}</td>
                     <!-- <td class="text-center"><a class="btn btn-info btn-xs" href="/cat_trazas/{{ $x->id }}/estatus">{{ ($x->estadotraza_id == "" ) ? "SIN ESTADO" : "CON ESTADO" }}&emsp;<i class="fas fa-exchange-alt"></i></a></td> -->
                     <td class="text-center"><a class="btn btn-info btn-xs" href="#">{{ ($x->estadotraza_id == "" ) ? "SIN ESTADO" : "CON ESTADO" }}&emsp;<i class="fas fa-exchange-alt"></i></a></td>
                     <td class="text-center"><a class="btn btn-warning btn-xs" href="/cat_trazas/{{ $x->id }}/posiciones"><i class="far fa-object-ungroup"></i></a></td>

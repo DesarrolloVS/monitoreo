@@ -13,22 +13,25 @@ class CamposgpsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    // public function index(Request $request)
+    public function index()
     {
-
-        // dd($request);
-        if ($request->has('gpsmarcamodelo_id')) {
-             $g = $request->get('gpsmarcamodelo_id');
-        }else{
-            $g = "";
-        }
-
-        //dd($g);
-
         return view('catalogos.camposgps.index', [
-            'mm' => Gpsmarcamodelo::all(),
-            'g' => $g
+            'campos' => Camposgps::all()
         ]);
+        // dd($request);
+        // if ($request->has('gpsmarcamodelo_id')) {
+        //      $g = $request->get('gpsmarcamodelo_id');
+        // }else{
+        //     $g = "";
+        // }
+
+        // //dd($g);
+
+        // return view('catalogos.camposgps.index', [
+        //     'mm' => Gpsmarcamodelo::all(),
+        //     'g' => $g
+        // ]);
     }
 
     /**
@@ -36,13 +39,14 @@ class CamposgpsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request, $id)
+    public function create()
     {   //echo $id; dd($request);
-        $mm = Gpsmarcamodelo::findOrFail($id);
-        return view('catalogos.camposgps.create', [
-            'id' => $id,
-            'mm' => $mm
-        ]);
+        // $mm = Gpsmarcamodelo::findOrFail($id);
+        // return view('catalogos.camposgps.create', [
+        //     'id' => $id,
+        //     'mm' => $mm
+        // ]);
+        return view('catalogos.camposgps.create');
     }
 
     /**
@@ -53,17 +57,16 @@ class CamposgpsController extends Controller
      */
     public function store(Request $request)
     {   
-        $gpsmarcamodelo_id = $request->get('gpsmarcamodelo_id');
         $validatedData = $request->validate([
             'descripcion' => 'required'
         ]);
 
         if($validatedData){
             $c = new Camposgps();
-            $c->gpsmarcamodelo_id = $request->get('gpsmarcamodelo_id');
             $c->descripcion = strtoupper($request->get('descripcion'));
             $c->save();
-            return redirect()->route('/gps/campos',['gpsmarcamodelo_id' => $gpsmarcamodelo_id]);
+            // return redirect()->route('/gps/campos',['gpsmarcamodelo_id' => $gpsmarcamodelo_id]);
+            return redirect("cat_camposgps");
         }
         
     }

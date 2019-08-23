@@ -10,9 +10,9 @@ class Gpsmarcamodelo extends Model
         return $this->hasMany(Gpscliente::class);
     }
 
-    public function camposgps () {
-        return $this->hasMany(Camposgps::class);
-    }
+    // public function camposgps () {
+    //     return $this->hasMany(Camposgps::class);
+    // }
 
     public function traza () {
         return $this->hasMany(Traza::class);

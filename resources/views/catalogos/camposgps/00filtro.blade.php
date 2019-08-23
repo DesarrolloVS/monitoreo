@@ -1,7 +1,7 @@
 <div class="row">
     <div class="form-group">
         <br><br>
-        <a class="btn btn-primary pull-right" href="/cat_camposgps/create/{{ $id }}"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar Campo</a>
+        <a class="btn btn-primary pull-right" href="/cat_camposgps/create"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar Campo</a>
     </div>
 </div>
 
