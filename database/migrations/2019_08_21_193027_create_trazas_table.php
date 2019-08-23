@@ -16,6 +16,7 @@ class CreateTrazasTable extends Migration
         Schema::create('trazas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('descripcion');
+            $table->integer('num_posiciones');
             $table->unsignedBigInteger('gpsmarcamodelo_id');
             $table->foreign('gpsmarcamodelo_id')->references('id')->on('gpsmarcamodelos');
             $table->unsignedBigInteger('tipotraza_id');

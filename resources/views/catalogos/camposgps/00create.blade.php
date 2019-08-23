@@ -13,6 +13,8 @@
 <!-- Include CARTO.js -->
 <script src="https://libs.cartocdn.com/carto.js/v4.1.2/carto.min.js"></script>
 <link href="https://carto.com/developers/carto-js/examples/maps/public/style.css" rel="stylesheet">
+<!-- Include Chart JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <!-- INICIO DE MIS ESTILOS -->
 <link rel="stylesheet" type="text/css" href="{{ asset('css/template/thisSystem.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
@@ -25,48 +27,54 @@
 
 @section('content')
 <div class="container montse">
-    <div class="row"><br><br>
-        <h2 class="text-center montseh2">CATÁLOGO CAMPOS GPS</h1>
-    </div>
-
     <div class="row">
-        <div class="form-group">
-            <br><br>
-            <a class="btn btn-primary pull-right" href="/cat_camposgps/create"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar Campo</a>
+        <div class="text-center">
+            <br>
+            <h2 montseh2>Agregar Campos GPS Marca - Modelo ({{ $mm->modelo }} - {{ $mm->marca }})</h2>
         </div>
     </div>
 
-    @if($campos->first())
     <div class="row">
         <br><br>
-        <div class="form-group">
-            <table class="table table-bordered table-condensed">
-                <th class="text-center">Id</th>
-                <th class="text-center">Campo</th>
-                <th class="text-center">Modificar</th>
-                <th class="text-center">Eliminar</th>
-                @foreach($campos as $x)
-                <tr>
-                    <td class="text-center">{{ $x->id }}</td>
-                    <td class="text-center">{{ $x->descripcion }}</td>
-                    <td class="text-center"><a class="btn btn-success btn-xs" href="/cat_camposgps/{{ $x->id }}/edit"><i class="fas fa-pencil-alt"></i></a></td>
-                    <td class="text-center"><a class="btn btn-danger btn-xs" href="/cat_camposgps/{{ $x->id }}/confirmDelete"><i class="fas fa-trash-alt"></i></a></td>
-                </tr>
-                @endforeach
-            </table>
+        <div class="">
+            <a class="btn btn-success" href="/cat_camposgps"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Campos GPS</a>
         </div>
     </div>
-    @else
-    <div class="row">
-    <br><br><br><br>
-        <div class="alert alert-danger alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Atención: </strong> No hay registros para este catalogo.
-        </div>
-    </div>
-    @endif
-</div>
 
+    <div class="row">
+        <br><br>
+
+        <form action="/cat_camposgps" method="POST">
+            @csrf
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="descripcion">Descripción: </label>
+                    <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="{{ old('descripcion') }}">
+                    {!! $errors->first('descripcion', '<small style="color:red">:message</small>') !!}
+                </div>
+
+            </div>
+            <input type="hidden" name="gpsmarcamodelo_id" value="{{ $id }}">
+            <br><br>
+            <div class="text-center">
+                <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
+            </div>
+        </form>
+        <br>
+
+        <!-- @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif -->
+
+    </div>
+
+</div>
 @include('template.menu_gps')
 @endsection
 
@@ -78,11 +86,13 @@
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 <script src="{{ asset('js/librerias/pushbar.js') }}"></script>
-<!-- <script src="{{ asset('js/catalogos/gps/camposgps.js') }}"></script> -->
 <script>
     var pushbar = new Pushbar({
         blur: true,
         overlay: true
     });
 </script>
+<!--
+<script type="text/javascript" src="{{ asset('js/template/main.js') }}"></script>
+-->
 @endsection

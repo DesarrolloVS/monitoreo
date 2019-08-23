@@ -55,10 +55,15 @@
         @csrf
         <div class="row"><br>
             <div class="form-group col-md-4">
-                        <label for="posicion">Posición: </label>
-                        <input class="form-control" type="text" id="posicion" name="posicion" placeholder="Posición" value="{{ old('posicion') }}">
-                        {!! $errors->first('posicion', '<small style="color:red">:message</small>') !!}
-                    </div>
+                <label for="posicion">Posicion: </label>
+                <select name="posicion" id="posicion" class="form-control">
+                    <option value="">Seleccione una Opción</option>
+                    @foreach($posiciones as $p)
+                    <option value="{{ $p }}">Posicion {{ $p }}</option>
+                    @endforeach
+                </select>
+                {!! $errors->first('posicion', '<small style="color:red">:message</small>') !!}
+            </div>
             <div class="form-group col-md-4">
                 <label for="camposgps_id">Campos GPS: </label>
                 <select name="camposgps_id" id="camposgps_id" class="form-control">
@@ -83,7 +88,7 @@
     <div class="row">
         <br><br>
         <div class="">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-condensed">
                 <th class="text-center">Id</th>
                 <th class="text-center">Posicion</th>
                 <th class="text-center">Campo</th>

@@ -30,7 +30,7 @@
     <div class="row">
         <div class="text-center">
             <br>
-            <h2 montseh2>Agregar Campos GPS Marca - Modelo ({{ $mm->modelo }} - {{ $mm->marca }})</h2>
+            <h2 montseh2>Agregar Campos GPS</h2>
         </div>
     </div>
 
@@ -52,26 +52,13 @@
                     <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="{{ old('descripcion') }}">
                     {!! $errors->first('descripcion', '<small style="color:red">:message</small>') !!}
                 </div>
-
             </div>
-            <input type="hidden" name="gpsmarcamodelo_id" value="{{ $id }}">
             <br><br>
             <div class="text-center">
                 <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
             </div>
         </form>
         <br>
-
-        <!-- @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif -->
-
     </div>
 
 </div>
@@ -92,7 +79,4 @@
         overlay: true
     });
 </script>
-<!--
-<script type="text/javascript" src="{{ asset('js/template/main.js') }}"></script>
--->
 @endsection

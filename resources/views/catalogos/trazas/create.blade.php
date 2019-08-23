@@ -61,12 +61,17 @@
 
             <div class="row">
             <br><br>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="descripcion">Descripción: </label>
                     <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="{{ old('descripcion') }}">
                     {!! $errors->first('descripcion', '<small style="color:red">:message</small>') !!}
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
+                    <label for="descripcion">Número de Posiones: </label>
+                    <input class="form-control" type="text" id="num_posiciones" name="num_posiciones" placeholder="Número de Posiciones" value="{{ old('num_posiciones') }}">
+                    {!! $errors->first('num_posiciones', '<small style="color:red">:message</small>') !!}
+                </div>
+                <div class="form-group col-md-4">
                     <label for="tipotraza_id">Tipo Traza: </label>
                     <select name="tipotraza_id" id="tipotraza_id" class="form-control">
                         <option value="">Seleccione una Opción</option>
