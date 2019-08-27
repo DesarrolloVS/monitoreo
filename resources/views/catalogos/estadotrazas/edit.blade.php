@@ -50,7 +50,7 @@
 
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label for="descripcion">Descripción: </label>
+                        <label for="descripcion">Traza: </label>
                         <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="{{ $et->descripcion }}">
                         {!! $errors->first('descripcion', '<small style="color:red">:message</small>') !!}
                     </div>

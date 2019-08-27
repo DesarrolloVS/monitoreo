@@ -115,17 +115,4 @@ class CamposgpsController extends Controller
     {
         //
     }
-
-    public function camposgps(Request $request)            //ELIMINA EL ELEMENTO
-    {        
-        $gpsmarcamodelo_id = $request->get('gpsmarcamodelo_id');
-        $mm = Gpsmarcamodelo::where('id',$gpsmarcamodelo_id)->get();
-        $campos = Camposgps::where('gpsmarcamodelo_id',$gpsmarcamodelo_id)->get();
-
-        return view('catalogos.camposgps.filtro',[
-            'id' => $gpsmarcamodelo_id,
-            'campos' => $campos,
-            'mm' => $mm
-        ]);
-    }
 }
