@@ -67,8 +67,8 @@
                     <td class="text-center">{{ $x->condicion }}</td>
                     <td class="text-center">{{ $x->valor }}</td>
                     <td class="text-center"><a class="btn btn-info btn-xs" href="#">{{ ($x->estado == false ) ? "INACTIVO" : "ACTIVO" }}&emsp;<i class="fas fa-exchange-alt"></i></a></td>
-                    <td class="text-center"><a class="btn btn-success btn-xs" href="#"><i class="fas fa-pencil-alt"></i></a></td>                    
-                    <td class="text-center"><a class="btn btn-danger btn-xs" href="#"><i class="fas fa-trash-alt"></i></a></td>
+                    <td class="text-center"><a class="btn btn-success btn-xs" href="/cat_gpsalerta/{{ $x->id }}/edit"><i class="fas fa-pencil-alt"></i></a></td>
+                    <td class="text-center"><a class="btn btn-danger btn-xs" href="/cat_gpsalerta/{{ $x->id }}/confirmDelete"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
                 @endforeach
             </table>

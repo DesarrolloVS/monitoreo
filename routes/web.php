@@ -225,6 +225,6 @@ Route::delete('/cat_deleteposicion/{id}', 'TrazaController@destroyPosition');
 
 //CATALOGO GPS ALERTAS
 Route::resource('/cat_gpsalerta', 'GpsalertaController');
-Route::get('/cat_trazas/{id}/confirmDelete', 'GpsalertaController@confirmDelete');
+Route::get('/cat_gpsalerta/{id}/confirmDelete', 'GpsalertaController@confirmDelete');
 Route::post('/gpsalerta/complement', 'GpsalertaController@complement');
 // Route::get('/gps/campos', 'CamposgpsController@index')->name('/gps/campos');

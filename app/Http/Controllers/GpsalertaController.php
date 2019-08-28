@@ -32,7 +32,7 @@ class GpsalertaController extends Controller
     {
         $mm = Gpsmarcamodelo::all();
         $actuales = Gpsalerta::all();
-        $act = array();
+        // $act = array();
         // foreach($actuales as $a){array_push($act,$a->gpsmarcamodelo_id);}
         // $res = $mm->diff(Gpsmarcamodelo::whereIn('id',$act)->get());
 
@@ -95,7 +95,21 @@ class GpsalertaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $mm = Gpsmarcamodelo::all();
+        $ga = Gpsalerta::findOrFail($id);
+        $campo = $ga->camposgps_id;
+        $gpsmarcamodelo_id = $ga->gpsmarcamodelo_id;
+
+        $t = Traza::where('gpsmarcamodelo_id',$gpsmarcamodelo_id)->first();
+        $t_id = $t->id;
+        $tp = Trazaposicion::where('traza_id',$t_id)->get();            //dd($tp);
+
+        return view('catalogos.gpsalerta.edit', [
+            'ga' => $ga,
+            'mm' => $mm,
+            'campo' => $campo,
+            'campos' => $tp
+        ]);
     }
 
     /**
@@ -107,7 +121,10 @@ class GpsalertaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // $ga = Gpsalerta::findOrFail($id);
+        // $m->descripcion = strtoupper($request->get('descripcion'));
+        // $m->save();
+        // return redirect('/cat_modelos');
     }
 
     /**
@@ -118,24 +135,35 @@ class GpsalertaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ga = Gpsalerta::findOrFail($id);
+        $ga->delete();
+        return redirect('cat_gpsalerta');
     }
 
     public function complement(Request $request)            //ELIMINA EL ELEMENTO
     {        
         $gpsmarcamodelo_id = $request->get('gpsmarcamodelo_id');
-        $rs = Gpsalerta::where('gpsmarcamodelo_id',$gpsmarcamodelo_id)->get();
-        $ex = array();
-        foreach($rs as $r){array_push($ex,$r->camposgps_id);}
-
+        //EXISTENTES
+        // $rs = Gpsalerta::where('gpsmarcamodelo_id',$gpsmarcamodelo_id)->get();
+        // $ex = array();
+        // foreach($rs as $r){array_push($ex,$r->camposgps_id);}
         $t = Traza::where('gpsmarcamodelo_id',$gpsmarcamodelo_id)->first();
         $t_id = $t->id;
-        $tp = Trazaposicion::where('traza_id',$t_id)->get();
+        // $tp = Trazaposicion::where('traza_id',$t_id)->get();
+        $campos = Trazaposicion::where('traza_id',$t_id)->get();
 
-        $campos = $tp->diff(Trazaposicion::whereIn('camposgps_id',$ex)->get());
+        // $campos = $tp->diff(Trazaposicion::whereIn('camposgps_id',$ex)->get());
 
         return view('catalogos.gpsalerta.complemento',[
             'campos' => $campos
+        ]);
+    }
+
+    public function confirmDelete($id)            //ELIMINA EL ELEMENTO
+    {        
+        $ga = Gpsalerta::findOrFail($id);
+        return view('catalogos.gpsalerta.confirmDelete',[
+            'ga' => $ga
         ]);
     }
 }
