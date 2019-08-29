@@ -11,6 +11,7 @@
         <a href="/cat_tipotraza">ABC Tipo Traza</a>
         <a href="/cat_estadotrazas">ABC Estados Trazas</a>
         <a href="/cat_trazas">ABC Trazas</a>
+        <a href="/cat_gpsalerta">ABC Alertas Gps</a>
         <a href="/">Inicio (Mapa)</a>
         <a href="/cat_cliente">Modulo Clientes</a>
         <a href="/cat_usuario">Modulo Usuarios</a>

@@ -27,37 +27,57 @@
 
 @section('content')
 <div class="container montse">
+
     <div class="row">
         <br><br>
-        <div class="col-md-10 col-offset-1">
-            <h2>Modificar Registro</h2>
+        <div class="">
+            <a class="btn btn-success" href="/cat_gpsalerta"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo GPS Alertas</a>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-10 col-offset-1">
-            <br><br>
-            <a class="btn btn-success" href="/cat_estadotrazas"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Estados-Turnos</a>
+        <br>
+        <div class="text-center">
+            <h2>Modificar Estatus Gps Alerta: </h2>
+            <p>Alerta: {{ $ga->alerta }}</p>
+            <p>Marca: {{ $ga->gpsmarcamodelo->marca }}</p>
+            <p>Modelo: {{ $ga->gpsmarcamodelo->modelo }}</p>
+            <p>Descripción: {{ $ga->camposgps->descripcion }}</p>
+            <p>Condicion: " {{ $ga->condicion }} "</p>
+            <p>Valor: {{ $ga->valor }}</p>
         </div>
     </div>
 
+    <div class="row"><br><br>
+        <div class="col-md-4 col-md-offset-4">
+            <h3>Estatus Actual: {{ ($ga->estado == false ) ? "INACTIVO" : "ACTIVO" }}</h3>
+    </div>
+    </div>
+
     <div class="row">
-        <div class="col-md-10 col-offset-1">
+        <div class="">
             <br><br>
-            <form action="/cat_estadotrazas/{{ $et->id }}" method="POST">
+            <form action="/cat_gpsalerta/{{ $ga->id }}/estatus" method="POST">
                 @csrf
                 @method('put')
 
                 <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="descripcion">Traza: </label>
-                        <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="{{ $et->descripcion }}">
-                        {!! $errors->first('descripcion', '<small style="color:red">:message</small>') !!}
+                    <div class="form-group col-md-4 col-md-offset-4">
+                        <label for="estado">Cambiar Estado a: </label>
+                        <select name="estado" id="estado" class="form-control">
+                            @if($ga->estado == true)
+                            <option value="0">Inactivo</option>
+                            @endif
+                            @if($ga->estado == false)
+                            <option value="1">Activo</option>
+                            @endif
+                    </select>
                     </div>
                 </div>
-
-                <br><br>
-                <button class="btn btn-primary" type="submit">Modificar</button>
+                
+                <div class="row text-center"><br><br><br><br>
+                    <button class="btn btn-primary" type="submit">Modificar</button>
+                </div>
 
             </form>
             <br>

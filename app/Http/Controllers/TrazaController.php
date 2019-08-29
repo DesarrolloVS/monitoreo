@@ -18,6 +18,7 @@ class TrazaController extends Controller
      */
     public function index()
     {
+        // dd(Traza::all());
         return view('catalogos.trazas.index', [
             'trazas' => Traza::all()
         ]);

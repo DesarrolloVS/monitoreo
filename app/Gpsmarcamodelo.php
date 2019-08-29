@@ -17,4 +17,8 @@ class Gpsmarcamodelo extends Model
     public function traza () {
         return $this->hasMany(Traza::class);
     }
+
+    public function gpsalerta () {
+        return $this->hasMany(Gpsalerta::class);
+    }
 }

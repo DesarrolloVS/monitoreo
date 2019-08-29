@@ -13,4 +13,8 @@ class Camposgps extends Model
     public function trazaposicion () {
         return $this->hasMany(Trazaposicion::class)->select('marca','modelo');
     }
+
+    public function gpsalerta () {
+        return $this->hasMany(Gpsalerta::class);
+    }
 }

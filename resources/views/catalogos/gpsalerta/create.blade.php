@@ -30,21 +30,21 @@
     <div class="row">
         <div class="text-center">
             <br>
-            <h2 montseh2>Agregar Traza</h2>
+            <h2 montseh2>Agregar Alerta GPS</h2>
         </div>
     </div>
 
     <div class="row">
         <br><br>
         <div class="">
-            <a class="btn btn-success" href="/cat_trazas"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Trazas</a>
+            <a class="btn btn-success" href="/cat_gpsalerta"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Alertas GPS</a>
         </div>
     </div>
 
     <div class="row">
         <br><br>
 
-        <form action="/cat_trazas" method="POST">
+        <form action="/cat_gpsalerta" method="POST">
             @csrf
             <div class="row">
                 <div class="form-group col-md-4">
@@ -58,33 +58,50 @@
                     {!! $errors->first('gpsmarcamodelo_id', '<small style="color:red">:message</small>') !!}
                 </div>
             </div>
+            <!-- <div id="complement"></div> -->
 
             <div class="row">
-            <br><br>
-                <div class="form-group col-md-4">
-                    <label for="descripcion">Traza: </label>
+                <br><br>
+                <div class="form-group col-md-6">
+                    <label for="alerta">Alerta: </label>
+                    <input class="form-control" type="text" id="alerta" name="alerta" placeholder="Alerta" value="{{ old('alerta') }}">
+                    {!! $errors->first('alerta', '<small style="color:red">:message</small>') !!}
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="descripcion">Descripción: </label>
                     <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="{{ old('descripcion') }}">
                     {!! $errors->first('descripcion', '<small style="color:red">:message</small>') !!}
                 </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4" id="complement">
+                    <label for="camposgps_id">Campo: </label>
+                    <select name="camposgps_id" id="camposgps_id" class="form-control">
+                        <option value="">Seleccione una Opción</option>
+                    </select>
+                    {!! $errors->first('camposgps_id', '<small style="color:red">:message</small>') !!}
+                </div>
+
                 <div class="form-group col-md-4">
-                    <label for="descripcion">Número de Posiones: </label>
-                    <input class="form-control" type="text" id="num_posiciones" name="num_posiciones" placeholder="Número de Posiciones" value="{{ old('num_posiciones') }}">
-                    {!! $errors->first('num_posiciones', '<small style="color:red">:message</small>') !!}
+                    <label for="condicion">Condicion: </label>
+                    <select name="condicion" id="condicion" class="form-control">
+                        <option value="">Seleccione una Opción</option>
+                        <option value="<">Menor</option>
+                        <option value=">">Mayor</option>
+                        <option value="=">Igual</option>
+                    </select>
+                    {!! $errors->first('condicion', '<small style="color:red">:message</small>') !!}
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="tipotraza_id">Tipo Traza: </label>
-                    <select name="tipotraza_id" id="tipotraza_id" class="form-control">
-                        <option value="">Seleccione una Opción</option>
-                        @foreach($tt as $t)
-                        <option value="{{ $t->id }}">{{ $t->descripcion }}</option>
-                        @endforeach
-                    </select>
-                    {!! $errors->first('tipotraza_id', '<small style="color:red">:message</small>') !!}
+                    <label for="valor">Valor: </label>
+                    <input class="form-control" type="text" id="valor" name="valor" placeholder="Valor" value="{{ old('valor') }}">
+                    {!! $errors->first('valor', '<small style="color:red">:message</small>') !!}
                 </div>
             </div>
 
             <br><br>
-            <div class="text-center">
+            <div class="text-center" id="save" style="display:none">
                 <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
             </div>
         </form>
@@ -102,6 +119,7 @@
 <!-- JS NOTIFICACIONES ANIMATE -->
 <script type="text/javascript" src="{{ asset('js/notify/bootstrap-notify.min.js') }}"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<script src="{{ asset('js/catalogos/alertas/complement.js') }}"></script>
 
 <script src="{{ asset('js/librerias/pushbar.js') }}"></script>
 <script>

@@ -204,8 +204,8 @@ Route::get('/cat_gps', function () {
 //CATALOGO CAMPOSGPS
 Route::resource('/cat_camposgps', 'CamposgpsController');
 Route::get('/cat_camposgps/create/{id}', 'CamposgpsController@create');
-Route::post('/gps/campos', 'CamposgpsController@camposgps');
-Route::get('/gps/campos', 'CamposgpsController@index')->name('/gps/campos');
+// Route::post('/gps/campos', 'CamposgpsController@camposgps');
+// Route::get('/gps/campos', 'CamposgpsController@index')->name('/gps/campos');
 
 //CATALOGO TIPOTRAZA
 Route::resource('/cat_tipotraza', 'TipotrazaController');
@@ -223,5 +223,9 @@ Route::post('/cat_posiciones/{id}','TrazaController@store_position');
 Route::get('/cat_trazas/{id}/confirmDeletePosicion', 'TrazaController@confirmDeletePosition');
 Route::delete('/cat_deleteposicion/{id}', 'TrazaController@destroyPosition');
 
-
-
+//CATALOGO GPS ALERTAS
+Route::resource('/cat_gpsalerta', 'GpsalertaController');
+Route::get('/cat_gpsalerta/{id}/confirmDelete', 'GpsalertaController@confirmDelete');
+Route::post('/gpsalerta/complement', 'GpsalertaController@complement');
+Route::get('/cat_gpsalerta/{id}/estatus', 'GpsalertaController@estatus');
+Route::put('/cat_gpsalerta/{id}/estatus', 'GpsalertaController@update_estatus');

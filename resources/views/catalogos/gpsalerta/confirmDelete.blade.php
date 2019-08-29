@@ -26,45 +26,37 @@
 @endsection
 
 @section('content')
-<div class="container montse">
+<div class="container">
     <div class="row">
+        <div class="col"><br><br>
         <br><br>
-        <div class="col-md-10 col-offset-1">
-            <h2>Modificar Registro</h2>
+            <a class="btn btn-success" href="/cat_gpsalerta"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo GPS Alertas</a>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-10 col-offset-1">
-            <br><br>
-            <a class="btn btn-success" href="/cat_estadotrazas"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Estados-Turnos</a>
+        <div class="col"><br>
+            <h1>Eliminar Registro</h1>
+            <p>Alerta: {{ $ga->alerta }}</p>
+            <p>Marca: {{ $ga->gpsmarcamodelo->marca }}</p>
+            <p>Modelo: {{ $ga->gpsmarcamodelo->modelo }}</p>
+            <p>Descripción: {{ $ga->camposgps->descripcion }}</p>
+            <p>Condicion: " {{ $ga->condicion }} "</p>
+            <p>Valor: {{ $ga->valor }}</p>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-10 col-offset-1">
-            <br><br>
-            <form action="/cat_estadotrazas/{{ $et->id }}" method="POST">
-                @csrf
-                @method('put')
-
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="descripcion">Traza: </label>
-                        <input class="form-control" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="{{ $et->descripcion }}">
-                        {!! $errors->first('descripcion', '<small style="color:red">:message</small>') !!}
-                    </div>
-                </div>
-
-                <br><br>
-                <button class="btn btn-primary" type="submit">Modificar</button>
+        <div class="col">
+            <form action="/cat_gpsalerta/{{ $ga->id }}" method="POST">
+                {{ csrf_field() }}
+                @method('delete')
+                <br><br><br>
+                <button class="btn btn-danger" type="submit">Eliminar</button>
 
             </form>
-            <br>
-            <br>
         </div>
     </div>
-
 </div>
 @include('template.menu_gps')
 @endsection
