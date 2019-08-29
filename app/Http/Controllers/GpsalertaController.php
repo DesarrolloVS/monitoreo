@@ -166,4 +166,20 @@ class GpsalertaController extends Controller
             'ga' => $ga
         ]);
     }
+
+    public function estatus($id)
+    {        
+        $ga = Gpsalerta::findOrFail($id);
+        return view('catalogos.gpsalerta.estatus', [
+            'ga' => $ga
+        ]);        
+    }
+
+    public function update_estatus(Request $request, $id)
+    {   
+        $ga = Gpsalerta::findOrFail($id);
+        $ga->estado = $request->get('estado');
+        $ga->save();
+        return redirect('/cat_gpsalerta');
+    }
 }
