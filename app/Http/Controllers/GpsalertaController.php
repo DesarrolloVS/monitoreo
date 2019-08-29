@@ -60,7 +60,6 @@ class GpsalertaController extends Controller
             'valor' => 'required|integer'
         ], [
             'gpsmarcamodelo_id.required' => 'El campo <i>Marca-Modelo</i> es obligatorio'
-            
         ]);
 
         if($validatedData){
@@ -121,10 +120,28 @@ class GpsalertaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $ga = Gpsalerta::findOrFail($id);
-        // $m->descripcion = strtoupper($request->get('descripcion'));
-        // $m->save();
-        // return redirect('/cat_modelos');
+        $validatedData = $request->validate([
+            'gpsmarcamodelo_id' => 'required',
+            'alerta' => 'required',
+            'descripcion' => 'required',
+            'camposgps_id' => 'required',
+            'condicion' => 'required',
+            'valor' => 'required|integer'
+        ], [
+            'gpsmarcamodelo_id.required' => 'El campo <i>Marca-Modelo</i> es obligatorio'
+        ]);
+
+        if($validatedData){
+            $x = Gpsalerta::findOrFail($id);
+            $x->gpsmarcamodelo_id = $request->get('gpsmarcamodelo_id');
+            $x->alerta = strtoupper($request->get('alerta'));
+            $x->descripcion = strtoupper($request->get('descripcion'));
+            $x->camposgps_id = $request->get('camposgps_id');
+            $x->condicion = $request->get('condicion');
+            $x->valor = $request->get('valor');
+            $x->save();
+            return redirect('cat_gpsalerta');
+        }
     }
 
     /**
@@ -148,9 +165,14 @@ class GpsalertaController extends Controller
         // $ex = array();
         // foreach($rs as $r){array_push($ex,$r->camposgps_id);}
         $t = Traza::where('gpsmarcamodelo_id',$gpsmarcamodelo_id)->first();
-        $t_id = $t->id;
-        // $tp = Trazaposicion::where('traza_id',$t_id)->get();
-        $campos = Trazaposicion::where('traza_id',$t_id)->get();
+        //dd($t);
+
+        if($t != null){
+            $t_id = $t->id;         // $tp = Trazaposicion::where('traza_id',$t_id)->get();
+            $campos = Trazaposicion::where('traza_id',$t_id)->get();
+        }else{
+            $campos = collect([]);
+        }
 
         // $campos = $tp->diff(Trazaposicion::whereIn('camposgps_id',$ex)->get());
 
