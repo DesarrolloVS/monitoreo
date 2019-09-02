@@ -229,3 +229,13 @@ Route::get('/cat_gpsalerta/{id}/confirmDelete', 'GpsalertaController@confirmDele
 Route::post('/gpsalerta/complement', 'GpsalertaController@complement');
 Route::get('/cat_gpsalerta/{id}/estatus', 'GpsalertaController@estatus');
 Route::put('/cat_gpsalerta/{id}/estatus', 'GpsalertaController@update_estatus');
+
+//CATALOGO PARAMETROS CLIENTE
+Route::resource('/cat_parametroscliente', 'ParametrosclienteController');
+Route::post('/cliente/parametros','ParametrosclienteController@parametros');
+Route::get('cliente/parametros', 'ParametrosclienteController@index')->name('cliente/parametros');
+Route::get('/cat_parametroscliente/create/{id}', 'ParametrosclienteController@create');
+Route::get('/cat_parametroscliente/{id}/confirmDelete', 'ParametrosclienteController@confirmDelete');
+// Route::post('/gpsalerta/complement', 'GpsalertaController@complement');
+// Route::get('/cat_gpsalerta/{id}/estatus', 'GpsalertaController@estatus');
+// Route::put('/cat_gpsalerta/{id}/estatus', 'GpsalertaController@update_estatus');

@@ -10,6 +10,7 @@
         <a href="/cat_estadoclientes">ABC Estados Clientes</a>
         <a href="/cat_tipodomicilios">ABC Tipo Domicilios</a>
         <a href="/cat_clientes">ABC Clientes</a>
+        <a href="/cat_parametroscliente">Parametros Cliente</a>
         <a href="/">Inicio (Mapa)</a>
         <a href="/cat_usuario">Modulo Usuarios</a>
         <a href="/cat_responsables">Modulo Responsables</a>
