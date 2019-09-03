@@ -23,7 +23,7 @@ class Cliente extends Model
     }
 
     public function vehiculo () {
-        return $this->vehiculo(Vehiculo::class);
+        return $this->hasMany(Vehiculo::class);
     }
 
     public function parametroscliente () {
