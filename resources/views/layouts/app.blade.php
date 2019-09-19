@@ -15,9 +15,10 @@
 
 <body class="as-app-body as-app">
     @include('template.modals')
-    <header class="as-toolbar" style="background: #000;max-heigth:60px;">
+    <!-- <header class="as-toolbar" style="background: #000;max-heigth:60px;"> -->
+    <!-- <header class="as-toolbar"> -->
         @include('template.header')
-    </header>
+    <!-- </header> -->
 
     <as-responsive-content>
         <div id="spinner"></div> 

@@ -239,3 +239,8 @@ Route::get('/cat_parametroscliente/{id}/confirmDelete', 'ParametrosclienteContro
 // Route::post('/gpsalerta/complement', 'GpsalertaController@complement');
 // Route::get('/cat_gpsalerta/{id}/estatus', 'GpsalertaController@estatus');
 // Route::put('/cat_gpsalerta/{id}/estatus', 'GpsalertaController@update_estatus');
+
+Route::get('/test', function () {
+    return view('welcome');
+});
+

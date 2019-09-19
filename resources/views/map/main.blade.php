@@ -20,14 +20,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <!-- INICIO DE MIS ESTILOS -->
 <link rel="stylesheet" type="text/css" href="{{ asset('css/template/thisSystem.css') }}" />
-<link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}"> -->
 <!-- CSS NOTIFICACIONES ANIMATE -->
 <link rel="stylesheet" type="text/css" href="{{ asset('css/animate/animate.css') }}" />
-<link rel="stylesheet" href="{{ asset('css/pushbar/pushbar.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('css/pushbar/pushbar.css') }}"> -->
 <link rel="stylesheet" href="{{ asset('css/template/estilos.css') }}">
 <link rel="stylesheet" href="{{ asset('css/template/botons.css') }}">
 <!-- TURF -->
 <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+<link rel="stylesheet" href="/css/app.css">
+<script src="/js/app.js" defer></script>
 
 @endsection
 
@@ -49,8 +51,8 @@
         -->
         <div id="search-visor" class="search-visor">
             <div class="search-visor-form" style="display: block">
-                <div id="search" class="input-group">
-                    <span id="algo" class="input-group-addon">Localiza tu dirección:</span>
+                <div id="search" class="input-group bg-white">
+                    <span id="algo" class="input-group-addon d-flex align-items-center px-3 border-bottom border-left bg-light">dirección:</span>
                     <input type="text" id="txtDireccion" name="txtDireccion" placeholder="p. ej. Calle, número, colonia" class="form-control" autocomplete="off">
                 </div>
             </div>
@@ -60,8 +62,8 @@
         <div id="map"></div>
 
         <div class="btn-group-vertical options" role="group">
-            <a class="btn btn-primary btn-lg" id="geo_cerca" data-toggle="tooltip" data-placement="right" title="Agregar Geocerca"><i class="fas fa-vector-square"></i></a>
-            <a class="btn btn-primary btn-lg" id="control_punto" data-toggle="tooltip" data-placement="right" title="Agregar Punto de Control"><i class="fas fa-bezier-curve"></i></a>
+            <a class="btn btn-info" id="geo_cerca" data-toggle="tooltip" data-placement="right" title="Agregar Geocerca"><i class="fas fa-vector-square"></i></a>
+            <a class="btn btn-info" id="control_punto" data-toggle="tooltip" data-placement="right" title="Agregar Punto de Control"><i class="fas fa-bezier-curve"></i></a>
         </div>
 
         
@@ -96,8 +98,8 @@
 <!--
     @/*include('template.pushbar')*/
     -->
-@include('template.menu')
-@include('template.pushbar_bottom')
+<!-- @//include('template.menu') -->
+<!-- @//include('template.pushbar_bottom') -->
 <!--
 <script src="{{ asset('js/template/route.js') }}"></script>
 -->
@@ -109,7 +111,7 @@
 
 @section ('scripts')
 <script src="{{ asset('js/librerias/jquery.min.js') }}"></script>
-<script src="{{ asset('js/librerias/bootstrap.min.js') }}"></script>
+<!-- <script src="{{ asset('js/librerias/bootstrap.min.js') }}"></script> -->
 <!-- JS NOTIFICACIONES ANIMATE -->
 <script type="text/javascript" src="{{ asset('js/notify/bootstrap-notify.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/template/functions.js') }}"></script>
