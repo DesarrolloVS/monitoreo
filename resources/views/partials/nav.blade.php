@@ -9,6 +9,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- <ul class="navbar-nav mr-auto"> -->
             <ul class="nav nav-pills ml-auto">
+                <!-- INICIO -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Inicio
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/">Mapa</a>
+                    </div>
+                </li>
                 <!-- MODULO CLIENTES -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
@@ -22,7 +31,7 @@
                         <a class="dropdown-item" href="/cat_tipodomicilios">ABC Tipo Domicilios</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/cat_clientes">ABC Clientes</a>
-                        <a class="dropdown-item" href="/cat_parametroscliente">Parametros Cliente</a>
+                        <!-- <a class="dropdown-item" href="/cat_parametroscliente">Parametros Cliente</a> -->
                     </div>
                 </li>
                 <!-- MODULO USUARIOS -->

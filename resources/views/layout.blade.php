@@ -8,13 +8,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="/css/app.css">
     <script src="/js/app.js" defer></script>
-    <!--     
-    <style>
-        .active a {
-            color:red;
-            text-decoration:none;
-        }
-    </style> -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700|Open+Sans:300,400,600" rel="stylesheet">
     @yield('css')
 </head>

@@ -1,136 +1,115 @@
-@extends('layouts.app')
+@extends('layout')
 
 @section ('css')
-<!-- Fuentes -->
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700|Open+Sans:300,400,600" rel="stylesheet">
-<!-- Include Airship -->
-<link rel="stylesheet" href="https://libs.cartocdn.com/airship-style/v2.0.5/airship.css">
-<script src="https://libs.cartocdn.com/airship-components/v2.0.5/airship.js"></script>
-<!-- Include Leaflet -->
-<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
-<link href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" rel="stylesheet">
-<!-- Include CARTO.js -->
-<script src="https://libs.cartocdn.com/carto.js/v4.1.2/carto.min.js"></script>
-<link href="https://carto.com/developers/carto-js/examples/maps/public/style.css" rel="stylesheet">
-<!-- Include Chart JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-<!-- INICIO DE MIS ESTILOS -->
-<link rel="stylesheet" type="text/css" href="{{ asset('css/template/thisSystem.css') }}" />
-<link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
-<!-- CSS NOTIFICACIONES ANIMATE -->
-<link rel="stylesheet" type="text/css" href="{{ asset('css/animate/animate.css') }}" />
-<link rel="stylesheet" href="{{ asset('css/pushbar/pushbar.css') }}">
-<link rel="stylesheet" href="{{ asset('css/template/estilos.css') }}">
-<link rel="stylesheet" href="{{ asset('css/template/botons.css') }}">
 @endsection
 
 @section('content')
-<div class="container montse">
-    <div class="row">
-        <br><br>
-        <div class="text-center">
-            <h2>Asignar Gps Vehiculo: <small>Placa: {{ $v->placa }} </small></h2>
-        </div>
-    </div>
+<div class="container">
 
     <div class="row">
-        <br><br>
-        <div class="">
-            <a class="btn btn-success" href="/cat_vehiculos"><i class="fas fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;Catálogo Vehículos</a>
-            @if($historico->first())
-            <a class="btn btn-info pull-right" href="/cat_vehiculos/{{ $v->id }}/historico"><i class="fas fa-database"></i>&nbsp;&nbsp;&nbsp;Historico GPS</a>
-            @endif
-        </div>
-    </div>
+        <div class="col-8 col-sm-8 col-md-8 col-lg-8 mx-auto">
 
-    <div class="row  col-md-4 col-md-offset-4"><br>
-        <div class="">
-            <h3>Gps Actual: {{ ($v->gpscliente_id == "" ) ? "NO ASIGNADO" : $v->gpscliente->imei }}
-                @if($v->gpscliente_id != "")
-                &emsp;<a href="/cat_vehiculos/{{ $v->id }}/nogps" class="btn btn-danger btn-xs">Desvincular GPS</a>
-                @endif
-            </h3>
-            @if($v->gpscliente_id != "")
-            <h3>Fecha de Asignación: {{ $v->gpscliente->created_at }}</h3>
-            @endif
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="">
-            <br><br>
-            <form action="/cat_vehiculos/{{ $v->id }}/gps" method="POST">
-                @csrf
-                @method('put')
-
-                <div class="row">
-                    <div class="form-group col-md-4 col-md-offset-4"><br><br>
-                        <label for="cliente_id">Cliente: </label>
-                        <select name="cliente_id" id="cliente_id" class="form-control" readonly>
-                            <option value="{{ $cliente->id }}" selected>{{ $cliente->nombre }}</option>
-                        </select>
-                    </div>
+            <div class="row">
+                <div class="col">
+                    <ol class="breadcrumb bg-transparent d-flex justify-content-end">
+                        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="/cat_vehiculos">Catálogo Vehículos</a></li>
+                        <li class="breadcrumb-item active" aria-current="">Asignar GPS</li>
+                    </ol>
                 </div>
+            </div>
 
-                @if($gpss->first())
-                <div class="row">
-                    <div class="form-group col-md-4 col-md-offset-4">
-                        <label for="gpscliente_id">Cambiar GPS a: </label>
-                        <select name="gpscliente_id" id="gpscliente_id" class="form-control">
-                            <option value="">Seleccione una Opción</option>
-                            @foreach($gpss as $g)
-                            <option value="{{ $g->id }}">{{ $g->serie }} - {{ $g->imei }}</option>
-                            @endforeach
-                        </select>
+            <div class="row">
+                <div class="col">
+                    <div class="bg-white shadow py-3 px-4 rounded">
+                        <h3>Gps Actual: {{ ($v->gpscliente_id == "" ) ? "NO ASIGNADO" : $v->gpscliente->imei }}
+                        @if($v->gpscliente_id != "")
+                        <h3>Fecha de Asignación: {{ $v->gpscliente->created_at }}</h3>
+                        @endif
+                            @if($v->gpscliente_id != "")
+                            &emsp;<a href="/cat_vehiculos/{{ $v->id }}/nogps" class="btn btn-danger btn-block btn-xs"><i class="fas fa-trash-alt"></i>&ensp;Desvincular GPS</a>
+                            @endif
+                        </h3>
                     </div>
+
                 </div>
-                <div class="row">
-                    <div class="form-group"><br>
-                        <div class="text-center" id="asignar" style="display:none"><br><br>
-                            <button class="btn btn-primary" type="submit">Asignar Gps</button>
+                
+            </div>
+            <hr>
+            
+
+            <div class="row">
+                <div class="col">
+                    
+                    <form class="bg-white shadow py-3 px-4 rounded" action="/cat_vehiculos/{{ $v->id }}/gps" method="POST">
+                        <h2 class="text-center">Asignar Gps Vehiculo: <small>{{ $v->placa }} </small></h2>
+                        <hr>
+                        @csrf
+                        @method('put')
+
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="cliente_id">Cliente: </label>
+                                <select name="cliente_id" id="cliente_id" class="form-control bg-light shadow-sm border-0" readonly>
+                                    <option value="{{ $cliente->id }}" selected>{{ $cliente->nombre }}</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                @else
-                <div class="row">
-                    <div class="form-group col-md-4 col-md-offset-4">
-                        <br>
-                        <div class="alert alert-danger alert-dismissible" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <strong>Atención: </strong> No hay registros de GPS's disponibles para este cliente.
-                        </div>
-                    </div>
-                </div>
-                @endif
-                </div>
 
-                <input type="hidden" name="placa" id="placa" value="{{ $v->placa }}">
-                <input type="hidden" name="vehiculo_id" id="vehiculo_id" value="{{ $v->id }}">
-                <input type="hidden" name="gpscliente_id_anterior" id="gpscliente_id_anterior" value="{{ $v->gpscliente_id }}">
-            </form>
-            <br>
-            <br>
+                        @if($gpss->first())
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="gpscliente_id">Cambiar GPS a: </label>
+                                    <select name="gpscliente_id" id="gpscliente_id" class="form-control bg-light shadow-sm border-0">
+                                        <option value="">Seleccione una Opción</option>
+                                        @foreach($gpss as $g)
+                                        <option value="{{ $g->id }}">{{ $g->serie }} - {{ $g->imei }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="text-center" id="asignar" style="display:none"><br>
+                                        <button class="btn btn-primary btn-block" type="submit">Asignar Gps</button>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                            <div class="row">
+                                <div class="form-group col">
+                                    <div class="alert alert-danger alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <strong>Atención: </strong> No hay registros de GPS's disponibles para este cliente.
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                        <!-- </div> -->
+
+                        <input type="hidden" name="placa" id="placa" value="{{ $v->placa }}">
+                        <input type="hidden" name="vehiculo_id" id="vehiculo_id" value="{{ $v->id }}">
+                        <input type="hidden" name="gpscliente_id_anterior" id="gpscliente_id_anterior" value="{{ $v->gpscliente_id }}">
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="bg-white shadow py-3 px-4 rounded">
+                        @if($historico->first())
+                        <a class="btn btn-info btn-block" href="/cat_vehiculos/{{ $v->id }}/historico"><i class="fas fa-database"></i>&nbsp;&nbsp;&nbsp;Historico GPS</a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-
 </div>
-@include('template.menu_vehiculos')
 @endsection
 
 @section ('scripts')
 <script src="{{ asset('js/librerias/jquery.min.js') }}"></script>
-<script src="{{ asset('js/librerias/bootstrap.min.js') }}"></script>
-<!-- JS NOTIFICACIONES ANIMATE -->
-<script type="text/javascript" src="{{ asset('js/notify/bootstrap-notify.min.js') }}"></script>
-<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-
-<script src="{{ asset('js/librerias/pushbar.js') }}"></script>
 <script src="{{ asset('js/usuario/asignargps.js') }}"></script>
-<script>
-    var pushbar = new Pushbar({
-        blur: true,
-        overlay: true
-    });
-</script>
 @endsection

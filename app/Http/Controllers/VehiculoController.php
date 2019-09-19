@@ -287,7 +287,8 @@ class VehiculoController extends Controller
 
     public function update_gps(Request $request, $id)
     {   
-        //dd($request);
+        // echo "id = " . $id;
+        // dd($request);
         $gpscliente_id = $request->get('gpscliente_id');
         $gpscliente_idanterior = $request->get('gpscliente_id_anterior');
         DB::beginTransaction();
@@ -454,7 +455,11 @@ class VehiculoController extends Controller
     public function destroyResponsable($id)
     {        
         $r = Responsablesvehiculo::findOrFail($id);
+        $id_vehiculo = $r->vehiculo_id;
         $r->delete();
         return redirect('/cat_vehiculos');
+        // return redirect("/cat_vehiculos/{{ $id_vehiculo }}/responsablesactuales");
+        
+        
     }
 }

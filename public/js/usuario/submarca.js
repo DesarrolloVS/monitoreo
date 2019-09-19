@@ -1,12 +1,15 @@
-$marca = $('#marca_id');
+$(document).ready(function(){
+    $marca = $('#marca_id');
 
-$marca.on('change', function () {
-    const value = $('#marca_id').val();
-    if (value == "") {
-        $('#sub,#save').hide();
-        $('#descripcion').val("");
+    $marca.on('change', function () {
+        const value = $('#marca_id').val();
+        if (value == "") {
+            $('#sub,#save').hide();
+            $('#descripcion').val("");
 
-    } else {
-        $('#sub,#save').show();
-    }
+        } else {
+            $('#sub,#save').show();
+        }
+    });
 });
+
