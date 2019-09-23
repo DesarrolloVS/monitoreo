@@ -19,15 +19,22 @@
                 </div>
             </div>
 
+            @php
+            $r = fnValor($ga->tipodato)
+            @endphp
+
             <div class="row">
                 <div class="col">
                     <div class="bg-white py-2 px-2 rounded">
                         <p class="my-0">Alerta: {{ $ga->alerta }}</p>
                         <p class="my-0">Marca: {{ $ga->gpsmarcamodelo->marca }}</p>
                         <p class="my-0">Modelo: {{ $ga->gpsmarcamodelo->modelo }}</p>
-                        <p class="my-0">Descripción: {{ $ga->camposgps->descripcion }}</p>
-                        <p class="my-0">Condicion: " {{ $ga->condicion }} "</p>
-                        <p class="my-0">Valor: {{ $ga->valor }}</p>
+                        <p class="my-0">Campo: {{ $ga->camposgps->descripcion }}</p>
+                        <p class="my-0">Tipo de alerta: {{ tipoAlerta($ga->tipoalerta) }}</p>
+                        <p class="my-0">Tipo de dato: {{ tipoDato($ga->tipodato) }}</p>
+                        <p class="my-0">Valor: {{ $ga->$r }}</p>
+                        <p class="my-0">Repetir: {{ $ga->repetir }}</p>
+                        <p class="my-0">Revisar: {{ $ga->revisar }}</p>
                     </div>
                 </div>
             </div>

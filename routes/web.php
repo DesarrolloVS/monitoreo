@@ -227,6 +227,7 @@ Route::delete('/cat_deleteposicion/{id}', 'TrazaController@destroyPosition');
 Route::resource('/cat_gpsalerta', 'GpsalertaController');
 Route::get('/cat_gpsalerta/{id}/confirmDelete', 'GpsalertaController@confirmDelete');
 Route::post('/gpsalerta/complement', 'GpsalertaController@complement');
+Route::post('/gpsalerta/valor', 'GpsalertaController@valor');
 Route::get('/cat_gpsalerta/{id}/estatus', 'GpsalertaController@estatus');
 Route::put('/cat_gpsalerta/{id}/estatus', 'GpsalertaController@update_estatus');
 
