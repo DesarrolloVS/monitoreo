@@ -15,9 +15,10 @@
 
 <body class="as-app-body as-app">
     <?php echo $__env->make('template.modals', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    <header class="as-toolbar" style="background: #000;max-heigth:60px;">
+    <!-- <header class="as-toolbar" style="background: #000;max-heigth:60px;"> -->
+    <!-- <header class="as-toolbar"> -->
         <?php echo $__env->make('template.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    </header>
+    <!-- </header> -->
 
     <as-responsive-content>
         <div id="spinner"></div> 
