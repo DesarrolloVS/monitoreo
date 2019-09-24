@@ -28,6 +28,7 @@ class VerifyCsrfToken extends Middleware
         '/vehiculo/gps',
         '/vehiculos/cliente',
         '/gpsalerta/complement',
+        '/gpsalerta/valor',
         '/cliente/parametros'
     ];
 }

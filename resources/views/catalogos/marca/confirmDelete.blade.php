@@ -21,7 +21,7 @@
 
             <div class="row">
                 <div class="col my-3">
-                    <form class="bg-white shadow py-3 py-4" action="/cat_marca/{{ $marca->id }}" method="POST">
+                    <form class="bg-white shadow py-3 py-4 rounded" action="/cat_marca/{{ $marca->id }}" method="POST">
                         <div class="col">
                             <h2 class="text-center">Eliminar Registro: <small> {{ $marca->descripcion }} </small></h2>
                             <hr>
@@ -31,7 +31,6 @@
                             <button class="btn btn-danger btn-block" type="submit"><i class="fas fa-trash-alt"></i>&ensp;Eliminar</button>
                             <a class="class btn btn-block btn-outline-dark" href="/cat_marca"><i class="far fa-window-close"></i>&ensp;Cancelar</a>
                         </div>
-
                     </form>
                 </div>
             </div>
