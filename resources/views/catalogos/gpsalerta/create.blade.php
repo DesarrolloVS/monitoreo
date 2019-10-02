@@ -3,7 +3,7 @@
 @endsection
 
 @section('content')
-<div class="container montse">
+<div class="container">
 
     <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 mx-auto">
@@ -40,11 +40,43 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="col-4 mb-4" style="display:none" id="div_campos">
+                                <div class="form-group" id="complement">
+                                    <label for="camposgps_id">Campo: </label>
+                                    <select name="camposgps_id" id="camposgps_id" class="form-control bg-light shadow-sm @error('camposgps_id') is-invalid @else border-0 @enderror">
+                                        <option value="">Seleccione una Opción</option>
+                                    </select>
+                                    @error('camposgps_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-4 mb-4" style="display:none" id="div_conf">
+                                <div class="form-group">
+                                    <label for="funcion">Tipo de Configuración Alerta:</label>
+                                    <select name="funcion" id="funcion" class="form-control bg-light shadow-sm @error('funcion') is-invalid @else border-0 @enderror">
+                                        <option value="">Seleccione una Opción</option>
+                                        <option value="1">Funcion 1</option>
+                                        <option value="2">Funcion 2</option>
+                                        <option value="3">Funcion 3</option>
+                                        <option value="4">Funcion 4</option>
+                                        <option value="5">Funcion 5</option>
+                                    </select>
+                                    @error('funcion')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
-                        <!-- <div id="complement"></div> -->
 
                         <div class="row">
-                            <div class="col">
+                            <div class="col-4 opcional" style="display:none" id="div_alerta">
                                 <div class="form-group">
                                     <label for="alerta">Alerta: </label>
                                     <input class="form-control bg-light shadow-sm @error('alerta') is-invalid @else border-0 @enderror" type="text" id="alerta" name="alerta" placeholder="Alerta" value="{{ old('alerta') }}">
@@ -56,7 +88,7 @@
                                 </div>
                             </div>
 
-                            <div class="col">
+                            <div class="col-4 opcional" style="display:none" id="div_tipoalerta">
                                 <div class="form-group">
                                     <label for="tipoalerta">Tipo de Alerta:</label>
                                     <select name="tipoalerta" id="tipoalerta" class="form-control bg-light shadow-sm @error('tipoalerta') is-invalid @else border-0 @enderror">
@@ -73,11 +105,11 @@
                                 </div>
                             </div>
 
-                            <div class="col">
+                            <div class="col-4 opcional" style="display:none" id="div_tipovehiculo_id">
                                 <div class="form-group">
                                     <label for="tipovehiculo_id">Tipo de Vehículo:</label>
                                     <select name="tipovehiculo_id" id="tipovehiculo_id" class="form-control bg-light shadow-sm @error('tipovehiculo_id') is-invalid @else border-0 @enderror">
-                                        <option value="">Seleccione una Opción</option>
+                                        <option value="">No Aplica</option>
                                         @foreach($tv as $x)
                                         <option value="{{ $x->id }}">{{ $x->descripcion }}</option>
                                         @endforeach
@@ -89,28 +121,12 @@
                                     @enderror
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group" id="complement">
-                                    <label for="camposgps_id">Campo: </label>
-                                    <select name="camposgps_id" id="camposgps_id" class="form-control bg-light shadow-sm @error('camposgps_id') is-invalid @else border-0 @enderror">
-                                        <option value="">Seleccione una Opción</option>
-                                    </select>
-                                    @error('camposgps_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="col">
+                                            
+                            <div class="col-4 opcional" style="display:none" id="div_tipodato">
                                 <div class="form-group">
                                     <label for="tipodato">Tipo de Dato: </label>
                                     <select name="tipodato" id="tipodato" class="form-control bg-light shadow-sm @error('tipodato') is-invalid @else border-0 @enderror">
-                                        <option value="">Seleccione una Opción</option>
+                                        <option value="">No Aplica</option>
                                         <option value="1">Entero</option>
                                         <option value="2">Decimal</option>
                                         <option value="3">Fecha</option>
@@ -125,7 +141,7 @@
                                 </div>
                             </div>
 
-                            <div class="col">
+                            <div class="col-4 opcional" style="display:none" id="div_valor">
                                 <div class="form-group" id="complement2">
                                     <label for="valor">Valor o Parametro: </label>
                                     <input class="form-control bg-light shadow-sm @error('valor') is-invalid @else border-0 @enderror" type="text" id="valor" name="valor" placeholder="Valor" value="{{ old('valor') }}">
@@ -137,27 +153,7 @@
                                 </div>
                             </div>
 
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="funcion">Tipo de Confirmación Alerta:</label>
-                                    <select name="funcion" id="funcion" class="form-control bg-light shadow-sm @error('funcion') is-invalid @else border-0 @enderror">
-                                        <option value="">Seleccione una Opción</option>
-                                        <option value="1">Funcion 1</option>
-                                        <option value="2">Funcion 2</option>
-                                        <option value="3">Funcion 3</option>
-                                    </select>
-                                    @error('funcion')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="col">
+                            <div class="col-4 opcional" style="display:none" id="div_repetir">
                                 <label for="repetir">Repetir: </label>
                                 <div class="form-group input-group">
                                     <input class="input-group form-control bg-light shadow-sm @error('repetir') is-invalid @else @enderror" type="text" id="repetir" name="repetir" placeholder="Repetir" value="{{ old('repetir') }}">
@@ -171,9 +167,9 @@
                                 </span>
                                 @enderror
                             </div>
-                            
+                        
 
-                            <div class="col">
+                            <div class="col-4 opcional" style="display:none" id="div_revisar">
                                 <label for="revisar">Revisar: </label>
                                 <div class="form-group input-group">
                                     <input class="input-group form-control bg-light shadow-sm @error('revisar') is-invalid @else @enderror" type="text" id="revisar" name="revisar" placeholder="Revisar" value="{{ old('revisar') }}">

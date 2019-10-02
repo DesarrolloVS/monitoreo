@@ -15,13 +15,13 @@ $(document).ready(function(){
                 method: 'POST',
                 body: datitos
             })
-                .then(function (response) {
-                    return response.text();
-                })
-                .then(function (html) {
-                    document.querySelector('#tabla_vehiculos').innerHTML = html;
-                    $('#tabla_vehiculos').show();
-                })
+            .then(function (response) {
+                return response.text();
+            })
+            .then(function (html) {
+                document.querySelector('#tabla_vehiculos').innerHTML = html;
+                $('#tabla_vehiculos').show();
+            })
         }
     });
 });
