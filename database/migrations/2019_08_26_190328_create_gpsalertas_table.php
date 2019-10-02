@@ -18,12 +18,12 @@ class CreateGpsalertasTable extends Migration
             $table->unsignedBigInteger('gpsmarcamodelo_id');
             $table->foreign('gpsmarcamodelo_id')->references('id')->on('gpsmarcamodelos');
             $table->text('alerta');
-            $table->integer('tipoalerta');
+            $table->integer('tipoalerta')->nullable();
             $table->unsignedBigInteger('tipovehiculo_id')->nullable();
             $table->foreign('tipovehiculo_id')->references('id')->on('tipovehiculos');
             $table->unsignedBigInteger('camposgps_id');
             $table->foreign('camposgps_id')->references('id')->on('camposgps');
-            $table->integer('tipodato');
+            $table->integer('tipodato')->nullable();
             $table->integer('ventero')->nullable();
             $table->float('vdecimal', 8, 2)->nullable();
             $table->date('vfecha')->nullable();
@@ -33,6 +33,7 @@ class CreateGpsalertasTable extends Migration
             $table->integer('repetir')->nullable();
             $table->integer('revisar')->nullable();
             $table->boolean('estado')->default(0);
+            $table->integer('aux')->nullable();
             $table->timestamps();
         });
     }

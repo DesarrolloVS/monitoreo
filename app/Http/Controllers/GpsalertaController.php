@@ -50,15 +50,14 @@ class GpsalertaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {   
-        //dd($request);
+    public function store(Request $request)         
+    {               //dd($request);
+        
         $validatedData = $request->validate([
             'gpsmarcamodelo_id' => 'required',
             'alerta' => 'required',
             'tipoalerta' => 'required',
             'camposgps_id' => 'required',
-            'tipodato' => 'required',
             'funcion' => 'required'            
         ], [
             'gpsmarcamodelo_id.required' => 'El campo <i>Marca-Modelo</i> es obligatorio'

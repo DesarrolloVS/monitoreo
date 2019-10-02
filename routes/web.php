@@ -245,3 +245,10 @@ Route::get('/test', function () {
     return view('welcome');
 });
 
+//CATALOGO GPS ALERTAS CLIENTE
+Route::resource('/cat_alertascliente', 'AlertasclienteController');
+Route::post('/cliente/marcamodelo','AlertasclienteController@mm');
+Route::post('/cliente/alertas','AlertasclienteController@alertasmm');
+Route::post('/cliente/updatealertas','AlertasclienteController@alertasupdate');
+// Route::get('/cat_alertascliente/{id}/confirmDelete', 'AlertasclienteController');
+
