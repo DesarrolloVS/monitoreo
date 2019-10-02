@@ -21,7 +21,7 @@
                         <a class="dropdown-item" href="/cat_tipodomicilios">ABC Tipo Domicilios</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/cat_clientes">ABC Clientes</a>
-                        <!-- <a class="dropdown-item" href="/cat_parametroscliente">Parametros Cliente</a> -->
+                        <a class="dropdown-item" href="/cat_parametroscliente">Parametros Cliente</a>
                     </div>
                 </li>
                 <!-- MODULO USUARIOS -->
