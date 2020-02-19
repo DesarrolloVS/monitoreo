@@ -38,8 +38,9 @@ class DatabaseSeeder extends Seeder
          $this->call(TipoCombustiblesTableSeeder::class);
          $this->call(TipoTransmisionsTableSeeder::class);
          $this->call(EstadoVehiculosTableSeeder::class);
-         */
          $this->call(ClaseVehiculosTableSeeder::class);
-
+         $this->call(MarcasTableSeeder::class);
+         */
+         $this->call(SubMarcasTableSeeder::class);
     }
 }
