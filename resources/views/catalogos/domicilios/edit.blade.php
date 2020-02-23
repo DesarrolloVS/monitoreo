@@ -6,7 +6,7 @@
 @section('content')
 <div class="container montse">
 
-    <div class="row">   
+    <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 mx-auto">
 
             <div class="row">
@@ -32,10 +32,12 @@
                             <div class="form-group col-md-4">
                                 <label for="calle">Calle: </label>
                                 <input class="form-control form-control-sm shadow-sm border-0 bg-light" type="text" id="calle" name="calle" placeholder="Calle" value="{{ $domicilio->calle }}">
+                                {!! $errors->first('calle', '<span class="badge badge-danger">:message</span>') !!}
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="exterior">Número Exterior: </label>
                                 <input class="form-control form-control-sm shadow-sm border-0 bg-light" type="text" id="exterior" name="exterior" placeholder="Número Exterior" value="{{ $domicilio->exterior }}">
+                                {!! $errors->first('exterior', '<span class="badge badge-danger">:message</span>') !!}
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="interior">Número Interior: </label>
@@ -47,14 +49,17 @@
                             <div class="form-group col-md-4">
                                 <label for="colonia">Colonia: </label>
                                 <input class="form-control form-control-sm shadow-sm border-0 bg-light" type="text" id="colonia" name="colonia" placeholder="Colonia" value="{{ $domicilio->colonia }}">
+                                {!! $errors->first('colonia', '<span class="badge badge-danger">:message</span>') !!}
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="cp">C.P. </label>
-                                <input class="form-control form-control-sm shadow-sm border-0 bg-light" type="text" id="cp" name="cp" placeholder="Colonia" value="{{ $domicilio->cp }}">
+                                <input class="form-control form-control-sm shadow-sm border-0 bg-light" type="text" id="cp" name="cp" placeholder="Código postal" value="{{ $domicilio->cp }}">
+                                {!! $errors->first('cp', '<span class="badge badge-danger">:message</span>') !!}
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="estado">Estado: </label>
                                 <input class="form-control form-control-sm shadow-sm border-0 bg-light" type="text" id="estado" name="estado" placeholder="Estado" value="{{ $domicilio->estado }}">
+                                {!! $errors->first('estado', '<span class="badge badge-danger">:message</span>') !!}
                             </div>
                         </div>
 
@@ -62,18 +67,20 @@
                             <div class="form-group col-md-4">
                                 <label for="ciiudad">Ciudad o Municipio: </label>
                                 <input class="form-control form-control-sm shadow-sm border-0 bg-light" type="text" id="ciudad" name="ciudad" placeholder="Ciudad" value="{{ $domicilio->ciudad }}">
+                                {!! $errors->first('ciudad', '<span class="badge badge-danger">:message</span>') !!}
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="tipodomicilio_id">Tipo de Domicilio: </label>
                                 <select name="tipodomicilio_id" id="tipodomicilio_id" class="form-control form-control-sm shadow-sm border-0 bg-light">
                                     @foreach($tds as $td)
-                                    <option value="{{ $td->id }}" 
+                                    <option value="{{ $td->id }}"
                                     @if($domicilio->tipodomicilio_id == $td->id)
                                     selected
                                     @endif
                                     >{{ $td->descripcion }}</option>
                                     @endforeach
                                 </select>
+                                {!! $errors->first('tipodomicilio_id', '<span class="badge badge-danger">:message</span>') !!}
                             </div>
                         </div>
                         <br>

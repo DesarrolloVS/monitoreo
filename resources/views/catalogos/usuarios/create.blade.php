@@ -43,10 +43,12 @@
                                 <div class="form-group col-md-4">
                                     <label for="nombre">Nombre: </label>
                                     <input class="form-control bg-light shadow-sm border-0" type="text" id="nombre" name="nombre" placeholder="Nombre" value="">
+                                    {!! $errors->first('nombre', '<span class="badge badge-danger">:message</span>') !!}
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="paterno">Paterno: </label>
                                     <input class="form-control bg-light shadow-sm border-0" type="text" id="paterno" name="paterno" placeholder="Paterno" value="">
+                                    {!! $errors->first('paterno', '<span class="badge badge-danger">:message</span>') !!}
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="materno">Materno: </label>
@@ -58,10 +60,12 @@
                                 <div class="form-group col-md-4">
                                     <label for="email">Correo: </label>
                                     <input class="form-control bg-light shadow-sm border-0" type="text" id="email" name="email" placeholder="Correo" value="">
+                                    {!! $errors->first('email', '<span class="badge badge-danger">:message</span>') !!}
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="rfc">RFC: </label>
                                     <input class="form-control bg-light shadow-sm border-0" type="text" id="rfc" name="rfc" placeholder="RFC" value="">
+                                    {!! $errors->first('rfc', '<span class="badge badge-danger">:message</span>') !!}
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="curp">CURP: </label>
@@ -77,6 +81,7 @@
                                         <option value="contacto">Contacto</option>
                                         <option value="usuario">Usuario</option>
                                     </select>
+                                    {!! $errors->first('tipoacceso_id', '<span class="badge badge-danger">:message</span>') !!}
                                 </div>
 
                                 <div class="form-group col-md-4">
@@ -87,7 +92,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group col-md-4" id="tipo_empleado" style="display:none">
                                 </div>
                             </div>

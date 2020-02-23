@@ -45,6 +45,7 @@
                                     @endif
                                 @endforeach
                             </select>
+                            {!! $errors->first('estadocliente_id', '<span class="badge badge-danger"> :message </span>') !!}
                             </div>
                         </div>
 

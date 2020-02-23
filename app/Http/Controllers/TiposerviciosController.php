@@ -38,6 +38,9 @@ class TiposerviciosController extends Controller
      */
     public function store(Request $request)
     {
+        request()->validate([
+            'descripcion' => 'required'
+        ]);
         DB::beginTransaction();
         $ts = new Tiposervicio();
 
@@ -104,7 +107,7 @@ class TiposerviciosController extends Controller
     }
 
     public function confirmDelete($id)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $ts = Tiposervicio::findOrFail($id);
         return view('catalogos.tiposervicios.confirmDelete',[
             'ts' => $ts

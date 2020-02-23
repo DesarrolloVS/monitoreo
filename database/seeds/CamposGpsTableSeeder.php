@@ -19,6 +19,15 @@ class CamposGpsTableSeeder extends Seeder
         Camposgps::create([ 'descripcion' => 'Longitud' ]);
         Camposgps::create([ 'descripcion' => 'Latitude' ]);
         Camposgps::create([ 'descripcion' => 'Fecha Registro GPS' ]);
+        Camposgps::create([ 'descripcion' => 'Fecha último envío' ]);
+        Camposgps::create([ 'descripcion' => 'Señal GPS ' ]);
+        Camposgps::create([ 'descripcion' => 'Señal GPRS' ]);
+        Camposgps::create([ 'descripcion' => 'Estado del GPS' ]);
+        Camposgps::create([ 'descripcion' => 'Hodometro' ]);
+        Camposgps::create([ 'descripcion' => 'Horometro' ]);
+        Camposgps::create([ 'descripcion' => 'Satelites' ]);
+        Camposgps::create([ 'descripcion' => 'Voltage' ]);
+        Camposgps::create([ 'descripcion' => 'Combustible' ]);
         Camposgps::create([ 'descripcion' => 'MCC' ]);
         Camposgps::create([ 'descripcion' => 'MNC' ]);
         Camposgps::create([ 'descripcion' => 'LAC' ]);
@@ -39,14 +48,5 @@ class CamposGpsTableSeeder extends Seeder
         Camposgps::create([ 'descripcion' => 'GTSTT 22 Encendido y en movimiento' ]);
         Camposgps::create([ 'descripcion' => 'GTSTT 41 Sin movimiento y apagado' ]);
         Camposgps::create([ 'descripcion' => 'GTSTT 42 en movimiento y encendido' ]);
-        Camposgps::create([ 'descripcion' => 'Fecha último envío' ]);
-        Camposgps::create([ 'descripcion' => 'Señal GPS ' ]);
-        Camposgps::create([ 'descripcion' => 'Señal GPRS' ]);
-        Camposgps::create([ 'descripcion' => 'Estado del GPS' ]);
-        Camposgps::create([ 'descripcion' => 'Hodometro' ]);
-        Camposgps::create([ 'descripcion' => 'Horometro' ]);
-        Camposgps::create([ 'descripcion' => 'Satelites' ]);
-        Camposgps::create([ 'descripcion' => 'Voltage' ]);
-        Camposgps::create([ 'descripcion' => 'Combustible' ]);
     }
 }

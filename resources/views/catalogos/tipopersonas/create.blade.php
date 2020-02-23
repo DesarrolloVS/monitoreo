@@ -6,7 +6,7 @@
 @section('content')
 <div class="container">
 
-    <div class="row">   
+    <div class="row">
         <div class="col-8 col-sm-8 col-md-8 col-lg-8 mx-auto">
 
             <div class="row">
@@ -18,7 +18,7 @@
                     </ol>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col">
                     <form class="bg-white shadow rounded py-3 px-4" action="/cat_tipopersonas" method="POST">
@@ -29,6 +29,9 @@
                             <div class="form-group col">
                                 <label for="descripcion">Descripción: </label>
                                 <input class="form-control bg-light shadow-sm border-0" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="">
+                                {!! $errors->first('descripcion', '<span class="badge badge-danger">:message </span>') !!}
+
+
                             </div>
                         </div>
 

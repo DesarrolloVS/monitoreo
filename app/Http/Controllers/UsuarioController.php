@@ -44,6 +44,14 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
+        request()->validate([
+            'nombre' => 'required',
+            'paterno' => 'required',
+            'email' => 'required|email',
+            'rfc' => 'required',
+            'tipoacceso_id' => 'required'
+        ]);
+
         $accesos = $request->get('tipoacceso_id');
         $empleado = $request->get('empleado');
         DB::beginTransaction();
@@ -66,16 +74,16 @@ class UsuarioController extends Controller
         if($accesos != null){
             if(in_array("rep_legal",$accesos)){
                 $us->rep_legal = 1;
-            } 
+            }
             if(in_array("contacto",$accesos)){
                 $us->contacto = 1;
-            } 
+            }
 
             if(in_array("usuario",$accesos)){
                 $us->usuario = 1;
-            } 
+            }
         }
-        
+
         $us->save();
         DB::commit();
         return redirect('cat_usuarios');
@@ -102,7 +110,7 @@ class UsuarioController extends Controller
     {
         //'usuario' => Usuario::findOrFail($id),
         //'tes' => Tipoempleado::all()
-        
+
         $usuario = Usuario::findOrFail($id);
         $tes = Tipoempleado::where('cliente_id','=',$usuario->cliente_id)->get();
 
@@ -121,7 +129,15 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {        
+    {
+        request()->validate([
+            'nombre' => 'required',
+            'paterno' => 'required',
+            'email' => 'required|email',
+            'rfc' => 'required',
+            'tipoacceso_id' => 'required'
+        ]);
+
         $us = Usuario::findOrFail($id);
         $accesos = $request->get('tipoacceso_id');
         $empleado = $request->get('empleado');
@@ -143,13 +159,13 @@ class UsuarioController extends Controller
         $us->rfc = strtoupper($request->get('rfc'));
         $us->curp = strtoupper($request->get('curp'));
         $us->cliente_id = strtoupper($request->get('cliente_id'));
-        
+
         if($accesos != null){
             if(in_array("rep_legal",$accesos)){
                 $us->rep_legal = 1;
             }else{
                 $us->rep_legal = null;
-            } 
+            }
             if(in_array("contacto",$accesos)){
                 $us->contacto = 1;
             }else{
@@ -160,13 +176,13 @@ class UsuarioController extends Controller
                 $us->usuario = 1;
             }else{
                 $us->usuario = null;
-            } 
+            }
         }else{
             $us->rep_legal = null;
             $us->contacto = null;
             $us->usuario = null;
         }
-        
+
         $us->save();
         DB::commit();
         return redirect('cat_usuarios');
@@ -184,18 +200,18 @@ class UsuarioController extends Controller
         $us->delete();
         return redirect('/cat_usuarios');
     }
-    
+
     public function estatus($id)
-    {        
+    {
         $usuario = Usuario::findOrFail($id);
         return view('usuario.estatus', [
             'usuario' => $usuario,
-            'estados' => Estadousuario::all()    
-        ]);        
+            'estados' => Estadousuario::all()
+        ]);
     }
 
     public function update_estatus(Request $request, $id)
-    {   
+    {
         DB::beginTransaction();
         $usuario = Usuario::findOrFail($id);
         $usuario->estadousuario_id = $request->get('estadousuario_id');
@@ -205,7 +221,7 @@ class UsuarioController extends Controller
     }
 
     public function confirmDelete($id)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $us = Usuario::findOrFail($id);
         return view('usuario.confirmDelete',[
             'us' => $us

@@ -6,7 +6,7 @@
 @section('content')
 <div class="container">
 
-    <div class="row">   
+    <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 mx-auto">
 
             <div class="row">
@@ -28,7 +28,8 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="nombre">Nombre Empresa: </label>
-                                <input class="form-control shadow-sm border-0 bg-light" type="text" id="nombre" name="nombre" placeholder="Nombre empresa" value="">
+                                <input class="form-control shadow-sm border-0 bg-light" type="text" id="nombre" name="nombre" placeholder="Nombre empresa" value="{{ old('nombre')}}">
+                                {!! $errors->first('nombre', '<span class="badge badge-danger">:message</span>') !!}
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="logo">Logo: </label>
@@ -45,10 +46,12 @@
                                         <option value="{{ $tp->id }}">{{ $tp->descripcion }}</option>
                                     @endforeach
                                 </select>
+                                {!! $errors->first('tipopersona_id', '<span class="badge badge-danger">:message</span>') !!}
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="rfc">RFC: </label>
-                                <input class="form-control shadow-sm border-0 bg-light" type="text" id="rfc" name="rfc" placeholder="RFC" value="">
+                                <input class="form-control shadow-sm border-0 bg-light" type="text" id="rfc" name="rfc" placeholder="RFC" value="{{ old('rfc')}}">
+                                {!! $errors->first('rfc', '<span class="badge badge-danger">:message</span>') !!}
                             </div>
                         </div>
 
@@ -61,6 +64,7 @@
                                         <option value="{{ $te->id }}">{{ $te->descripcion }}</option>
                                     @endforeach
                                 </select>
+                                {!! $errors->first('tipoempresa_id', '<span class="badge badge-danger">:message</span>') !!}
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="estadocliente_id">Estado cliente: </label>
@@ -70,6 +74,7 @@
                                         <option value="{{ $estado->id }}">{{ $estado->descripcion }}</option>
                                     @endforeach
                                 </select>
+                                {!! $errors->first('estadocliente_id', '<span class="badge badge-danger">:message</span>') !!}
                             </div>
                         </div>
 
@@ -81,7 +86,8 @@
                                         <option value="{{ $ts->id }}">{{ $ts->descripcion }}</option>
                                     @endforeach
                                 </select>
-                            </div>    
+                                {!! $errors->first('tiposervicio_id', '<span class="badge badge-danger">:message</span>') !!}
+                            </div>
                         </div>
 
                         <br>

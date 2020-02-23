@@ -7,7 +7,7 @@
 <div class="container montse">
 
     <div class="row">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 mx-auto">    
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 mx-auto">
 
             <div class="row">
                 <div class="col">
@@ -33,7 +33,7 @@
                                 <select name="cliente_id" id="cliente_id" class="form-control bg-light shadow-sm border-0">
                                     <option value="">Seleccione una Opción</option>
                                     @foreach($clientes as $cliente)
-                                        <option value="{{ $cliente->id }}" 
+                                        <option value="{{ $cliente->id }}"
                                         @if($cliente->id == $usuario->cliente_id)
                                         selected
                                         @endif
@@ -47,10 +47,12 @@
                             <div class="form-group col-md-4">
                                 <label for="nombre">Nombre: </label>
                                 <input class="form-control bg-light shadow-sm border-0" type="text" id="nombre" name="nombre" placeholder="Nombre" value="{{ $usuario->nombre }}">
+                                {!! $errors->first('nombre', '<span class="badge badge-danger">:message</span>') !!}
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="paterno">Paterno: </label>
                                 <input class="form-control bg-light shadow-sm border-0" type="text" id="paterno" name="paterno" placeholder="Paterno" value="{{ $usuario->paterno }}">
+                                {!! $errors->first('paterno', '<span class="badge badge-danger">:message</span>') !!}
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="materno">Materno: </label>
@@ -62,10 +64,12 @@
                             <div class="form-group col-md-4">
                                 <label for="email">Correo: </label>
                                 <input class="form-control bg-light shadow-sm border-0" type="text" id="email" name="email" placeholder="Correo" value="{{ $usuario->email }}">
+                                {!! $errors->first('email', '<span class="badge badge-danger">:message</span>') !!}
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="rfc">RFC: </label>
                                 <input class="form-control bg-light shadow-sm border-0" type="text" id="rfc" name="rfc" placeholder="RFC" value="{{ $usuario->rfc }}">
+                                {!! $errors->first('rfc', '<span class="badge badge-danger">:message</span>') !!}
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="curp">CURP: </label>
@@ -77,29 +81,30 @@
                             <div class="form-group col-md-4">
                                 <label for="tipoacceso_id">Tipo de acceso: </label>
                                 <select multiple name="tipoacceso_id[]" id="tipoacceso_id[]" class="form-control bg-light shadow-sm border-0">
-                                    <option value="rep_legal" 
+                                    <option value="rep_legal"
                                     @if($usuario->rep_legal == 1)
                                     selected
                                     @endif
                                     >Representante Legal</option>
-                                    <option value="contacto" 
+                                    <option value="contacto"
                                     @if($usuario->contacto == 1)
                                     selected
                                     @endif
                                     >Contacto</option>
-                                    <option value="usuario" 
+                                    <option value="usuario"
                                     @if($usuario->usuario == 1)
                                     selected
                                     @endif
                                     >Usuario</option>
                                 </select>
+                                {!! $errors->first('tipoacceso_id', '<span class="badge badge-danger">:message</span>') !!}
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label for="">&ensp;</label>
                                 <div class="checkbox">
                                     <label>
-                                        <input id="empleado" name="empleado" type="checkbox" value="{{ $usuario->empleado }}" onclick="calc()" 
+                                        <input id="empleado" name="empleado" type="checkbox" value="{{ $usuario->empleado }}" onclick="calc()"
                                     @if($usuario->empleado == 1)
                                     checked
                                     @endif
@@ -112,7 +117,7 @@
                                 <select name="tipoempleado_id" id="tipoempleado_id" class="form-control bg-light shadow-sm border-0">
                                     <option value="">Seleccione una Opción</option>
                                     @foreach($tes as $te)
-                                        <option value="{{ $te->id }}" 
+                                        <option value="{{ $te->id }}"
                                         @if($usuario->tipoempleado_id == $te->id)
                                         selected
                                         @endif

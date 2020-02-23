@@ -90,8 +90,15 @@ class VehiculoController extends Controller
      */
     public function store(Request $request)
     {
-
         // dd($request);
+
+        request()->validate([
+            'descripcion' => 'required',
+            'placa' => 'required',
+            'Modelo' => 'required',
+            'tipovehiculo_id' => 'required'
+        ]);
+
         $vehiculo = new Vehiculo();
         $vehiculo->cliente_id = $request->get('cliente_id');
         $vehiculo->descripcion = strtoupper($request->get('descripcion'));
@@ -207,7 +214,7 @@ class VehiculoController extends Controller
     }
 
     public function submarca(Request $request)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $id_marca = $request->get('id_marca');
         $subs = Submarca::where('marca_id','=',$id_marca)->get();
 
@@ -217,7 +224,7 @@ class VehiculoController extends Controller
     }
 
     public function confirmDelete($id)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $v = Vehiculo::findOrFail($id);
         return view('vehiculos.vehiculos.confirmDelete',[
             'v' => $v
@@ -225,16 +232,16 @@ class VehiculoController extends Controller
     }
 
     public function estatus($id)
-    {        
+    {
         $v = Vehiculo::findOrFail($id);
         return view('vehiculos.vehiculos.estatus', [
             'v' => $v,
-            'estados' => Estadovehiculo::all()    
-        ]);        
+            'estados' => Estadovehiculo::all()
+        ]);
     }
 
     public function update_estatus(Request $request, $id)
-    {   
+    {
         $v = Vehiculo::findOrFail($id);
         $v->estadovehiculo_id = $request->get('estadovehiculo_id');
         $v->save();
@@ -242,12 +249,12 @@ class VehiculoController extends Controller
     }
 
     public function gps($id)
-    {        
+    {
         $v = Vehiculo::findOrFail($id);
         $id_vehiculo = $v->id;
         $historico = DB::table('vehiculogpshistoricos')
         ->where('vehiculo_id',$id_vehiculo)
-        ->get();            
+        ->get();
         $c = Cliente::findOrFail($v->cliente_id);
         if($historico->first()){$bandera2 = 1;}else{$bandera2 = 0;}
 
@@ -258,18 +265,18 @@ class VehiculoController extends Controller
 
         //if($gpss->first()){$bandera = 1;}else{$bandera = 0;}
 
-        
+
         return view('vehiculos.vehiculos.gps', [
             'v' => $v,
             'cliente' => $c,
             'historico' => $historico,
             'gpss' => $gpss
-            // 'bandera' => $bandera   
-        ]);        
+            // 'bandera' => $bandera
+        ]);
     }
 
     public function showgpss(Request $request)            //ELIMINA EL ELEMENTO
-    {        
+    {
         //dd($request);
         $id_cliente = $request->get('id_cliente');
         $gpss = DB::table('gpsclientes')
@@ -281,12 +288,12 @@ class VehiculoController extends Controller
 
         return view('vehiculos.vehiculos.gpss', [
             'gpss' => $gpss,
-            'bandera' => $bandera   
-        ]);        
+            'bandera' => $bandera
+        ]);
     }
 
     public function update_gps(Request $request, $id)
-    {   
+    {
         // echo "id = " . $id;
         // dd($request);
         $gpscliente_id = $request->get('gpscliente_id');
@@ -325,20 +332,20 @@ class VehiculoController extends Controller
     }
 
     public function historico($id)
-    {        
+    {
         $v = Vehiculo::findOrFail($id);
         $historico = DB::table('vehiculogpshistoricos')
         ->where('vehiculo_id',$id)
-        ->get();            
-        
+        ->get();
+
         return view('vehiculos.vehiculos.historicogps', [
             'v' => $v,
-            'historico' => $historico   
-        ]);        
+            'historico' => $historico
+        ]);
     }
 
     public function nogps($id)
-    {        
+    {
         DB::beginTransaction();
         $v = Vehiculo::findOrFail($id);
         $gpscliente_id = $v->gpscliente_id;
@@ -353,7 +360,7 @@ class VehiculoController extends Controller
     }
 
     public function clientes(Request $request)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $id_cliente = $request->get('id_cliente');
         $vehiculos = Vehiculo::where('cliente_id','=',$id_cliente)->get();
 
@@ -364,7 +371,7 @@ class VehiculoController extends Controller
     }
 
     public function responsable($id)
-    {        
+    {
         $v = Vehiculo::findOrFail($id);
         $id_cliente = $v->cliente_id;
         $c = Cliente::findOrFail($id_cliente);
@@ -373,13 +380,13 @@ class VehiculoController extends Controller
             ->get();
         $h = Responsablesvehiculoh::where('vehiculo_id',$id)
             ->get();
-        
+
         $restodos = Responsablevehiculo::where('cliente_id',$id_cliente)
             ->get();
-        
+
         $arr =  array();
         foreach($actuales as $a){array_push($arr,$a->responsablevehiculo_id);}
-        
+
         $res = $restodos->diff(Responsablevehiculo::whereIn('id',$arr)->get());
 
         return view('vehiculos.vehiculos.responsables', [
@@ -388,15 +395,15 @@ class VehiculoController extends Controller
             'actuales' => $actuales,
             'res' => $res,
             'h' => $h
-        ]);        
+        ]);
     }
 
     public function storeresp(Request $request, $id)
-    {   
+    {
         $v = Vehiculo::findOrFail($id);
         // $c = Cliente::findOrFail($request->get('cliente_id'));
         $res = Responsablevehiculo::findOrFail($request->get('responsablevehiculo_id'));
-        
+
         $usuario_id = $res->usuario_id;
         $cliente_id = $res->cliente_id;
 
@@ -419,30 +426,30 @@ class VehiculoController extends Controller
     }
 
     public function responsablesh($id)
-    {        
+    {
         $v = Vehiculo::findOrFail($id);
         $res = Responsablesvehiculoh::where('vehiculo_id',$id)
             ->get();
         //dd($res);
         return view('vehiculos.vehiculos.historicoresponsables', [
             'v' => $v,
-            'res' => $res            
-        ]);        
+            'res' => $res
+        ]);
     }
 
     public function resact($id)
-    {        
+    {
         $v = Vehiculo::findOrFail($id);
         $res = Responsablesvehiculo::where('vehiculo_id',$id)
             ->get();
         return view('vehiculos.vehiculos.responsablesactuales', [
             'v' => $v,
-            'res' => $res            
-        ]);        
+            'res' => $res
+        ]);
     }
 
     public function confirm($id)
-    {        
+    {
         $r = Responsablesvehiculo::findOrFail($id);
         $vehiculo_id = $r->vehiculo_id;
         $v = Vehiculo::findOrFail($vehiculo_id);
@@ -453,13 +460,13 @@ class VehiculoController extends Controller
     }
 
     public function destroyResponsable($id)
-    {        
+    {
         $r = Responsablesvehiculo::findOrFail($id);
         $id_vehiculo = $r->vehiculo_id;
         $r->delete();
         return redirect('/cat_vehiculos');
         // return redirect("/cat_vehiculos/{{ $id_vehiculo }}/responsablesactuales");
-        
-        
+
+
     }
 }

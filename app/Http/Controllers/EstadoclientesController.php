@@ -38,6 +38,9 @@ class EstadoclientesController extends Controller
      */
     public function store(Request $request)
     {
+        request()->validate([
+            'descripcion' => 'required'
+        ]);
         DB::beginTransaction();
         $estado = new Estadocliente();
 
@@ -104,7 +107,7 @@ class EstadoclientesController extends Controller
     }
 
     public function confirmDelete($id)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $estado = Estadocliente::findOrFail($id);
         return view('catalogos.estadoclientes.confirmDelete',[
             'estado' => $estado

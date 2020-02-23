@@ -49,7 +49,17 @@ class ClienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   //dd($request);
+    {
+        //dd($request);
+        request()->validate([
+            'nombre' => 'required',
+            'tipopersona_id' => 'required',
+            'rfc' => 'required',
+            'tipoempresa_id' => 'required',
+            'estadocliente_id' => 'required',
+            'tiposervicio_id' => 'required'
+        ]);
+
         DB::beginTransaction();
         $cliente = new Cliente();
 
@@ -108,7 +118,7 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        
+
         $servicios = DB::table('cliente_tiposervicio')
         ->where('cliente_id',$id)
         ->get();
@@ -144,7 +154,16 @@ class ClienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
+    {
+        request()->validate([
+            'nombre' => 'required',
+            'tipopersona_id' => 'required',
+            'rfc' => 'required',
+            'tipoempresa_id' => 'required',
+            'estadocliente_id' => 'required',
+            'tiposervicio_id' => 'required'
+        ]);
+
         DB::beginTransaction();
         $cliente = Cliente::findOrFail($id);
 
@@ -180,7 +199,7 @@ class ClienteController extends Controller
             }
         }
 
-        
+
 
         DB::commit();
 
@@ -199,7 +218,7 @@ class ClienteController extends Controller
     }
 
     public function domicilios($id)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $cliente = Cliente::findOrFail($id);
         $doms = DB::table('domicilios')
         ->where('cliente_id',$id)
@@ -208,20 +227,24 @@ class ClienteController extends Controller
         return view('catalogos.domicilios.index', [
             'cliente' => $cliente,
             'domicilios' => $doms
-        ]);        
+        ]);
     }
 
     public function estatus($id)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $cliente = Cliente::findOrFail($id);
         return view('cliente.estatus', [
             'cliente' => $cliente,
-            'estados' => Estadocliente::all()    
-        ]);        
+            'estados' => Estadocliente::all()
+        ]);
     }
 
     public function update_estatus(Request $request, $id)
-    {   
+    {
+        request()->validate([
+            'estadocliente_id' => 'required'
+        ]);
+
         DB::beginTransaction();
         $cliente = Cliente::findOrFail($id);
         $cliente->estadocliente_id = $request->get('estadocliente_id');

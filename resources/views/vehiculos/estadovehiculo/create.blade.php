@@ -30,6 +30,7 @@
                                 <div class="form-group">
                                     <label for="descripcion">Descripción: </label>
                                     <input class="form-control bg-light shadow-sm border-0" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="">
+                                {!! $errors->first('descripcion', '<small>:message </small>') !!}
                                 </div>
                             </div>
                         </div>

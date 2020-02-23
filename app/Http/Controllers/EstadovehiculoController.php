@@ -37,6 +37,9 @@ class EstadovehiculoController extends Controller
      */
     public function store(Request $request)
     {
+        request()->validate([
+            'descripcion' => 'required'
+        ]);
         $estado = new Estadovehiculo();
         $estado->descripcion = strtoupper($request->get('descripcion'));
         $estado->save();
@@ -97,7 +100,7 @@ class EstadovehiculoController extends Controller
     }
 
     public function confirmDelete($id)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $estado = Estadovehiculo::findOrFail($id);
         return view('vehiculos.estadovehiculo.confirmDelete',[
             'estado' => $estado

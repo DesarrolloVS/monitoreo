@@ -6,7 +6,7 @@
 @section('content')
 <div class="container montse">
 
-    <div class="row">   
+    <div class="row">
         <div class="col-8 col-sm-8 col-md-8 col-lg-8 mx-auto">
 
             <div class="row">
@@ -29,6 +29,7 @@
                             <div class="form-group col">
                                 <label for="descripcion">Descripción: </label>
                                 <input class="form-control shadow-sm border-0 bg-light" type="text" id="descripcion" name="descripcion" placeholder="Descripción" value="">
+                                {!! $errors->first('descripcion', '<small>:message </small>') !!}
                             </div>
                         </div>
 

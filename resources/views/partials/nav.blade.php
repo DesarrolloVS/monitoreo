@@ -38,27 +38,12 @@
                 <!-- MODULO USUARIOS -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuarios Cte
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuarios
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
                         <a class="dropdown-item" href="/cat_usuarios">ABC Usuarios</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/cat_tipoempleados">ABC Tipo Empleados</a>
                         <a class="dropdown-item" href="/cat_estadosusuario">ABC Estados Usuarios</a>
-                    </div>
-                </li>
-                <!-- MODULO RESPONSABLES -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Responsables
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                        <a class="dropdown-item" href="/cat_respveh">ABC Responsables de Vehículos</a>
-                        <a class="dropdown-item" href="/cat_turnos">ABC Turnos</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/cat_estadosturnos">ABC Estados Turnos</a>
-                        <a class="dropdown-item" href="/cat_tipoturnos">ABC Tipo Turnos</a>
-                        <a class="dropdown-item" href="/cat_estadosrespveh">ABC Estados Responsables Vehículos</a>
                     </div>
                 </li>
                 <!-- MODULO gps'S -->
@@ -67,6 +52,10 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">GPS's Admón
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
+                        <a class="dropdown-item" href="/cat_gpscliente">ABC GPS Cliente</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/cat_estadogpscliente">ABC Estados GPS Cliente</a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/cat_gpsmarcamodelo">ABC GPS Marca Modelo</a>
                         <a class="dropdown-item" href="/cat_trazas">ABC Trazas</a>
                         <a class="dropdown-item" href="/cat_gpsalerta">ABC Alertas Gps</a>
@@ -74,47 +63,19 @@
                         <a class="dropdown-item" href="/cat_camposgps">ABC GPS Campos</a>
                         <a class="dropdown-item" href="/cat_tipotraza">ABC Tipo Traza</a>
                         <a class="dropdown-item" href="/cat_estadotrazas">ABC Estados Trazas</a>
+                    </div>
+                </li>
 
-                        <a class="dropdown-item" href="/cat_estadogpscliente">ABC Estados GPS Cliente</a>
-                        <a class="dropdown-item" href="/cat_gpscliente">ABC GPS Cliente</a>
-                    </div>
-                </li>
-                <!-- MODULO gps'S -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">GPS's Cte
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
-                        <a class="dropdown-item" href="/cat_gpscliente">ABC GPS Cliente</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/cat_estadogpscliente">ABC Estados GPS Cliente</a>
-                    </div>
-                </li>
                 <!-- MODULO vEHICULOS -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown5" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Vehículos Admón
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown5">
-                        <a class="dropdown-item" href="/cat_estadosvehiculos">ABC Estados Vehìculos</a>
-                        <a class="dropdown-item" href="/cat_marca">ABC Marca</a>
-                        <a class="dropdown-item" href="/cat_submarca">ABC Submarca</a>
-                        <a class="dropdown-item" href="/cat_modelos">ABC Modelo</a>
-                        <a class="dropdown-item" href="/cat_procedencia">ABC Procedencia</a>
-                        <a class="dropdown-item" href="/cat_tipovehiculos">ABC Tipo de Vehículo</a>
-                        <a class="dropdown-item" href="/cat_tipouso">ABC Tipo de Uso</a>
-                        <a class="dropdown-item" href="/cat_tipocombustible">ABC Tipo de Combustible</a>
-                        <a class="dropdown-item" href="/cat_tipotransmision">ABC Tipo de Transmisión</a>
-                        <a class="dropdown-item" href="/cat_clasevehiculo">ABC Clase Vehículo</a>
-                    </div>
-                </li>
-                <!-- MODULO vEHICULOS -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown5" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Vehículos Cte.
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Vehículos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown5">
                         <a class="dropdown-item" href="/cat_vehiculos">ABC Vehículos</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/cat_estadosvehiculos">ABC Estados Vehìculos</a>
+                        <a class="dropdown-item" href="/cat_tipovehiculos">ABC Tipo de Vehículo</a>
                     </div>
                 </li>
 

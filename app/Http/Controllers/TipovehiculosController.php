@@ -37,6 +37,10 @@ class TipovehiculosController extends Controller
      */
     public function store(Request $request)
     {
+        request()->validate([
+            'descripcion' => 'required'
+        ]);
+
         $tv = new Tipovehiculo();
         $tv->descripcion = strtoupper($request->get('descripcion'));
         $tv->save();
@@ -76,7 +80,7 @@ class TipovehiculosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
+    {
         $tv = Tipovehiculo::findOrFail($id);
         $tv->descripcion = strtoupper($request->get('descripcion'));
         $tv->save();
@@ -97,7 +101,7 @@ class TipovehiculosController extends Controller
     }
 
     public function confirmDelete($id)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $tv = Tipovehiculo::findOrFail($id);
         return view('vehiculos.tipovehiculos.confirmDelete',[
             'tv' => $tv

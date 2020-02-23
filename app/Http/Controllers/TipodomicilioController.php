@@ -38,6 +38,9 @@ class TipodomicilioController extends Controller
      */
     public function store(Request $request)
     {
+        request()->validate([
+            'descripcion' => 'required'
+        ]);
         DB::beginTransaction();
         $td = new Tipodomicilio();
 
@@ -104,7 +107,7 @@ class TipodomicilioController extends Controller
     }
 
     public function confirmDelete($id)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $td = Tipodomicilio::findOrFail($id);
         return view('catalogos.tipodomicilio.confirmDelete',[
             'td' => $td

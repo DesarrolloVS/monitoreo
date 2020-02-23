@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        /*
+
     	//Catálogos clientes
          $this->call(TipoPersonasTableSeeder::class);
          $this->call(TipoEmpresasTableSeeder::class);
@@ -21,26 +21,31 @@ class DatabaseSeeder extends Seeder
          $this->call(ClientesTableSeeder::class);
          // Catálogos Usuarios
          $this->call(EstadoUsuariosTableSeeder::class);
-         // Catálogos Turnos
-         $this->call(EstadoTurnosTableSeeder::class);
-         $this->call(TipoTurnosTableSeeder::class);
-         // Catálogos Responsable Vehículo
-         $this->call(EstadoResponsableVehiculosTableSeeder::class);
          // Catálogos GPS
          $this->call(TipoTrazasTableSeeder::class);
          $this->call(EstadoTrazasTableSeeder::class);
          $this->call(CamposGpsTableSeeder::class);
 
          //Catálogos vehiculos
-         $this->call(ProcedenciasTableSeeder::class);
          $this->call(TipoVehiculosTableSeeder::class);
-         $this->call(TipoUsosTableSeeder::class);
-         $this->call(TipoCombustiblesTableSeeder::class);
-         $this->call(TipoTransmisionsTableSeeder::class);
          $this->call(EstadoVehiculosTableSeeder::class);
-         $this->call(ClaseVehiculosTableSeeder::class);
-         $this->call(MarcasTableSeeder::class);
+         $this->call(EstadoGpsClientesTableSeeder::class);
+
+         /* Eliminados
+             // Catálogos Turnos
+             $this->call(EstadoTurnosTableSeeder::class);
+             $this->call(TipoTurnosTableSeeder::class);
+             // Catálogos Responsable Vehículo
+             $this->call(EstadoResponsableVehiculosTableSeeder::class);
+             //Catálogos vehiculos
+             $this->call(ProcedenciasTableSeeder::class);
+             $this->call(TipoUsosTableSeeder::class);
+             $this->call(TipoCombustiblesTableSeeder::class);
+             $this->call(TipoTransmisionsTableSeeder::class);
+             $this->call(ClaseVehiculosTableSeeder::class);
+             $this->call(MarcasTableSeeder::class);
+             $this->call(SubMarcasTableSeeder::class);
          */
-         $this->call(SubMarcasTableSeeder::class);
+
     }
 }
