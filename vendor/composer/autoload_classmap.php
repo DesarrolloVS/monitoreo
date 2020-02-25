@@ -6,10 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-<<<<<<< HEAD
-=======
     'App\\Alertascliente' => $baseDir . '/app/Alertascliente.php',
->>>>>>> 70f73b414fac68f60389cc563bf7ec4e4fcc98cf
     'App\\Camposgps' => $baseDir . '/app/Camposgps.php',
     'App\\CartoRequest' => $baseDir . '/app/CartoRequest.php',
     'App\\Clasevehiculo' => $baseDir . '/app/Clasevehiculo.php',
@@ -29,10 +26,7 @@ return array(
     'App\\Gpsalerta' => $baseDir . '/app/Gpsalerta.php',
     'App\\Gpscliente' => $baseDir . '/app/Gpscliente.php',
     'App\\Gpsmarcamodelo' => $baseDir . '/app/Gpsmarcamodelo.php',
-<<<<<<< HEAD
-=======
     'App\\Http\\Controllers\\AlertasclienteController' => $baseDir . '/app/Http/Controllers/AlertasclienteController.php',
->>>>>>> 70f73b414fac68f60389cc563bf7ec4e4fcc98cf
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
     'App\\Http\\Controllers\\Auth\\RegisterController' => $baseDir . '/app/Http/Controllers/Auth/RegisterController.php',
