@@ -25,4 +25,5 @@ class EstadoGpsClientesTableSeeder extends Seeder
         Estadogpscliente::create([
         	'descripcion' => 'Baja'
         ]);
+    }
 }

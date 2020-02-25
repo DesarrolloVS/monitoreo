@@ -29,7 +29,6 @@ class CreateUsuariosTable extends Migration
             $table->text('curp');
             $table->integer('empleado')->nullable();
             $table->unsignedBigInteger('tipoempleado_id')->nullable();
-            $table->foreign('tipoempleado_id')->references('id')->on('tipoempleados');
             $table->integer('rep_legal')->nullable();
             $table->integer('contacto')->nullable();
             $table->integer('usuario')->nullable();
@@ -39,6 +38,7 @@ class CreateUsuariosTable extends Migration
             $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->string('password')->nullable();
             $table->timestamps();
+//            $table->foreign('tipoempleado_id')->references('id')->on('tipoempleados');
         });
     }
 
