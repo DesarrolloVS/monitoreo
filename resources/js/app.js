@@ -1,32 +1,62 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
 
-window.Vue = require('vue');
+import Vue from 'vue';
+window.Vue = Vue;
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+import Form from "./utilities/Form";
+window.Form = Form;
 
-// const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
+import {ServerTable} from 'vue-tables-2';
+Vue.use(ServerTable, {}, false, 'bootstrap4', 'default');
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+Vue.component('user-component', require('./views/users.vue').default);
+Vue.component('ine-component', require('./views/ine.vue').default);
+Vue.component('vue-signature', require('./views/signature.vue').default);
 
 const app = new Vue({
     el: '#app',
+    data() {
+        return {
+          option:{
+            penColor:"rgb(0, 0, 0)"
+          }
+        };
+      },
+      methods:{
+        save(){
+          
+          var _this = this;
+          var png = _this.$refs.signature.save()
+
+          const myId = document.querySelector('#my_id').value;
+
+          axios.get('/ine/guardafirma', {
+            params: {
+              params: png,
+              id: myId
+            }
+          })
+          .then(response => {
+            window.location.href = '/cards';
+          })
+          .catch(e => {
+              // Podemos mostrar los errores en la consola
+              console.log(e);
+          })
+
+          
+
+
+          // var jpeg = _this.$refs.signature.save('image/jpeg')
+          // var svg = _this.$refs.signature.save('image/svg+xml');
+          //console.log(png);
+
+          // console.log(jpeg)
+          // console.log(svg)
+        },
+        clear(){
+          var _this = this;
+          _this.$refs.signature.clear();
+        }
+      }
 });

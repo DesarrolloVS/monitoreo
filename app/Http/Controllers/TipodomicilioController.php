@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\DB;
 
 class TipodomicilioController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('accesous: 1, 1, 2,admin,superuser');
+        //$this->middleware('roles:admin,superuser');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +22,7 @@ class TipodomicilioController extends Controller
     public function index()
     {
         return view('catalogos.tipodomicilio.index', [
-            'tipodomicilios' => Tipodomicilio::all()
+            'tipodomicilios' => Tipodomicilio::all()->sortBy("id")
         ]);
     }
 
@@ -38,6 +44,9 @@ class TipodomicilioController extends Controller
      */
     public function store(Request $request)
     {
+        request()->validate([
+            'descripcion' => 'required'
+        ]);
         DB::beginTransaction();
         $td = new Tipodomicilio();
 
@@ -81,6 +90,9 @@ class TipodomicilioController extends Controller
      */
     public function update(Request $request, $id)
     {
+        request()->validate([
+            'descripcion' => 'required'
+        ]);
         DB::beginTransaction();
         $td = Tipodomicilio::findOrFail($id);
         $td->descripcion = strtoupper($request->get('descripcion'));
@@ -104,7 +116,7 @@ class TipodomicilioController extends Controller
     }
 
     public function confirmDelete($id)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $td = Tipodomicilio::findOrFail($id);
         return view('catalogos.tipodomicilio.confirmDelete',[
             'td' => $td

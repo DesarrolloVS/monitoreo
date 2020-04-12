@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use App\Camposgps;
 use App\Gpsmarcamodelo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CamposgpsController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('accesous: 1, 1, 2,admin,superuser');
+        //$this->middleware('roles:admin,superuser');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +24,7 @@ class CamposgpsController extends Controller
     public function index()
     {
         return view('catalogos.camposgps.index', [
-            'campos' => Camposgps::all()
+            'campos' => Camposgps::all()->sortBy("id")
         ]);
         // dd($request);
         // if ($request->has('gpsmarcamodelo_id')) {
@@ -56,19 +63,21 @@ class CamposgpsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $validatedData = $request->validate([
+            'campo' => 'required',
             'descripcion' => 'required'
         ]);
 
         if($validatedData){
             $c = new Camposgps();
+            $c->campo = strtoupper($request->get('campo'));
             $c->descripcion = strtoupper($request->get('descripcion'));
             $c->save();
             // return redirect()->route('/gps/campos',['gpsmarcamodelo_id' => $gpsmarcamodelo_id]);
             return redirect("cat_camposgps");
         }
-        
+
     }
 
     /**
@@ -90,7 +99,10 @@ class CamposgpsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $camposgps = Camposgps::findOrFail($id);
+        return view('catalogos.camposgps.edit', [
+            'camposgps' => $camposgps
+        ]);
     }
 
     /**
@@ -102,7 +114,19 @@ class CamposgpsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        request()->validate([
+            'campo' => 'required',
+            'descripcion' => 'required'
+        ]);
+        DB::beginTransaction();
+        $camposgps = Camposgps::findOrFail($id);
+        $camposgps->descripcion = strtoupper($request->get('descripcion'));
+        $camposgps->campo = strtoupper($request->get('campo'));
+        $camposgps->save();
+        DB::commit();
+
+        return redirect('cat_camposgps');
+
     }
 
     /**

@@ -11,244 +11,156 @@
 |
 */
 
-/*
 Route::get('/', function () {
     return view('welcome');
 });
-*/
 
-//CATALOGOS MAIN
-Route::get('/catalogos', function () {
-    return view('catalogos.main');
-});
-
-Route::get('/', function () {
+Route::get('/map', function () {
     return view('map.main');
 });
 
-//GEOCERCA
-Route::post('forms/form_geocerca','FormsController@form_geocerca');
-Route::post('registrar/geocerca','FormsController@registrar_geocerca');
+/*
+Route::get('/mapago', function () {
+    return view('mapago.mapa');
+});
+*/
 
-//CATALOGO CLIENTES
-Route::resource('/cat_clientes', 'ClienteController');
-Route::get('/cat_clientes/{id}/domicilios', 'ClienteController@domicilios');
-Route::get('/cat_clientes/{id}/estatus', 'ClienteController@estatus');
-Route::put('/cat_clientes/{id}/estatus', 'ClienteController@update_estatus');
-//CATALOGO TIPOPERSONAS
-Route::resource('/cat_tipopersonas', 'TipopersonasController');
-Route::get('/cat_tipopersonas/{id}/confirmDelete', 'TipopersonasController@confirmDelete');
+Route::get('/mapaadmin', 'MondadminController@mapa');
+Route::get('/listalertas', 'MondadminController@listalertas');
 
-//CATALOGO TIPO EMPRESAS
-Route::resource('/cat_tipoempresas', 'TipoempresasController');
-Route::get('/cat_tipoempresas/{id}/confirmDelete', 'TipoempresasController@confirmDelete');
 
-//CATALOGO TIPO SERVICIOS
-Route::resource('/cat_tiposervicios', 'TiposerviciosController');
-Route::get('/cat_tiposervicios/{id}/confirmDelete', 'TiposerviciosController@confirmDelete');
+Auth::routes();
 
-//CATALOGO ESTADOCLIENTES
-Route::resource('/cat_estadoclientes', 'EstadoclientesController');
-Route::get('/cat_estadoclientes/{id}/confirmDelete', 'EstadoclientesController@confirmDelete');
+Route::get('/home', 'HomeController@index')->name('home');
 
-//CATALOGO TIPODOMICILIIOS
-Route::resource('/cat_tipodomicilios', 'TipodomicilioController');
-Route::get('/cat_tipodomicilios/{id}/confirmDelete', 'TipodomicilioController@confirmDelete');
-
-//CATALOGO DOMICILIIOS
-Route::get('cat_domicilios/{id}/create', 'DomicilioController@create');
-Route::post('domicilios/{id}','DomicilioController@store');
-Route::get('cat_domicilios/{id}/edit', 'DomicilioController@edit');
-Route::put('cat_domicilios/{id}', 'DomicilioController@update');
-
-//CATALOGO TIPOEMPLEADOS
-Route::resource('/cat_tipoempleados', 'TipoempleadoController');
-Route::get('/cat_tipoempleados/{id}/confirmDelete', 'TipoempleadoController@confirmDelete');
-Route::post('/tipoempleado/cliente', 'TipoempleadoController@select');
-
-//CATALOGO ESTADOUSUARIOS
-Route::resource('/cat_estadosusuario', 'EstadousuariosController');
-Route::get('/cat_estadosusuario/{id}/confirmDelete', 'EstadousuariosController@confirmDelete');
-
-//CATALOGO USUARIOS
-Route::resource('/cat_usuarios', 'UsuarioController');
-Route::get('/cat_usuarios/{id}/confirmDelete', 'UsuarioController@confirmDelete');
-Route::get('/cat_usuarios/{id}/estatus', 'UsuarioController@estatus');
-Route::put('/cat_usuarios/{id}/estatus', 'UsuarioController@update_estatus');
-
-//CATALOGO ESTADOSTURNOS
-Route::resource('/cat_estadosturnos', 'EstadosturnosController');
-Route::get('/cat_estadosturnos/{id}/confirmDelete', 'EstadosturnosController@confirmDelete');
-
-//CATALOGO TIPOTURNOS
-Route::resource('/cat_tipoturnos', 'TipoturnoController');
-Route::get('/cat_tipoturnos/{id}/confirmDelete', 'TipoturnoController@confirmDelete');
-
-//CATALOGO TURNOS
-Route::resource('/cat_turnos', 'TurnoController');
-Route::get('/cat_turnos/{id}/confirmDelete', 'TurnoController@confirmDelete');
-Route::get('/cat_turnos/{id}/estatus', 'TurnoController@estatus');
-Route::put('/cat_turnos/{id}/estatus', 'TurnoController@update_estatus');
-
-//CATALOGO ESTADOSRESPONSABLES DE VEHICULOS
-Route::resource('/cat_estadosrespveh', 'EstadoresponsablevehiculoController');
-Route::get('/cat_estadosrespveh/{id}/confirmDelete', 'EstadoresponsablevehiculoController@confirmDelete');
-
-//CATALOGO RESPONSABLES DE VEHICULOS
-Route::resource('/cat_respveh', 'ResponsablevehiculoController');
-Route::get('/cat_respveh/{id}/confirmDelete', 'ResponsablevehiculoController@confirmDelete');
-Route::post('/usuarios/cliente', 'ResponsablevehiculoController@usuarios');
-Route::get('/cat_respveh/{id}/estatus', 'ResponsablevehiculoController@estatus');
-Route::put('/cat_respveh/{id}/estatus', 'ResponsablevehiculoController@update_estatus');
-
-//CATALOGO GPS MARCA MODELO
+//Admón. GPS Marca - Modelo
 Route::resource('/cat_gpsmarcamodelo', 'GpsmarcamodeloController');
-Route::get('/cat_gpsmarcamodelo/{id}/confirmDelete', 'GpsmarcamodeloController@confirmDelete');
+Route::get('/cat_gpsmarcamodelo/{id1}/trazasgpsmm', 'GpsmarcamodeloController@trazasgpsmm');
+Route::get('/cat_gpsmarcamodelo/{id1}/alertasgpsmm', 'GpsmarcamodeloController@alertasgpsmm');
+Route::get('/cat_gpsmarcamodelo/{id1}/estatus', 'GpsmarcamodeloController@estatus');
+Route::put('/cat_gpsmarcamodelo/{id1}/estatusupd', 'GpsmarcamodeloController@estatusupd');
 
-//CATALOGO ESTADOS GPS CLIENTES
-Route::resource('/cat_estadogpscliente', 'EstadogpsclienteController');
-Route::get('/cat_estadogpscliente/{id}/confirmDelete', 'EstadogpsclienteController@confirmDelete');
+//Trazas posiciones trazas gpsmm
+Route::get('/cat_trazas/{id1}/posiciones', 'TrazaController@positions');
 
-//CATALOGO GPS CLIENTES
-Route::resource('/cat_gpscliente', 'GpsclienteController');
-Route::post('/gps/form', 'GpsclienteController@form');
-Route::get('/cat_gpscliente/{id}/confirmDelete', 'GpsclienteController@confirmDelete');
-Route::get('/cat_gpscliente/{id}/estatus', 'GpsclienteController@estatus');
-Route::put('/cat_gpscliente/{id}/estatus', 'GpsclienteController@update_estatus');
-
-//CATALOGOS VEHICULOS
-Route::get('/cat_vehiculo', function () {
-    return view('vehiculos.main');
-});
-
-//CATALOGO ESTADOS VEHICULOS
-Route::resource('/cat_estadosvehiculos', 'EstadovehiculoController');
-Route::get('/cat_estadosvehiculos/{id}/confirmDelete', 'EstadovehiculoController@confirmDelete');
-
-//CATALOGO MARCA
-Route::resource('/cat_marca', 'MarcaController');
-Route::get('/cat_marca/{id}/confirmDelete', 'MarcaController@confirmDelete');
-
-//CATALOGO SUBMARCAS
-Route::resource('/cat_submarca', 'SubmarcaController');
-Route::get('/cat_submarca/{id}/confirmDelete', 'SubmarcaController@confirmDelete');
-
-//CATALOGO MODELOS
-Route::resource('/cat_modelos', 'ModeloController');
-Route::get('/cat_modelos/{id}/confirmDelete', 'ModeloController@confirmDelete');
-
-//CATALOGO PROCEDENCIA
-Route::resource('/cat_procedencia', 'ProcedenciaController');
-Route::get('/cat_procedencia/{id}/confirmDelete', 'ProcedenciaController@confirmDelete');
-
-//CATALOGO TIPOVEHICULOS
-Route::resource('/cat_tipovehiculos', 'TipovehiculosController');
-Route::get('/cat_tipovehiculos/{id}/confirmDelete', 'TipovehiculosController@confirmDelete');
-
-//CATALOGO TIPOUSO
-Route::resource('/cat_tipouso', 'TipousoController');
-Route::get('/cat_tipouso/{id}/confirmDelete', 'TipousoController@confirmDelete');
-
-//CATALOGO TIPOCOMBUSTIBLE
-Route::resource('/cat_tipocombustible', 'TipocombustibleController');
-Route::get('/cat_tipocombustible/{id}/confirmDelete', 'TipocombustibleController@confirmDelete');
-
-//CATALOGO TIPOTRANSMISION
-Route::resource('/cat_tipotransmision', 'TipotransmisionController');
-Route::get('/cat_tipotransmision/{id}/confirmDelete', 'TipotransmisionController@confirmDelete');
-
-//CATALOGO CLASE VEHICULO
-Route::resource('/cat_clasevehiculo', 'ClasevehiculoController');
-Route::get('/cat_clasevehiculo/{id}/confirmDelete', 'ClasevehiculoController@confirmDelete');
-
-//CATALOGO VEHICULO
-Route::resource('/cat_vehiculos', 'VehiculoController');
-Route::get('/cat_vehiculos/{id}/confirmDelete', 'VehiculoController@confirmDelete');
-Route::post('/vehiculo/marca', 'VehiculoController@submarca');
-Route::get('/cat_vehiculos/{id}/estatus', 'VehiculoController@estatus');
-Route::put('/cat_vehiculos/{id}/estatus', 'VehiculoController@update_estatus');
-Route::get('/cat_vehiculos/{id}/gps', 'VehiculoController@gps');
-Route::post('vehiculo/gps','VehiculoController@showgpss');
-Route::put('/cat_vehiculos/{id}/gps', 'VehiculoController@update_gps');
-Route::get('/cat_vehiculos/{id}/nogps', 'VehiculoController@nogps');
-Route::get('cat_vehiculos/{id}/historico','VehiculoController@historico');
-Route::post('/vehiculos/cliente','VehiculoController@clientes');
-Route::get('/cat_vehiculos/create/{id}', 'VehiculoController@create');
-Route::get('/cat_vehiculos/{id}/resp', 'VehiculoController@responsable');
-Route::put('/cat_vehiculos/{id}/resp', 'VehiculoController@storeresp');
-Route::get('/cat_vehiculos/{id}/responsablesh', 'VehiculoController@responsablesh');
-Route::get('/cat_vehiculos/{id}/responsablesactuales', 'VehiculoController@resact');
-Route::get('/cat_vehiculos/{id}/deleteResponsable', 'VehiculoController@confirm');
-Route::delete('/cat_vehiculos/deleteResponsable/{id}', 'VehiculoController@destroyResponsable');
-
-//CATALOGOS CLIENTES
-Route::get('/cat_cliente', function () {
-    return view('cliente.main');
-});
-
-//CATALOGOS USUARIOS
-Route::get('/cat_usuario', function () {
-    return view('usuario.main');
-});
-
-//CATALOGOS RESPONSABLES
-Route::get('/cat_responsables', function () {
-    return view('catalogos.respveh.main');
-});
-
-//CATALOGOS GPS
-Route::get('/cat_gps', function () {
-    return view('catalogos.gpscliente.main');
-});
-
-//CATALOGO CAMPOSGPS
-Route::resource('/cat_camposgps', 'CamposgpsController');
-Route::get('/cat_camposgps/create/{id}', 'CamposgpsController@create');
-// Route::post('/gps/campos', 'CamposgpsController@camposgps');
-// Route::get('/gps/campos', 'CamposgpsController@index')->name('/gps/campos');
-
-//CATALOGO TIPOTRAZA
-Route::resource('/cat_tipotraza', 'TipotrazaController');
-Route::get('/cat_tipotraza/{id}/confirmDelete', 'TipotrazaController@confirmDelete');
-
-//CATALOGO ESTADO TRAZAS
-Route::resource('/cat_estadotrazas', 'EstadotrazaController');
-Route::get('/cat_estadotrazas/{id}/confirmDelete', 'EstadotrazaController@confirmDelete');
-
-//CATALOGO TRAZAS
-Route::resource('/cat_trazas', 'TrazaController');
-Route::get('/cat_trazas/{id}/confirmDelete', 'TrazaController@confirmDelete');
-Route::get('/cat_trazas/{id}/posiciones','TrazaController@positions');
-Route::post('/cat_posiciones/{id}','TrazaController@store_position');
-Route::get('/cat_trazas/{id}/confirmDeletePosicion', 'TrazaController@confirmDeletePosition');
-Route::delete('/cat_deleteposicion/{id}', 'TrazaController@destroyPosition');
-
-//CATALOGO GPS ALERTAS
+//Trazas crear alertas gpsmm
 Route::resource('/cat_gpsalerta', 'GpsalertaController');
-Route::get('/cat_gpsalerta/{id}/confirmDelete', 'GpsalertaController@confirmDelete');
-Route::post('/gpsalerta/complement', 'GpsalertaController@complement');
-Route::post('/gpsalerta/valor', 'GpsalertaController@valor');
-Route::get('/cat_gpsalerta/{id}/estatus', 'GpsalertaController@estatus');
-Route::put('/cat_gpsalerta/{id}/estatus', 'GpsalertaController@update_estatus');
+Route::get('/cat_gpsalerta/{id1}/create', 'GpsalertaController@create');
+Route::put('/cat_gpsalerta/{id1}/update', 'GpsalertaController@update');
+Route::get('/cat_gpsalerta/{id1}/estatus', 'GpsalertaController@estatus');
+Route::put('/cat_gpsalerta/{id1}/update_estatus', 'GpsalertaController@update_estatus');
 
-//CATALOGO PARAMETROS CLIENTE
-Route::resource('/cat_parametroscliente', 'ParametrosclienteController');
-Route::post('/cliente/parametros','ParametrosclienteController@parametros');
-Route::get('cliente/parametros', 'ParametrosclienteController@index')->name('cliente/parametros');
-Route::get('/cat_parametroscliente/create/{id}', 'ParametrosclienteController@create');
-Route::get('/cat_parametroscliente/{id}/confirmDelete', 'ParametrosclienteController@confirmDelete');
-// Route::post('/gpsalerta/complement', 'GpsalertaController@complement');
-// Route::get('/cat_gpsalerta/{id}/estatus', 'GpsalertaController@estatus');
-// Route::put('/cat_gpsalerta/{id}/estatus', 'GpsalertaController@update_estatus');
 
-Route::get('/test', function () {
-    return view('welcome');
-});
+//Admón. Clientes
+Route::resource('/cat_clientes', 'ClienteController');
+Route::get('/cat_clientes/{id1}/parametroscte', 'ClienteController@parametroscte');
+Route::get('/cat_clientes/{id1}/gpsscte', 'ClienteController@gpsscte');
+Route::get('/cat_clientes/{id1}/vehiculoscte', 'ClienteController@vehiculoscte');
+Route::get('/cat_clientes/{id1}/domicilios', 'ClienteController@domicilios');
+Route::get('/cat_clientes/{id1}/usuarioscte', 'ClienteController@usuarioscte');
+Route::get('/cat_clientes/{id1}/gpsmmcte', 'ClienteController@gpsmmcte');
+Route::get('/cat_clientes/{id1}/estatus', 'ClienteController@estatus');
+Route::put('/cat_clientes/{id1}/estatus', 'ClienteController@update_estatus');
 
-//CATALOGO GPS ALERTAS CLIENTE
-Route::resource('/cat_alertascliente', 'AlertasclienteController');
-Route::post('/cliente/marcamodelo','AlertasclienteController@mm');
-Route::post('/cliente/alertas','AlertasclienteController@alertasmm');
-Route::post('/cliente/updatealertas','AlertasclienteController@alertasupdate');
-// Route::get('/cat_alertascliente/{id}/confirmDelete', 'AlertasclienteController');
 
+//Admón. Gps_s Clientes
+Route::resource('/cat_gpscliente', 'GpsclienteController');
+Route::get('/cat_gpscliente/create/{id1}', 'GpsclienteController@create');
+Route::get('/cat_gpscliente/{id1}/estatus/{id2}/cliente', 'GpsclienteController@estatus');
+Route::put('/cat_gpscliente/{id1}/estatus/', 'GpsclienteController@update_estatus');
+Route::get('/cat_gpscliente/{id1}/edit/{id2}/cliente', 'GpsclienteController@edit');
+
+//Admón. Domicilios Clientes
+Route::resource('/cat_domicilios', 'DomicilioController');
+Route::get('/cat_domicilios/{id1}/create', 'DomicilioController@create');
+Route::post('/cat_domicilios/{id1}', 'DomicilioController@store');
+
+//Admón. Usuarios Clientes
+Route::resource('/cat_usuarioscte', 'UsuariocteController');
+Route::get('/cat_usuarioscte/{id1}/create', 'UsuariocteController@create');
+Route::get('/cat_usuarioscte/{id1}/estatus/{id2}/cliente/', 'UsuariocteController@estatus');
+Route::put('/cat_usuarioscte/{id1}/estatus/{id2}/cliente/', 'UsuariocteController@update_estatus');
+Route::get('/cat_usuarioscte/{id1}/roles/{id2}/cliente/', 'UsuariocteController@roles');
+Route::put('/cat_usuarioscte/{id1}/roles/{id2}/cliente/', 'UsuariocteController@update_roles');
+Route::get('/cat_usuarioscte/{id1}/edit/{id2}/cliente/', 'UsuariocteController@edit');
+Route::put('/cat_usuarioscte/{id1}/edit/{id2}/cliente/', 'UsuariocteController@update');
+
+//Admón. gps mm Clientes
+Route::resource('/cat_gpsmmcte', 'GpsmmcteController');
+Route::get('/cat_gpsmmcte/{id1}/create', 'GpsmmcteController@create');
+Route::get('/cat_gpsmmcte/{id1}/alertascte', 'GpsmmcteController@alertascte');
+Route::get('/cat_gpsmmcte/{id1}/alertasctecreate', 'GpsmmcteController@alertasctecreate');
+Route::get('/cat_gpsmmcte/{id1}/alertascteedit', 'GpsmmcteController@alertascteedit');
+Route::put('/cat_gpsmmcte/{id1}/alertascteupd', 'GpsmmcteController@alertascteupd');
+Route::get('/cat_gpsmmcte/{id1}/estatus', 'GpsmmcteController@estatus');
+Route::put('/cat_gpsmmcte/{id1}/estatusupd', 'GpsmmcteController@estatusupd');
+
+//Admón. Parámetros generales
+Route::resource('/cat_parametros', 'ParametrosController');
+Route::get('/cat_parametros/create/{id1}', 'ParametrosController@create');
+Route::post('/cat_parametros/store', 'ParametrosController@store');
+Route::get('/cat_parametros/{id1}/estatus', 'ParametrosController@estatus');
+Route::put('/cat_parametros/{id1}/estatusupd', 'ParametrosController@estatusupd');
+
+//Admón. Usuarios propios
+Route::resource('/cat_usuarios', 'UsuarioController');
+Route::get('/cat_usuarios/{id1}/estatus', 'UsuarioController@estatus');
+Route::put('/cat_usuarios/{id1}/estatus', 'UsuarioController@update_estatus');
+Route::get('/cat_usuarios/{id1}/roles', 'UsuarioController@roles');
+Route::put('/cat_usuarios/{id1}/rolesupd', 'UsuarioController@rolesupd');
+Route::get('/cat_usuarios/{id1}/edit', 'UsuarioController@edit');
+Route::put('/cat_usuarios/{id1}/update', 'UsuarioController@update');
+
+//Catálogos
+//Campos GPS
+Route::resource('/cat_camposgps', 'CamposgpsController');
+
+//Tipo traza
+Route::resource('/cat_tipotraza', 'TipotrazaController');
+
+//Estado traza
+Route::resource('/cat_estadotrazas', 'EstadotrazaController');
+
+//Estado gpscliente
+Route::resource('/cat_estadogpscliente', 'EstadogpsclienteController');
+
+//Estado vehiculos
+Route::resource('/cat_estadosvehiculos', 'EstadovehiculoController');
+
+//Estado vehiculos
+Route::resource('/cat_tipovehiculos', 'TipovehiculosController');
+
+//Estado usuario
+Route::resource('/cat_estadosusuario', 'EstadousuariosController');
+
+//Estado tipo persona
+Route::resource('/cat_tipopersonas', 'TipopersonasController');
+
+//Estado tipo empresas
+Route::resource('/cat_tipoempresas', 'TipoempresasController');
+
+//Estado tipo servicios
+Route::resource('/cat_tiposervicios', 'TiposerviciosController');
+
+//Estado estado clientes
+Route::resource('/cat_estadoclientes', 'EstadoclientesController');
+
+//Tipodomicilios
+Route::resource('/cat_tipodomicilios', 'TipodomicilioController');
+
+//Parametros cliente
+Route::resource('/cat_parametroscte', 'ParametroscteController');
+Route::get('/cat_parametroscte/{id1}/create', 'ParametroscteController@create');
+Route::get('/cat_parametroscte/{id1}/edit', 'ParametroscteController@edit');
+
+//Vehículos cliente
+Route::resource('/cat_vehiculos', 'VehiculoController');
+Route::get('/cat_vehiculos/create/{id1}', 'VehiculoController@create');
+Route::get('/cat_vehiculos/{id1}/estatus/{id2}/cliente', 'VehiculoController@estatus');
+Route::put('/cat_vehiculos/{id1}/estatus', 'VehiculoController@update_estatus');
+Route::get('/cat_vehiculos/{id1}/gps/{id2}/cliente', 'VehiculoController@gps');
+Route::put('/cat_vehiculos/{id1}/gps/{id2}/cliente', 'VehiculoController@update_gps');
+Route::get('/cat_vehiculos/{id1}/nogps', 'VehiculoController@nogps');
+Route::get('/cat_vehiculos/{id1}/gps/{id2}/cliente', 'VehiculoController@gps');
+Route::get('/cat_vehiculos/{id1}/historico', 'VehiculoController@historico');
+Route::get('/cat_vehiculos/{id1}/edit/{id2}/cliente', 'VehiculoController@edit');

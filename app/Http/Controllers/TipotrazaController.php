@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class TipotrazaController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('accesous: 1, 1, 2,admin,superuser');
+        //$this->middleware('roles:admin,superuser');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +21,7 @@ class TipotrazaController extends Controller
     public function index()
     {
         return view('catalogos.tipotraza.index', [
-            'tt' => Tipotraza::all()
+            'tt' => Tipotraza::all()->sortBy("id")
         ]);
     }
 
@@ -36,7 +42,7 @@ class TipotrazaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $validatedData = $request->validate([
             'descripcion' => 'required'
         ]);
@@ -109,7 +115,7 @@ class TipotrazaController extends Controller
     }
 
     public function confirmDelete($id)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $tt = Tipotraza::findOrFail($id);
         return view('catalogos.tipotraza.confirmDelete',[
             'tt' => $tt

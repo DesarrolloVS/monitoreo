@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layoutbasico')
 
 @section ('css')
 @endsection
@@ -7,18 +7,18 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-8 col-sm-8 col-md-8 col-lg-8 mx-auto">    
+        <div class="col-8 col-sm-8 col-md-8 col-lg-8 mx-auto">
 
             <div class="row">
                 <div class="col">
                     <ol class="breadcrumb bg-transparent d-flex justify-content-end">
-                        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
                         <li class="breadcrumb-item"><a href="/cat_estadotrazas">Catálogo Estados Trazas</a></li>
                         <li class="breadcrumb-item active" aria-current="">Eliminar Registro</li>
                     </ol>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col">
                     <form class="bg-white shadow py-3 px-4" action="/cat_estadotrazas/{{ $et->id }}" method="POST">

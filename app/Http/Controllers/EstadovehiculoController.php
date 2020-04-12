@@ -7,6 +7,12 @@ use App\Estadovehiculo;
 
 class EstadovehiculoController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('accesous: 1, 1, 2,admin,superuser');
+        //$this->middleware('roles:admin,superuser');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +20,8 @@ class EstadovehiculoController extends Controller
      */
     public function index()
     {
-        return view('vehiculos.estadovehiculo.index', [
-            'estados' => Estadovehiculo::all()
+        return view('catalogos.estadovehiculo.index', [
+            'estados' => Estadovehiculo::all()->sortBy("id")
         ]);
     }
 
@@ -26,7 +32,7 @@ class EstadovehiculoController extends Controller
      */
     public function create()
     {
-        return view('vehiculos.estadovehiculo.create');
+        return view('catalogos.estadovehiculo.create');
     }
 
     /**
@@ -37,6 +43,9 @@ class EstadovehiculoController extends Controller
      */
     public function store(Request $request)
     {
+        request()->validate([
+            'descripcion' => 'required'
+        ]);
         $estado = new Estadovehiculo();
         $estado->descripcion = strtoupper($request->get('descripcion'));
         $estado->save();
@@ -63,7 +72,7 @@ class EstadovehiculoController extends Controller
     public function edit($id)
     {
         $estado = Estadovehiculo::findOrFail($id);
-        return view('vehiculos.estadovehiculo.edit', [
+        return view('catalogos.estadovehiculo.edit', [
             'estado' => $estado
         ]);
     }
@@ -77,6 +86,9 @@ class EstadovehiculoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        request()->validate([
+            'descripcion' => 'required'
+        ]);
         $estado = Estadovehiculo::findOrFail($id);
         $estado->descripcion = strtoupper($request->get('descripcion'));
         $estado->save();
@@ -97,9 +109,9 @@ class EstadovehiculoController extends Controller
     }
 
     public function confirmDelete($id)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $estado = Estadovehiculo::findOrFail($id);
-        return view('vehiculos.estadovehiculo.confirmDelete',[
+        return view('catalogos.estadovehiculo.confirmDelete',[
             'estado' => $estado
         ]);
     }

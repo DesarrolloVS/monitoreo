@@ -7,6 +7,12 @@ use App\Estadogpscliente;
 
 class EstadogpsclienteController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('accesous: 1, 1, 2,admin,superuser');
+        //$this->middleware('roles:admin,superuser');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +21,7 @@ class EstadogpsclienteController extends Controller
     public function index()
     {
         return view('catalogos.estadogpscliente.index', [
-            'estados' => Estadogpscliente::all()
+            'estados' => Estadogpscliente::all()->sortBy("id")
         ]);
     }
 
@@ -37,6 +43,9 @@ class EstadogpsclienteController extends Controller
      */
     public function store(Request $request)
     {
+        request()->validate([
+            'descripcion' => 'required'
+        ]);
         $estado = new Estadogpscliente();
         $estado->descripcion = strtoupper($request->get('descripcion'));
         $estado->save();
@@ -77,6 +86,9 @@ class EstadogpsclienteController extends Controller
      */
     public function update(Request $request, $id)
     {
+        request()->validate([
+            'descripcion' => 'required'
+        ]);
         $estado = Estadogpscliente::findOrFail($id);
         $estado->descripcion = strtoupper($request->get('descripcion'));
         $estado->save();
@@ -97,7 +109,7 @@ class EstadogpsclienteController extends Controller
     }
 
     public function confirmDelete($id)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $estado = Estadogpscliente::findOrFail($id);
         return view('catalogos.estadogpscliente.confirmDelete',[
             'estado' => $estado

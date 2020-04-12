@@ -1,33 +1,37 @@
-@extends('layout')
-
-@section ('css')
-
-@endsection
+@extends('core.main')
 
 @section('content')
-<div class="container montse">
 
-    <div class="row">
-        <div class="col-8 col-sm-8 col-md-8 col-lg-8 mx-auto">
+    <!-- Navbar -->
+    @include('layouts.admin.nav')
+    <!-- /.navbar -->
 
-            <div class="row">
-                <div class="col">
-                    <ol class="breadcrumb bg-transparent d-flex justify-content-end">
-                        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-                        <li class="breadcrumb-item"><a href="/cat_clientes">Catálogo Clientes</a></li>
-                        <li class="breadcrumb-item active" aria-current="">Modificar Estatus</li>
-                    </ol>
-                </div>
-            </div>
+    <!-- Main Sidebar Container -->
+    @include('layouts.admin.sidebar')
+    <!-- /.Main Sidebar Container -->
 
-            <div class="row">
-                <div class="col">
-                    <h3>Estatus Actual: {{ $cliente->estadocliente_id }}</h3>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col">
+  <div class="content-wrapper">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h4>Estatus Actual: {{ $edocte->descripcion }}</h4>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="/cat_clientes">Catálogo Clientes</a></li>
+                <li class="breadcrumb-item active">Modificar Estatus</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <section class="content">
+        <div class="card card-solid">
+            <div class="card-body">
                     <form class="bg-white shadow py-3 px-4 rounded" action="/cat_clientes/{{ $cliente->id }}/estatus" method="POST">
                         <h3 class="text-center">Modificar Estatus Cliente: <small>{{ $cliente->nombre }}</small></h3>
                         <hr>
@@ -45,6 +49,7 @@
                                     @endif
                                 @endforeach
                             </select>
+                            {!! $errors->first('estadocliente_id', '<span class="badge badge-danger"> :message </span>') !!}
                             </div>
                         </div>
 
@@ -53,9 +58,16 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 </div>
+    <!-- Control Sidebar -->
+    @include('layouts.admin.controlbar')
+    <!-- /.control-sidebar -->
+
+    <!-- Admin Footer -->
+    @include('layouts.admin.footer')
+
 @endsection
 
 @section ('scripts')

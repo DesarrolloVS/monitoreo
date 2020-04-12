@@ -8,9 +8,16 @@ use App\Tipotraza;
 use App\Traza;
 use App\Trazaposicion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TrazaController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('accesous: 1, 1, 2,admin,superuser');
+        //$this->middleware('roles:admin,superuser');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -29,17 +36,22 @@ class TrazaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {   
-        $mm = Gpsmarcamodelo::all();
+    public function create($id)
+    {
+        $mm = Gpsmarcamodelo::findOrFail($id);
+        //$mm = Gpsmarcamodelo::all();
+        $trazasmm = Traza::where('gpsmarcamodelo_id', '=', $id)->get();
+        $tt = Tipotraza::all();
+        /*
         $actuales = Traza::all();
         $act = array();
         foreach($actuales as $a){array_push($act,$a->gpsmarcamodelo_id);}
         $res = $mm->diff(Gpsmarcamodelo::whereIn('id',$act)->get());
-
-        return view('catalogos.trazas.create',[
-            'mm' => $res,
-            'tt' => Tipotraza::all()
+        */
+        return view('catalogos.trazasgpsmm.create',[
+            'mm' => $mm,
+            'trazasmm' => $trazasmm,
+            'tt' => $tt
         ]);
     }
 
@@ -51,26 +63,21 @@ class TrazaController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'gpsmarcamodelo_id' => 'required',
+        request()->validate([
             'descripcion' => 'required',
             'tipotraza_id' => 'required',
             'num_posiciones' => 'required|integer'
-        ], [
-            'gpsmarcamodelo_id.required' => 'El campo <i>Marca-Modelo</i> es obligatorio',
-            'tipotraza_id.required' => 'El campo <i>Tipo Traza</i> es obligatorio',
-            'num_posiciones.required' => 'El campo <i>posiciones</i> es obligatorio',
         ]);
 
-        if($validatedData){
+        DB::beginTransaction();
             $t = new Traza();
-            $t->gpsmarcamodelo_id = $request->get('gpsmarcamodelo_id');
+            $t->gpsmarcamodelo_id = $request->get('id_gps');
             $t->descripcion = strtoupper($request->get('descripcion'));
             $t->num_posiciones = strtoupper($request->get('num_posiciones'));
             $t->tipotraza_id = $request->get('tipotraza_id');
             $t->save();
-            return redirect('cat_trazas');
-        }
+        DB::commit();
+        return redirect("/cat_gpsmarcamodelo/".$request->get('id_gps')."/trazasgpsmm");
     }
 
     /**
@@ -119,7 +126,7 @@ class TrazaController extends Controller
     }
 
     public function positions($id)      //$id =  id_traza
-    {        
+    {
 
         $t = Traza::findOrFail($id);
         $posiciones = $t->num_posiciones;
@@ -146,11 +153,11 @@ class TrazaController extends Controller
             'ps' => $ps,
             'campos' => $camp,
             'posiciones' => $pos
-        ]);        
+        ]);
     }
 
     public function store_position(Request $request, $id)
-    {   
+    {
         $validatedData = $request->validate([
             'posicion' => 'required|integer',
             'camposgps_id' => 'required'
@@ -169,7 +176,7 @@ class TrazaController extends Controller
     }
 
     public function confirmDeletePosition($id)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $tp = Trazaposicion::findOrFail($id);
         $traza_id = $tp->traza_id;
         $t = Traza::findOrFail($traza_id);
@@ -181,11 +188,11 @@ class TrazaController extends Controller
     }
 
     public function destroyPosition($id)
-    {        
+    {
         $tp = Trazaposicion::findOrFail($id);
         $traza_id = $tp->traza_id;
         $tp->delete();
         return redirect("/cat_trazas/$traza_id/posiciones");
-        
+
     }
 }

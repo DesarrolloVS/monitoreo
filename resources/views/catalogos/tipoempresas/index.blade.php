@@ -1,39 +1,53 @@
-@extends('layout')
-
-@section ('css')
-@endsection
+@extends('core.main')
 
 @section('content')
-<div class="container">
+    <!-- Navbar -->
+    @include('layouts.admin.nav')
+    <!-- /.navbar -->
 
-    <div class="row">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 mx-auto">
+    <!-- Main Sidebar Container -->
+    @include('layouts.admin.sidebar')
+    <!-- /.Main Sidebar Container -->
 
-            <div class="row">
-                <div class="col">
-                    <ol class="breadcrumb bg-transparent d-flex justify-content-end">
-                        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-                        <li class="breadcrumb-item active" aria-current="">Catálogo Tipo de Empresas</li>
-                    </ol>
-                </div>
+
+  <div class="content-wrapper">
+
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h4>Catálogo Tipo de Empresas</h4>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
+                <li class="breadcrumb-item active">Catálogo Tipo de Empresas</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="card card-solid">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 col-sm-6">
+                <a class="btn btn-primary" href="/cat_tipoempresas/create"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar Registro</a>
             </div>
+          </div>
+        </div>
+      </div>
+  </section>
 
-            <div class="row">
-                <div class="col">
-                    <h2 class="text-center">CATÁLOGO TIPO EMPRESAS</h1>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col my-3">
-                    <a class="btn btn-primary" href="/cat_tipoempresas/create"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar Registro</a>
-                </div>
-            </div>
-
+    <section class="content">
+      <div class="card card-solid">
+        <div class="card-body">
             @if($tipoempresas->first())
             <div class="row">
-                <div class="col">
-                    <table class="table table-bordered table-hover table-sm">
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
                         <thead class="thead-light">
                             <tr>
                                 <th class="text-center">Id</th>
@@ -47,7 +61,7 @@
                             <td class="text-center">{{ $te->id }}</td>
                             <td class="text-center">{{ $te->descripcion }}</td>
                             <td class="text-center"><a class="btn btn-success btn-sm" href="/cat_tipoempresas/{{ $te->id }}/edit"><i class="fas fa-pencil-alt"></i></a></td>
-                            <td class="text-center"><a class="btn btn-danger btn-sm" href="/cat_tipoempresas/{{ $te->id }}/confirmDelete"><i class="fas fa-trash-alt"></i></a></td>
+                            <td class="text-center"><a class="btn btn-danger btn-sm disabled" href="/cat_tipoempresas/{{ $te->id }}/confirmDelete"><i class="fas fa-trash-alt"></i></a></td>
                         </tr>
                         @endforeach
                     </table>
@@ -64,9 +78,18 @@
                 </div>
             </div>
             @endif
+            </div>
         </div>
-    </div>
+    </section>
 </div>
+
+    <!-- Control Sidebar -->
+    @include('layouts.admin.controlbar')
+    <!-- /.control-sidebar -->
+
+    <!-- Admin Footer -->
+    @include('layouts.admin.footer')
+
 @endsection
 
 @section ('scripts')

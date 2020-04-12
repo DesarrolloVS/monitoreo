@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Camposgps;
 use App\Gpsalerta;
 use App\Gpsmarcamodelo;
+use App\Parametros;
+use App\Tipoconfiguracion;
 use App\Tipovehiculo;
 use App\Traza;
 use App\Trazaposicion;
@@ -12,6 +15,12 @@ use Illuminate\Support\Facades\DB;
 
 class GpsalertaController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('accesous: 1, 1, 2,admin,superuser');
+        //$this->middleware('roles:admin,superuser');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -29,18 +38,18 @@ class GpsalertaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        $mm = Gpsmarcamodelo::all();
-        //$actuales = Gpsalerta::all();
-        // $act = array();
-        // foreach($actuales as $a){array_push($act,$a->gpsmarcamodelo_id);}
-        // $res = $mm->diff(Gpsmarcamodelo::whereIn('id',$act)->get());
+        $gps = Gpsmarcamodelo::findOrFail($id);
+        $alertasmm = Gpsalerta::where('gpsmarcamodelo_id', '=', $id)->get();
 
-        return view('catalogos.gpsalerta.create',[
-            'mm' => $mm,
-            'tv' => Tipovehiculo::all()
-            // 'tt' => Tipotraza::all()
+        return view('catalogos.alertasgpsmm.create',[
+            'gps' => $gps,
+            'alertasmm' => $alertasmm,
+            'tvehic' => Tipovehiculo::all(),
+            'tconf' => Tipoconfiguracion::all(),
+            'camposgsp' => Camposgps::all(),
+            'parametros' => Parametros::all()
         ]);
     }
 
@@ -50,48 +59,111 @@ class GpsalertaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)         
-    {               //dd($request);
-        
-        $validatedData = $request->validate([
-            'gpsmarcamodelo_id' => 'required',
-            'alerta' => 'required',
-            'tipoalerta' => 'required',
-            'camposgps_id' => 'required',
-            'funcion' => 'required'            
-        ], [
-            'gpsmarcamodelo_id.required' => 'El campo <i>Marca-Modelo</i> es obligatorio'
-        ]);
-
-        $tipodato = $request->get('tipodato');
-
-        if($validatedData){
-            $x = new Gpsalerta();
-            $x->gpsmarcamodelo_id = $request->get('gpsmarcamodelo_id');
-            $x->alerta = strtoupper($request->get('alerta'));
-            $x->tipoalerta = $request->get('tipoalerta');
-            $x->tipovehiculo_id = $request->get('tipovehiculo_id');
-            $x->camposgps_id = $request->get('camposgps_id');
-            $x->tipodato = $request->get('tipodato');
-            $x->funcion = $request->get('funcion');
-            $x->repetir = $request->get('repetir');
-            $x->revisar = $request->get('revisar');
-
-            if($tipodato == 1){
-                $x->ventero = $request->get('ventero');
-            }elseif($tipodato == 2){
-                $x->vdecimal = $request->get('vdecimal');
-            }elseif($tipodato == 3){
-                $x->vfecha = $request->get('vfecha');
-            }elseif($tipodato == 4){
-                $x->vbooleano = $request->get('vbooleano');
-            }elseif($tipodato == 5){
-                $x->vcadena = $request->get('vcadena');
-            }
-            
-            $x->save();
-            return redirect('cat_gpsalerta');
+    public function store(Request $request)
+    {
+        //dd($request);
+        if ($request->get('tipoconfiguracion_id') == null)
+        {
+            request()->validate([
+                'desc_corta' => 'required',
+                'desc_mostrar' => 'required',
+                'tipoconfiguracion_id' => 'required',
+                'camposgps_id' => 'required',
+            ]);
         }
+        $tipoconf_v = strtoupper($request->get('tipoconfiguracion_id'));
+        if($tipoconf_v == 1){
+            request()->validate([
+                'desc_corta' => 'required',
+                'desc_mostrar' => 'required',
+                'tipoconfiguracion_id' => 'required',
+                'camposgps_id' => 'required',
+            ]);
+        }elseif($tipoconf_v == 2){
+            if($request->get('parametro_sn') == 1){ //parametro = si
+                request()->validate([
+                    'desc_corta' => 'required',
+                    'desc_mostrar' => 'required',
+                    'tipoconfiguracion_id' => 'required',
+                    'camposgps_id' => 'required',
+                    'repetir' => 'required',
+                    'parametros_id' => 'required',
+                ]);
+            }else{
+                request()->validate([
+                    'desc_corta' => 'required',
+                    'desc_mostrar' => 'required',
+                    'tipoconfiguracion_id' => 'required',
+                    'camposgps_id' => 'required',
+                    'repetir' => 'required',
+                    'valor' => 'required',
+                ]);
+            }
+
+        }elseif($tipoconf_v == 3 or $tipoconf_v == 4 or $tipoconf_v == 5  or $tipoconf_v == 6){
+            if($request->get('parametro_sn') == 1){ //parametro = si
+                request()->validate([
+                    'desc_corta' => 'required',
+                    'desc_mostrar' => 'required',
+                    'tipoconfiguracion_id' => 'required',
+                    'tipovehiculo_id' => 'required',
+                    'camposgps_id' => 'required',
+                    'repetir' => 'required',
+                    'parametros_id' => 'required',
+                ]);
+            }else
+            {
+                request()->validate([
+                        'desc_corta' => 'required',
+                        'desc_mostrar' => 'required',
+                        'tipoconfiguracion_id' => 'required',
+                        'tipovehiculo_id' => 'required',
+                        'camposgps_id' => 'required',
+                        'repetir' => 'required',
+                        'valor' => 'required',
+                    ]);
+            }
+
+        }elseif($tipoconf_v == 7 or $tipoconf_v == 8 or $tipoconf_v == 9 or $tipoconf_v == 10){
+            request()->validate([
+                'desc_corta' => 'required',
+                'desc_mostrar' => 'required',
+                'tipoconfiguracion_id' => 'required',
+                'camposgps_id' => 'required',
+                'campo_cond' => 'required'
+            ]);
+        }
+        DB::beginTransaction();
+            $x = new Gpsalerta();
+            //Todos
+            $x->gpsmarcamodelo_id = $request->get('id_gps');
+            $x->desc_corta = strtoupper($request->get('desc_corta'));
+            $x->descripcion = strtoupper($request->get('desc_mostrar'));
+            $x->tipoconfiguracion_id = strtoupper($request->get('tipoconfiguracion_id'));
+            $x->camposgps_id = strtoupper($request->get('camposgps_id'));
+            // tipo (2)
+            if($tipoconf_v == 2 or $tipoconf_v == 3 or $tipoconf_v == 4 or $tipoconf_v == 5 or $tipoconf_v == 6){
+                $x->repetir = $request->get('repetir');
+                if($request->get('parametro_sn') == 1){ //parametro = si
+                    $x->parametros_id = $request->get('parametros_id');
+                    $x->pov = true;
+
+                }else{
+                    $x->valor = strtoupper($request->get('valor'));
+                    $x->pov = false;
+                }
+            }
+            if($tipoconf_v == 3 or $tipoconf_v == 4 or $tipoconf_v == 5 or $tipoconf_v == 6){
+                $x->tipovehiculo_id = strtoupper($request->get('tipovehiculo_id'));
+            }
+            if($tipoconf_v == 7 or $tipoconf_v == 8 or $tipoconf_v == 9 or $tipoconf_v == 10){
+                $x->campos_condicion = strtoupper($request->get('campo_cond'));
+            }
+            $x->estado = true;
+            $x->save();
+        DB::commit();
+
+        return redirect("/cat_gpsmarcamodelo/".$request->get('id_gps')."/alertasgpsmm");
     }
 
     /**
@@ -113,25 +185,14 @@ class GpsalertaController extends Controller
      */
     public function edit($id)
     {
-        $mm = Gpsmarcamodelo::all();
+        //dd($id);
         $ga = Gpsalerta::findOrFail($id);
-        $campo = $ga->camposgps_id;
-        $gpsmarcamodelo_id = $ga->gpsmarcamodelo_id;
-
-        $t = Traza::where('gpsmarcamodelo_id',$gpsmarcamodelo_id)->first();
-        $t_id = $t->id;
-        $tp = Trazaposicion::where('traza_id',$t_id)->get();            //dd($tp);
-
-        $r = fnValor($ga->tipodato);
-        $valor = $ga->$r;
-
-        return view('catalogos.gpsalerta.edit', [
+        //dd($ga);
+        $gps = Gpsmarcamodelo::findOrFail($ga->gpsmarcamodelo_id);
+        return view('catalogos.alertasgpsmm.edit', [
             'ga' => $ga,
-            'mm' => $mm,
-            'campo' => $campo,
-            'campos' => $tp,
-            'tv' => Tipovehiculo::all(),
-            'valor' => $valor
+            'gps' => $gps,
+            'parametros' => Parametros::all()
         ]);
     }
 
@@ -145,45 +206,67 @@ class GpsalertaController extends Controller
     public function update(Request $request, $id)
     {
         //dd($request);
-        $validatedData = $request->validate([
-            'gpsmarcamodelo_id' => 'required',
-            'alerta' => 'required',
-            'tipoalerta' => 'required',
-            'camposgps_id' => 'required',
-            'tipodato' => 'required',
-            'funcion' => 'required'            
-        ], [
-            'gpsmarcamodelo_id.required' => 'El campo <i>Marca-Modelo</i> es obligatorio'
-        ]);
-
-        if($validatedData){
-            $tipodato = $request->get('tipodato');
-            $x = Gpsalerta::findOrFail($id);
-            $x->gpsmarcamodelo_id = $request->get('gpsmarcamodelo_id');
-            $x->alerta = strtoupper($request->get('alerta'));
-            $x->tipoalerta = $request->get('tipoalerta');
-            $x->tipovehiculo_id = $request->get('tipovehiculo_id');
-            $x->camposgps_id = $request->get('camposgps_id');
-            $x->tipodato = $request->get('tipodato');
-            $x->funcion = $request->get('funcion');
-            $x->repetir = $request->get('repetir');
-            $x->revisar = $request->get('revisar');
-
-            if($tipodato == 1){
-                $x->ventero = $request->get('ventero');
-            }elseif($tipodato == 2){
-                $x->vdecimal = $request->get('vdecimal');
-            }elseif($tipodato == 3){
-                $x->vfecha = $request->get('vfecha');
-            }elseif($tipodato == 4){
-                $x->vbooleano = $request->get('vbooleano');
-            }elseif($tipodato == 5){
-                $x->vcadena = $request->get('vcadena');
-            }
-            
-            $x->save();
-            return redirect('cat_gpsalerta');
+        if ($request->get('tipoconfiguracion_id') == null or $request->get('tipoconfiguracion_id') == 1)
+        {
+            return redirect("/cat_gpsmarcamodelo/".$request->get('id_gps')."/alertasgpsmm");
         }
+        $tipoconf_v = strtoupper($request->get('tipoconfiguracion_id'));
+
+        if($tipoconf_v == 2){
+            if($request->get('parametro_sn') == 1){ //parametro = si
+                request()->validate([
+                    'repetir' => 'required',
+                    'parametros_id' => 'required',
+                ]);
+            }else{
+                request()->validate([
+                    'repetir' => 'required',
+                    'valor' => 'required',
+                ]);
+            }
+        }elseif($tipoconf_v == 3 or $tipoconf_v == 4 or $tipoconf_v == 5  or $tipoconf_v == 6){
+            if($request->get('parametro_sn') == 1){ //parametro = si
+                request()->validate([
+                    'repetir' => 'required',
+                    'parametros_id' => 'required',
+                ]);
+            }else
+            {
+                request()->validate([
+                        'repetir' => 'required',
+                        'valor' => 'required',
+                    ]);
+            }
+
+        }elseif($tipoconf_v == 7 or $tipoconf_v == 8 or $tipoconf_v == 9 or $tipoconf_v == 10){
+            request()->validate([
+                'campo_cond' => 'required'
+            ]);
+        }
+
+        DB::beginTransaction();
+            $x = Gpsalerta::findOrFail($id);
+            // tipo (2)
+            if($tipoconf_v == 2 or $tipoconf_v == 3 or $tipoconf_v == 4 or $tipoconf_v == 5 or $tipoconf_v == 6){
+                $x->repetir = $request->get('repetir');
+                if($request->get('parametro_sn') == 1){ //parametro = si
+                    $x->parametros_id = $request->get('parametros_id');
+                    $x->pov = true;
+                    $x->valor = null;
+
+                }else{
+                    $x->valor = strtoupper($request->get('valor'));
+                    $x->pov = false;
+                    $x->parametros_id = null;
+                }
+            }
+            if($tipoconf_v == 7 or $tipoconf_v == 8 or $tipoconf_v == 9 or $tipoconf_v == 10){
+                $x->campos_condicion = strtoupper($request->get('campo_cond'));
+            }
+            $x->save();
+        DB::commit();
+
+        return redirect("/cat_gpsmarcamodelo/".$request->get('id_gps')."/alertasgpsmm");
     }
 
     /**
@@ -200,7 +283,7 @@ class GpsalertaController extends Controller
     }
 
     public function complement(Request $request)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $gpsmarcamodelo_id = $request->get('gpsmarcamodelo_id');
         //EXISTENTES
         // $rs = Gpsalerta::where('gpsmarcamodelo_id',$gpsmarcamodelo_id)->get();
@@ -224,7 +307,7 @@ class GpsalertaController extends Controller
     }
 
     public function confirmDelete($id)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $ga = Gpsalerta::findOrFail($id);
         return view('catalogos.gpsalerta.confirmDelete',[
             'ga' => $ga
@@ -232,23 +315,27 @@ class GpsalertaController extends Controller
     }
 
     public function estatus($id)
-    {        
+    {
         $ga = Gpsalerta::findOrFail($id);
-        return view('catalogos.gpsalerta.estatus', [
+        return view('catalogos.alertasgpsmm.estatus', [
             'ga' => $ga
-        ]);        
+        ]);
     }
 
     public function update_estatus(Request $request, $id)
-    {   
+    {
+        request()->validate([
+            'estadoalerta' => 'required'
+        ]);
+        //dd($request);
         $ga = Gpsalerta::findOrFail($id);
-        $ga->estado = $request->get('estado');
+        $ga->estado = $request->get('estadoalerta');
         $ga->save();
-        return redirect('/cat_gpsalerta');
+        return redirect("/cat_gpsmarcamodelo/".$request->get('id_gpsmm')."/alertasgpsmm");
     }
 
     public function valor(Request $request)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $tipodato = $request->get('tipodato');
 
         if($tipodato == 1){

@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layoutbasico')
 @section ('css')
 @endsection
 

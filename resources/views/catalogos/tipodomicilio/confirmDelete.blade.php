@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layoutbasico')
 
 @section ('css')
 @endsection
@@ -12,12 +12,12 @@
             <div class="row">
                 <div class="col">
                     <ol class="breadcrumb bg-transparent d-flex justify-content-end">
-                        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
                         <li class="breadcrumb-item"><a href="/cat_tipodomicilios">Catálogo Tipo de Domicilios</a></li>
                         <li class="breadcrumb-item active" aria-current="">Eliminar Registro</li>
                     </ol>
                 </div>
-            </div>            
+            </div>
 
             <div class="row">
                 <div class="col">

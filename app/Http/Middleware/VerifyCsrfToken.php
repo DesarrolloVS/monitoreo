@@ -19,19 +19,5 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'forms/form_geocerca',
-        'forms/registrar_geocerca',
-        'tipoempleado/cliente',
-        'usuarios/cliente',
-        '/gps/form',
-        '/vehiculo/marca',
-        '/vehiculo/gps',
-        '/vehiculos/cliente',
-        '/gpsalerta/complement',
-        '/gpsalerta/valor',
-        '/cliente/parametros',
-        '/cliente/marcamodelo',
-        '/cliente/alertas',
-        '/cliente/updatealertas'
     ];
 }

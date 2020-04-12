@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\DB;
 
 class TiposerviciosController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('accesous: 1, 1, 2,admin,superuser');
+        //$this->middleware('roles:admin,superuser');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +22,7 @@ class TiposerviciosController extends Controller
     public function index()
     {
         return view('catalogos.tiposervicios.index', [
-            'tiposervicios' => Tiposervicio::all()
+            'tiposervicios' => Tiposervicio::all()->sortBy("id")
         ]);
     }
 
@@ -38,6 +44,9 @@ class TiposerviciosController extends Controller
      */
     public function store(Request $request)
     {
+        request()->validate([
+            'descripcion' => 'required'
+        ]);
         DB::beginTransaction();
         $ts = new Tiposervicio();
 
@@ -81,6 +90,9 @@ class TiposerviciosController extends Controller
      */
     public function update(Request $request, $id)
     {
+        request()->validate([
+            'descripcion' => 'required'
+        ]);
         DB::beginTransaction();
         $ts = Tiposervicio::findOrFail($id);
         $ts->descripcion = strtoupper($request->get('descripcion'));
@@ -104,7 +116,7 @@ class TiposerviciosController extends Controller
     }
 
     public function confirmDelete($id)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $ts = Tiposervicio::findOrFail($id);
         return view('catalogos.tiposervicios.confirmDelete',[
             'ts' => $ts

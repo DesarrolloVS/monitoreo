@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layoutbasico')
 
 @section ('css')
 @endsection
@@ -29,6 +29,7 @@
                         <br>
                         <button class="btn btn-danger btn-block" type="submit"><i class="fas fa-trash-alt"></i>&ensp;Eliminar</button>
                         <a class="class btn btn-block btn-outline-dark" href="/cat_gpscliente"><i class="far fa-window-close"></i>&ensp;Cancelar</a>
+                        <input type="hidden" name="id_cliente" id="id_cliente" value="{{ $cliente_id }}">
                     </form>
                 </div>
             </div>

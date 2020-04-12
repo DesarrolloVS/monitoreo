@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\DB;
 
 class EstadoclientesController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('accesous: 1, 1, 2,admin,superuser');
+        //$this->middleware('roles:admin,superuser');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +23,7 @@ class EstadoclientesController extends Controller
     public function index()
     {
         return view('catalogos.estadoclientes.index', [
-            'estados' => Estadocliente::all()
+            'estados' => Estadocliente::all()->sortBy("id")
         ]);
     }
 
@@ -38,6 +45,9 @@ class EstadoclientesController extends Controller
      */
     public function store(Request $request)
     {
+        request()->validate([
+            'descripcion' => 'required'
+        ]);
         DB::beginTransaction();
         $estado = new Estadocliente();
 
@@ -81,6 +91,9 @@ class EstadoclientesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        request()->validate([
+            'descripcion' => 'required'
+        ]);
         DB::beginTransaction();
         $estado = Estadocliente::findOrFail($id);
         $estado->descripcion = strtoupper($request->get('descripcion'));
@@ -104,7 +117,7 @@ class EstadoclientesController extends Controller
     }
 
     public function confirmDelete($id)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $estado = Estadocliente::findOrFail($id);
         return view('catalogos.estadoclientes.confirmDelete',[
             'estado' => $estado

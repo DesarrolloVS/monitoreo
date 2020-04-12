@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\DB;
 
 class TipopersonasController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('accesous: 1, 1, 2,admin,superuser');
+        //$this->middleware('roles:admin,superuser');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +22,7 @@ class TipopersonasController extends Controller
     public function index()
     {
         return view('catalogos.tipopersonas.index', [
-            'tipopersonas' => TipoPersona::all()
+            'tipopersonas' => TipoPersona::all()->sortBy("id")
         ]);
     }
 
@@ -38,6 +44,10 @@ class TipopersonasController extends Controller
      */
     public function store(Request $request)
     {
+        request()->validate([
+            'descripcion' => 'required'
+        ]);
+
         DB::beginTransaction();
         $tp = new Tipopersona();
 
@@ -81,6 +91,10 @@ class TipopersonasController extends Controller
      */
     public function update(Request $request, $id)
     {
+        request()->validate([
+            'descripcion' => 'required'
+        ]);
+
         DB::beginTransaction();
         $tp = Tipopersona::findOrFail($id);
         $tp->descripcion = strtoupper($request->get('descripcion'));
@@ -104,7 +118,7 @@ class TipopersonasController extends Controller
     }
 
     public function confirmDelete($id)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $tp = Tipopersona::findOrFail($id);
         return view('catalogos.tipopersonas.confirmDelete',[
             'tp' => $tp

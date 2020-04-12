@@ -1,49 +1,68 @@
-@extends('layout')
-
-@section ('css')
-@endsection
+@extends('core.main')
 
 @section('content')
-<div class="container">
+    <!-- Navbar -->
+    @include('layouts.admin.nav')
+    <!-- /.navbar -->
 
-    <div class="row">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 mx-auto">
+    <!-- Main Sidebar Container -->
+    @include('layouts.admin.sidebar')
+    <!-- /.Main Sidebar Container -->
 
-            <div class="row">
-                <div class="col">
-                    <ol class="breadcrumb bg-transparent d-flex justify-content-end">
-                        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-                        <li class="breadcrumb-item active" aria-current="">Catálogo Clientes</li>
-                    </ol>
-                </div>
+
+  <div class="content-wrapper">
+
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h4>Administración Clientes</h4>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="">Administración Clientes</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="card card-solid">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 col-sm-6">
+                <a class="btn btn-primary" href="/cat_clientes/create"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar Cliente</a>
             </div>
+          </div>
+        </div>
+      </div>
+  </section>
 
-            <div class="row">
-                <div class="col">
-                    <h2 class="text-center">CATÁLOGO CLIENTES</h1>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col my-3">
-                    <a class="btn btn-primary" href="/cat_clientes/create"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar Cliente</a>
-                </div>
-            </div>
+    <section class="content">
+        <div class="card card-solid">
+            <div class="card-body">
 
             @if($clientes->first())
-            <div class="row">                
-                <div class="col">
-                    <table class="table table-bordered table-hover table-sm">
+            <div class="row">
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-bordered table-hover">
                         <thead class="thead-light">
                             <tr>
-                                <th class="text-center">Id</th>
-                                <th class="text-center">Nombre</th>
-                                <th class="text-center">RFC</th>
-                                <th class="text-center">Contacto</th>
-                                <th class="text-center">Estatus</th>
-                                <th class="text-center">Logo</th>
-                                <th class="text-center">Domicilio</th>
-                                <th class="text-center">Modificar</th>
+                                <th class="text-center"><small>Id</small></th>
+                                <th class="text-center"><small>Nombre</small></th>
+                                <th class="text-center"><small>RFC</small></th>
+                                <th class="text-center"><small>Modificar</small></th>
+                                <th class="text-center"><small>Parámetros</small></th>
+                                <th class="text-center"><small>GPS</small></th>
+                                <th class="text-center"><small>Vehículos</small></th>
+                                <th class="text-center"><small>Domicilios</small></th>
+                                <th class="text-center"><small>Usuarios</small></th>
+                                <th class="text-center"><small>Alertas</small></th>
+                                <th class="text-center"><small>Estatus</small></th>
                             </tr>
                         </thead>
                         @foreach($clientes as $cliente)
@@ -51,18 +70,24 @@
                             <td class="text-center">{{ $cliente->id }}</td>
                             <td class="text-center">{{ $cliente->nombre }}</td>
                             <td class="text-center">{{ $cliente->rfc }}</td>
-                            <td class="text-center">{{ $cliente->usuario_id }}</td>
+
+                            <td class="text-center"><a class="btn btn-info btn-sm" href="/cat_clientes/{{ $cliente->id }}/edit"><i class="fas fa-pencil-alt"></i></a></td>
+
+
+                            <td class="text-center"><a class="btn btn-info btn-sm" href="/cat_clientes/{{ $cliente->id }}/parametroscte"><i class="fas fa-tasks"></i>&emsp;</a></td>
+
+                            <td class="text-center"><a class="btn btn-info btn-sm" href="/cat_clientes/{{ $cliente->id }}/gpsscte"><i class="fas fa-magic"></i>&emsp;</a></td>
+
+                            <td class="text-center"><a href="/cat_clientes/{{ $cliente->id }}/vehiculoscte" class="btn btn-info btn-sm"><i class="fas fa-car-alt"></i>&emsp;</a></td>
+
+                            <td class="text-center"><a class="btn btn-info btn-sm" href="/cat_clientes/{{ $cliente->id }}/domicilios"><i class="fas fa-address-card"></i>&emsp;</a></td>
+
+
+                            <td class="text-center"><a class="btn btn-info btn-sm" href="/cat_clientes/{{ $cliente->id }}/usuarioscte"><i class="fas fa-users"></i>&emsp;</a></td>
+
+                            <td class="text-center"><a href="/cat_clientes/{{ $cliente->id }}/gpsmmcte" class="btn btn-info btn-sm"><i class="fas fa-exclamation-triangle"></i>&emsp;</a></td>
+
                             <td class="text-center"><a href="/cat_clientes/{{ $cliente->id }}/estatus" class="btn btn-warning btn-sm">{{ $cliente->estadocliente_id }}&emsp;<i class="fas fa-exchange-alt"></i></a></td>
-                            <td class="text-center">
-                                @if($cliente->logo)
-                                <a href="{{ asset('logos/') }}/{{ $cliente->logo }}" target="_blank" class="btn btn-info btn-sm">Ver Logo</a>
-                                @endif
-                            </td>
-                            <td class="text-center"><a class="btn btn-primary btn-sm" href="/cat_clientes/{{ $cliente->id }}/domicilios">Domicilios</a></td>
-                            <td class="text-center"><a class="btn btn-success btn-sm" href="/cat_clientes/{{ $cliente->id }}/edit"><i class="fas fa-pencil-alt"></i></a></td>
-                            <!--
-                            <td class="text-center"><a class="btn btn-danger btn-xs" href="/cat_clientes/{{ $cliente->id }}/confirmDelete"><i class="fas fa-trash-alt"></i></a></td>
-                            -->
                         </tr>
                         @endforeach
                     </table>
@@ -81,7 +106,16 @@
             @endif
         </div>
     </div>
+</section>
 </div>
+        <!-- Control Sidebar -->
+    @include('layouts.admin.controlbar')
+    <!-- /.control-sidebar -->
+
+    <!-- Admin Footer -->
+    @include('layouts.admin.footer')
+
+
 @endsection
 
 @section ('scripts')

@@ -7,6 +7,12 @@ use App\Tipovehiculo;
 
 class TipovehiculosController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('accesous: 1, 1, 2,admin,superuser');
+        //$this->middleware('roles:admin,superuser');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +20,8 @@ class TipovehiculosController extends Controller
      */
     public function index()
     {
-        return view('vehiculos.tipovehiculos.index', [
-            'tv' => Tipovehiculo::all()
+        return view('catalogos.tipovehiculos.index', [
+            'tv' => Tipovehiculo::all()->sortBy("id")
         ]);
     }
 
@@ -26,7 +32,7 @@ class TipovehiculosController extends Controller
      */
     public function create()
     {
-        return view('vehiculos.tipovehiculos.create');
+        return view('catalogos.tipovehiculos.create');
     }
 
     /**
@@ -37,6 +43,10 @@ class TipovehiculosController extends Controller
      */
     public function store(Request $request)
     {
+        request()->validate([
+            'descripcion' => 'required'
+        ]);
+
         $tv = new Tipovehiculo();
         $tv->descripcion = strtoupper($request->get('descripcion'));
         $tv->save();
@@ -63,7 +73,7 @@ class TipovehiculosController extends Controller
     public function edit($id)
     {
         $tv = Tipovehiculo::findOrFail($id);
-        return view('vehiculos.tipovehiculos.edit', [
+        return view('catalogos.tipovehiculos.edit', [
             'tv' => $tv
         ]);
     }
@@ -76,7 +86,10 @@ class TipovehiculosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
+    {
+        request()->validate([
+            'descripcion' => 'required'
+        ]);
         $tv = Tipovehiculo::findOrFail($id);
         $tv->descripcion = strtoupper($request->get('descripcion'));
         $tv->save();
@@ -97,9 +110,9 @@ class TipovehiculosController extends Controller
     }
 
     public function confirmDelete($id)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $tv = Tipovehiculo::findOrFail($id);
-        return view('vehiculos.tipovehiculos.confirmDelete',[
+        return view('catalogos.tipovehiculos.confirmDelete',[
             'tv' => $tv
         ]);
     }

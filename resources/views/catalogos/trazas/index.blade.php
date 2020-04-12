@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layoutbasico')
 
 @section ('css')
 @endsection
@@ -13,7 +13,6 @@
                 <div class="col">
                     <ol class="breadcrumb bg-transparent d-flex justify-content-end">
                         <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-                        <li class="breadcrumb-item active" aria-current="">Catálogo Trazas</li>
                     </ol>
                 </div>
             </div>
@@ -57,7 +56,7 @@
                             <!-- <td class="text-center"><a class="btn btn-info btn-xs" href="/cat_trazas/{{ $x->id }}/estatus">{{ ($x->estadotraza_id == "" ) ? "SIN ESTADO" : "CON ESTADO" }}&emsp;<i class="fas fa-exchange-alt"></i></a></td> -->
                             <td class="text-center"><a class="btn btn-info btn-sm" href="#">{{ ($x->estadotraza_id == "" ) ? "SIN ESTADO" : "CON ESTADO" }}&emsp;<i class="fas fa-exchange-alt"></i></a></td>
                             <td class="text-center"><a class="btn btn-warning btn-sm" href="/cat_trazas/{{ $x->id }}/posiciones"><i class="far fa-object-ungroup"></i></a></td>
-                            <td class="text-center"><a class="btn btn-success btn-sm" href="#"><i class="fas fa-pencil-alt"></i></a></td>                    
+                            <td class="text-center"><a class="btn btn-success btn-sm" href="#"><i class="fas fa-pencil-alt"></i></a></td>
                             <td class="text-center"><a class="btn btn-danger btn-sm" href="#"><i class="fas fa-trash-alt"></i></a></td>
                         </tr>
                         @endforeach

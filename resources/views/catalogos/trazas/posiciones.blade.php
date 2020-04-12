@@ -1,31 +1,53 @@
-@extends('layout')
-
-@section ('css')
-@endsection
+@extends('core.main')
 
 @section('content')
-<div class="container">
+    <!-- Navbar -->
+    @include('layouts.admin.nav')
+    <!-- /.navbar -->
 
-    <div class="row">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 mx-auto">    
+    <!-- Main Sidebar Container -->
+    @include('layouts.admin.sidebar')
+    <!-- /.Main Sidebar Container -->
 
-            <div class="row">
-                <div class="col">
-                    <ol class="breadcrumb bg-transparent d-flex justify-content-end">
-                        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-                        <li class="breadcrumb-item"><a href="/cat_trazas">Catálogo Trazas</a></li>
-                        <li class="breadcrumb-item active" aria-current="">Administrar Posiciones</li>
-                    </ol>
-                </div>
+
+  <div class="content-wrapper">
+
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h4>Administrar Posiciones</h4>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="/cat_trazas">Catálogo Trazas</a></li>
+                <li class="breadcrumb-item active">Administrar Posiciones</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="card card-solid">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 col-sm-6">
+                <p class="my-0">Marca: {{ $t->gpsmarcamodelo->marca }}</p>
+                <p class="my-0">Modelo: {{ $t->gpsmarcamodelo->modelo }}</p>
+                <p class="my-0">Tipo Traza: {{ $t->tipotraza->descripcion }}</p>
             </div>
+          </div>
+        </div>
+      </div>
+  </section>
 
-            <div class="row">
-                <div class="col">
-                    <p class="my-0">Marca: {{ $t->gpsmarcamodelo->marca }}</p>
-                    <p class="my-0">Modelo: {{ $t->gpsmarcamodelo->modelo }}</p>
-                    <p class="my-0">Tipo Traza: {{ $t->tipotraza->descripcion }}</p>
-                </div>
-            </div>
+
+    <section class="content">
+      <div class="card card-solid">
+        <div class="card-body">
 
             <form class="bg-white shadow rounded py-3 px-4 my-3" action="/cat_posiciones/{{ $t->id }}" method="POST">
                 <h2 class="text-center">Administrar Posiciones</h2>
@@ -62,8 +84,8 @@
 
             @if($ps->first())
             <div class="row">
-                <div class="col">
-                    <table class="table table-bordered table-hover table-sm">
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
                         <thead class="thead-light">
                             <tr>
                                 <th class="text-center">Id</th>
@@ -94,9 +116,17 @@
                 </div>
             </div>
             @endif
+            </div>
         </div>
-    </div>
+    </section>
 </div>
+    <!-- Control Sidebar -->
+    @include('layouts.admin.controlbar')
+    <!-- /.control-sidebar -->
+
+    <!-- Admin Footer -->
+    @include('layouts.admin.footer')
+
 @endsection
 
 @section ('scripts')

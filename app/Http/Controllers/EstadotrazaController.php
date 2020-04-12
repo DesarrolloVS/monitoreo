@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class EstadotrazaController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('accesous: 1, 1, 2,admin,superuser');
+        //$this->middleware('roles:admin,superuser');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +21,7 @@ class EstadotrazaController extends Controller
     public function index()
     {
         return view('catalogos.estadotrazas.index', [
-            'ets' => Estadotraza::all()
+            'ets' => Estadotraza::all()->sortBy("id")
         ]);
     }
 
@@ -109,7 +115,7 @@ class EstadotrazaController extends Controller
     }
 
     public function confirmDelete($id)            //ELIMINA EL ELEMENTO
-    {        
+    {
         $e = Estadotraza::findOrFail($id);
         return view('catalogos.estadotrazas.confirmDelete',[
             'et' => $e
